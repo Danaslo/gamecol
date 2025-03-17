@@ -9,7 +9,7 @@ services:
       MYSQL_PASSWORD: Wh@t@reYouSelling
       MYSQL_ROOT_PASSWORD: r@@terb@@ter
     volumes:
-      - /home/daniel/Proyecto/db:/var/lib/mysql
+      - /home/daniel/Proyecto2/db:/var/lib/mysql
     networks:
       backend:
         ipv4_address: 172.18.0.2
@@ -20,7 +20,7 @@ services:
     depends_on:
       - db
     volumes:
-      - /home/daniel/Proyecto/server:/app
+      - /home/daniel/Proyecto2/server:/app
     environment:
       DB_HOST: 172.18.0.2
       DB_PORT: 3306
@@ -39,7 +39,7 @@ services:
     image: danielfaq/gamecol_frontend
     container_name: frontend
     volumes:
-      - /home/daniel/Proyecto/frontend:/app
+      - /home/daniel/Proyecto2/frontend:/app
     networks:
       frontend:
         ipv4_address: 172.18.1.2
