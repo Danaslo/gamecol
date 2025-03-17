@@ -1,7 +1,5 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/sequelize');
-const Usuario = require('./Usuario');
-const Coleccion = require('./Coleccion');
 
 
 const Juego = sequelize.define('Juego',{
@@ -31,10 +29,6 @@ const Juego = sequelize.define('Juego',{
     },
     precio: {
         type: DataTypes.DECIMAL,
-        allowNull: false
-    },
-    id_duenio: {
-        type: DataTypes.BIGINT,
         allowNull: false
     },
     id_coleccion: {
