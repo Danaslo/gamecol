@@ -10,7 +10,7 @@ const Usuario = sequelize.define('Usuario',{
     primaryKey: true,
     autoIncrement: true
   },
-  nombre_usuario: {
+  nombreUsuario: {
     type: DataTypes.STRING,
     allowNull: false
   },
@@ -31,11 +31,8 @@ const Usuario = sequelize.define('Usuario',{
     allowNull: false,
     validate: {
       isIn: [['admin', 'user']]
-    }
-  },
-  nombre_real : {
-    type: DataTypes.STRING,
-    allowNull: false
+    },
+    defaultValue: 'user'
   }
 },{
     timestamps: false,
