@@ -5,7 +5,8 @@ const jwt = require('jsonwebtoken');
 async function registro(req, res){
     try {
         const { nombreUsuario, email, password } = req.body;
-        const existe = Usuario.findOne({ where: { nombreUsuario } });
+
+        const existe = await Usuario.findOne({ where: { nombreUsuario } });
         if (existe) {
             return res.status(400).json({ message: 'El usuario ya existe' });
         }
@@ -14,20 +15,16 @@ async function registro(req, res){
         const contraseniaHasheada = bcrypt.hashSync(password, saltosEncriptacion);     
         //Creación del usuario:
         const usuario = await Usuario.create({
-            nombreUsuario,
-            email,
+            nombreUsuario: nombreUsuario,
+            email: email,
             password: contraseniaHasheada,
             rol: 'user'
         });
-        //Creación del token:
-        const token = jwt.sign({ id: usuario.id, rol: user.rol }, process.env.SECRET, {
-            expiresIn: 864000
-        });
 
-        res.json({ token });
+        res.json({ message: 'Usuario creado correctamente' });
     }
     catch (error){
-        console.log(error).message;
+        console.log(error.message);
     }  
 }
 
