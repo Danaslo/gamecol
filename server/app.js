@@ -3,14 +3,17 @@ const userRouter = require('./router/router');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 80;
 const sequelize = require('./config/sequelize');
 require('./model/Asociaciones');
 
 dotenv.config();
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
-
-app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -22,7 +25,7 @@ app.set('views', './views');
 sequelize.authenticate()
     .then(() => {
         console.log(' Conexión a la base de datos exitosa.');
-        return sequelize.sync({ force: true }); 
+        return sequelize.sync({ force: false }); 
     })
     .then(() => {
         console.log(' Tablas sincronizadas correctamente.');
@@ -30,9 +33,7 @@ sequelize.authenticate()
     .catch(err => {
         console.error(' No se pudo conectar a la base de datos o sincronizar tablas:', err);
     });
-
-
 app.use(userRouter);
-app.listen(PORT, () => {
-    console.log(`Servidor funcionando en el puerto ${PORT}`);
-});
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Servidor corriendo en http://0.0.0.0:${PORT}`);
+  });

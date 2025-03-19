@@ -24,6 +24,7 @@ export class RegistroComponent {
 
   onSubmit() {
     if (this.nombreUsuario && this.email && this.password) {
+      console.log(this.nombreUsuario + ' ' + this.email + ' ' + this.password);
       this.authService.registro({ nombreUsuario: this.nombreUsuario, email: this.email, password: this.password })
         .subscribe(
           (response) => {
