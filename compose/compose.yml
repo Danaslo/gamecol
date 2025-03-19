@@ -21,14 +21,6 @@ services:
       - db
     volumes:
       - /Proyecto2/server:/app
-    environment:
-      DB_HOST: 172.18.0.2
-      DB_PORT: 3306
-      DB_USER: gamehoarder
-      DB_PASS: Wh@t@reYouSelling
-      DB_NAME: gamingcollections
-      PORT: 80
-      SECRET: docecascabelesllevamicaballo
     networks:
       backend:
         ipv4_address: 172.18.0.3
