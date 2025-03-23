@@ -1,0 +1,63 @@
+
+
+.registro-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;  
+  }
+  
+  .registro-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;  
+    box-sizing: border-box;
+  }
+  
+  .registro-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .registro-card label {
+    font-weight: bold;
+  }
+  
+  .registro-card input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+  }
+  
+  .registro-card button {
+    padding: 10px;
+    background-color: #DAA520;  
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .registro-card button:hover {
+    background-color: #b8860b;  
+  }
+  
+
+  /*Media Queries para responsividad */
+  @media (max-width: 600px) {
+    .registro-card {
+      padding: 15px;
+    }
+  
+    .registro-card input,
+    .registro-card button {
+      padding: 8px;
+    }
+  }
+  
