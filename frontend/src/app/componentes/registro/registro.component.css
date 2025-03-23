@@ -81,7 +81,7 @@ input {
 
 .button-container {
   display: flex;
-  justify-content: flex-start; /* Alinea el botón a la izquierda */
+  justify-content: flex-start;
   width: 100%;
 }
 
@@ -92,7 +92,7 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background 0.5s ease; /* Transición suave de fondo */
+  transition: background 0.5s ease; 
 }
 
 button:hover {
