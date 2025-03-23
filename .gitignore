@@ -2,7 +2,7 @@
 /frontend/node_modules/
 /db
 *.log
-
+/frontend/.angular/*
 # Logs de errores de node
 npm-debug.log*
 yarn-debug.log*
