@@ -3,12 +3,16 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';  // Importa HttpClientModule
+import { HttpClientModule } from '@angular/common/http';
+import { HeaderComponent } from '../header/header.component';
+import { CommonModule } from '@angular/common';
+import { FooterComponent } from '../footer/footer.component';
+
 
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [FormsModule, RouterOutlet, HttpClientModule],  // Asegúrate de incluir HttpClientModule en imports
+  imports: [FormsModule, RouterOutlet, HttpClientModule, HeaderComponent,CommonModule, FooterComponent], 
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css']
 })
