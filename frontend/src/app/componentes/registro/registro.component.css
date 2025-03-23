@@ -1,63 +1,136 @@
-
-
 .registro-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;  
-  }
-  
-  .registro-card {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;  
-    box-sizing: border-box;
-  }
-  
-  .registro-card form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .registro-card label {
-    font-weight: bold;
-  }
-  
-  .registro-card input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 100%;
-  }
-  
-  .registro-card button {
-    padding: 10px;
-    background-color: #DAA520;  
-    border: none;
-    color: white;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .registro-card button:hover {
-    background-color: #b8860b;  
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  text-align: center;
+  padding: 60px;
+}
 
-  /*Media Queries para responsividad */
-  @media (max-width: 600px) {
-    .registro-card {
-      padding: 15px;
-    }
-  
-    .registro-card input,
-    .registro-card button {
-      padding: 8px;
-    }
+h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.form-container {
+  border: 1px solid #DAA520;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: #2C2C2C;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+  width: 100%;
+  max-width: 900px;
+}
+
+.registro-card {
+  display: flex;
+  flex-direction: row;
+  padding: 40px;
+  max-width: 100%;
+  width: 100%;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.image-container {
+  max-width: 300px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid #DAA520;
+}
+
+.form-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  flex: 2;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  align-items: flex-start;
+}
+
+label {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+input {
+  padding: 8px;
+  width: 100%;
+  max-width: 300px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-start; /* Alinea el botón a la izquierda */
+  width: 100%;
+}
+
+button {
+  background: linear-gradient(to right, #DDA0DD, #4A2D4A);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.5s ease; /* Transición suave de fondo */
+}
+
+button:hover {
+  background: linear-gradient(to right, #4A2D4A, #DDA0DD);
+}
+
+
+/* Media qUeries para responsive */
+@media (max-width: 768px) {
+  .registro-card {
+    flex-direction: column;
+    align-items: center;
   }
-  
+
+  .image-container {
+    margin-top: 20px;
+    max-width: 250px;
+  }
+
+  .form-inputs {
+    width: 100%;
+  }
+
+  input {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .registro-card {
+    padding: 20px;
+  }
+
+  button {
+    padding: 8px 16px;
+  }
+}

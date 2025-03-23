@@ -1,5 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
 
 body {
-    background-color: #4F4F4F;
-  }
+    background-image: url('assets/img/bg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed; 
+}
+
+h1,h2,h3,h4,h5,button{
+  color: #DAA520;
+  font-family: 'Almendra SC', serif;
+}
+
+input{
+  border: 3px solid #DAA520;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+p,label{
+  font-family: 'Inria Sans', sans-serif;
+  color: white
+}
