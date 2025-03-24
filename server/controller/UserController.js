@@ -1,6 +1,15 @@
+/*Éste controller tiene que: 
+- Loguear un usuario (devuelve un token)
+- Registrar un usuario creando una colección con su ID y encriptando contraseña.
+- Verificar el token
+
+QUEDA PROBAR EL LOGIN Y VER SI DA UN TOKEN VÁLIDO.
+
+*/
 const Usuario = require('../model/Usuario');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const Coleccion = require('../model/Coleccion');
 
 async function registro(req, res){
     try {
@@ -20,6 +29,9 @@ async function registro(req, res){
             password: contraseniaHasheada,
             rol: 'user'
         });
+        //Creación de la colección:
+        const idUsuario = usuario.id;
+        await Coleccion.create({ id_usuario: idUsuario, juegos: [] });
 
         res.json({ message: 'Usuario creado correctamente' });
     }
