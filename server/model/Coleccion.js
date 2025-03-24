@@ -1,7 +1,5 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/sequelize');
-const Usuario = require('./Usuario');
-const Juego = require('./Juego');
 
 const Coleccion = sequelize.define('Coleccion',{
     id: {
@@ -9,12 +7,12 @@ const Coleccion = sequelize.define('Coleccion',{
         primaryKey: true,
         autoIncrement: true
     },
-    id_juego: {
+    id_usuario: {
         type: DataTypes.BIGINT,
         allowNull: false
     },
-    id_usuario: {
-        type: DataTypes.BIGINT,
+    juegos: {
+        type: DataTypes.JSON,
         allowNull: false
     }
 },{
