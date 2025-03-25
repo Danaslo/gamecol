@@ -31,6 +31,7 @@ services:
   frontend:
     image: danielfaq/gamecol_frontend
     container_name: frontend
+    hostname: gamercave
     volumes:
       - /Proyecto2/frontend:/app
     networks:
@@ -38,10 +39,7 @@ services:
         ipv4_address: 172.18.1.2
     ports:
       - "4200:4200"
-    command: ["npm", "start"]
-
-
-
+    command: ["sh", "-c", "npm install && npm start"]
 
 # Redes:
 networks:
