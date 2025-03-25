@@ -7,13 +7,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from '../header/header.component';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from '../footer/footer.component';
-import { NavbarComponent } from '../navbar/navbar.component';
+
 
 
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [FormsModule, RouterOutlet, HttpClientModule, HeaderComponent,CommonModule, FooterComponent, NavbarComponent], 
+  imports: [FormsModule, RouterOutlet, HttpClientModule, HeaderComponent,CommonModule, FooterComponent], 
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css']
 })

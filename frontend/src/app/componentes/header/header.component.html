@@ -1,9 +1,20 @@
 <header class="header">
+  <div class="header-left">
     <div class="logo">
       <img src="assets/img/header/logo.png" alt="Logo" />
     </div>
-    <div class="user-actions">
-      <!-- Aquí el ngif (angular if) hace que el botón salga sólo si se está logueado-->
-      <button *ngIf="isLoggedIn" id="logout-btn" (click)="logout()">Salir</button>
-    </div>
-  </header>
+    <nav class="navbar">
+      <div class="navbar-left">
+        <button class="btn" routerLink="/">Inicio</button>
+        <button class="btn" *ngIf="isAuthenticated" routerLink="/coleccion">Colección</button>
+        <button class="btn" routerLink="/mercado">Mercado</button>
+        <button class="btn" *ngIf="isAuthenticated" routerLink="/seguimientos">Seguimientos</button>
+        <button class="btn" *ngIf="isAuthenticated" routerLink="/ventas">Ventas</button>
+        <button class="btn" routerLink="/contacto">Contacto</button>
+      </div>
+    </nav>
+  </div>
+  <div class="user-actions">
+    <button *ngIf="isLoggedIn" id="logout-btn" (click)="logout()">Salir</button>
+  </div>
+</header>
