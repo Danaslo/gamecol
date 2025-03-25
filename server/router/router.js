@@ -6,8 +6,8 @@ const juegoController = require('../controller/JuegoController');
 const verificarToken = require('../controller/UserController').verificarToken;
 
 //Rutas de userController:
-router.post("/login", userController.registro); //FUNCIONA
-router.get("/login", userController.login);
+router.post("/registro", userController.registro); //FUNCIONA
+router.post("/login", userController.login);
 
 //Rutas de juegoController:
 router.post("/editarNombre", verificarToken, juegoController.editarNombre);

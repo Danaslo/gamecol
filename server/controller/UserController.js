@@ -67,7 +67,7 @@ async function login (req,res){
     if (!passwordValida) {
         return res.status(401).json({ message: 'Contraseña incorrecta' });
     }
-    const token = jwt.sign({ id: usuario.id, rol: usuario.rol }, process.env.SECRET, {
+    const token = jwt.sign({ id: usuario.id, rol: usuario.rol }, "Iba yo de peregrino", {
         expiresIn: 864000
     });
     res.json({ token });
