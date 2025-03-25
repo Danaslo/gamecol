@@ -8,12 +8,10 @@ import { HeaderComponent } from '../header/header.component';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from '../footer/footer.component';
 
-
-
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [FormsModule, RouterOutlet, HttpClientModule, HeaderComponent,CommonModule, FooterComponent], 
+  imports: [FormsModule, RouterOutlet, HttpClientModule, HeaderComponent, CommonModule, FooterComponent], 
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css']
 })
@@ -33,11 +31,10 @@ export class RegistroComponent {
       this.authService.registro({ nombreUsuario: this.nombreUsuario, email: this.email, password: this.password })
         .subscribe(
           (response) => {
-            // Manejar la respuesta exitosa
-            this.router.navigate(['/login']);
+            console.log('Usuario registrado:', response);
+            this.router.navigate(['/']); 
           },
           (error) => {
-            // Manejar el error
             console.error('Error al registrar usuario', error);
           }
         );
