@@ -1,20 +1,39 @@
 <header class="header">
-  <div class="header-left">
-    <div class="logo">
-      <img src="assets/img/header/logo.png" alt="Logo" />
+    <div class="header-left">
+        <div class="logo">
+            <img src="assets/img/header/logo.png" alt="Logo" />
+        </div>
+        <nav class="navbar navbar-expand-lg">
+            <button class="navbar-toggler" type="button" (click)="toggleMenu()" aria-controls="navbarNav" [attr.aria-expanded]="menuOpen" aria-label="Toggle navigation">
+
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" [class.show]="menuOpen" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link btn" routerLink="/">Inicio</a>
+                    </li>
+                    <li class="nav-item" *ngIf="isAuthenticated">
+                        <a class="nav-link btn" routerLink="/coleccion">Colección</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn" routerLink="/mercado">Mercado</a>
+                    </li>
+                    <li class="nav-item" *ngIf="isAuthenticated">
+                        <a class="nav-link btn" routerLink="/seguimientos">Seguimientos</a>
+                    </li>
+                    <li class="nav-item" *ngIf="isAuthenticated">
+                        <a class="nav-link btn" routerLink="/ventas">Ventas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn" routerLink="/contacto">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     </div>
-    <nav class="navbar">
-      <div class="navbar-left">
-        <button class="btn" routerLink="/">Inicio</button>
-        <button class="btn" *ngIf="isAuthenticated" routerLink="/coleccion">Colección</button>
-        <button class="btn" routerLink="/mercado">Mercado</button>
-        <button class="btn" *ngIf="isAuthenticated" routerLink="/seguimientos">Seguimientos</button>
-        <button class="btn" *ngIf="isAuthenticated" routerLink="/ventas">Ventas</button>
-        <button class="btn" routerLink="/contacto">Contacto</button>
-      </div>
-    </nav>
-  </div>
-  <div class="user-actions">
-    <button *ngIf="isLoggedIn" id="logout-btn" class="btn" (click)="logout()">Salir</button>
-  </div>
+
+    <div class="user-actions">
+        <button *ngIf="isLoggedIn" id="logout-btn" class="btn" (click)="logout()">Salir</button>
+    </div>
 </header>

@@ -3,35 +3,39 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-header',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+    selector: 'app-header',
+    standalone: true,
+    imports: [CommonModule],
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  isLoggedIn: boolean;
-  isAuthenticated: boolean = false;
+    isLoggedIn: boolean = false;
+    isAuthenticated: boolean = false;
+    menuOpen: boolean = false;
 
-  constructor(private router: Router) {
-    this.isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn') || 'false');
-    this.isAuthenticated = localStorage.getItem('token') !== null;
-  }
+    constructor(private router: Router) {
+        this.checkAuthStatus();
+    }
 
-  login() {
-    this.isLoggedIn = true;
-    localStorage.setItem('isLoggedIn', 'true');
-  }
+    checkAuthStatus() {
+        this.isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn') || 'false');
+        this.isAuthenticated = localStorage.getItem('token') !== null;
+    }
 
+    login() {
+        localStorage.setItem('isLoggedIn', 'true');
+        this.checkAuthStatus();
+    }
 
-  logout() {
-    this.isLoggedIn = false;
-    localStorage.setItem('isLoggedIn', 'false');
-    localStorage.removeItem('token');
-    this.router.navigate(['/login']);
-  }
+    logout() {
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('token');
+        this.checkAuthStatus();
+        this.router.navigate(['/login']);
+    }
 
-  agregarJuego() {
-    console.log('Agregar Juego');
-  }
+    toggleMenu() {
+        this.menuOpen = !this.menuOpen;
+    }
 }
