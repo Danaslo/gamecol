@@ -3,37 +3,36 @@
         <div class="logo">
             <img src="assets/img/header/logo.png" alt="Logo" />
         </div>
-        <nav class="navbar navbar-expand-lg">
-            <button class="navbar-toggler" type="button" (click)="toggleMenu()" aria-controls="navbarNav" [attr.aria-expanded]="menuOpen" aria-label="Toggle navigation">
-
+        <nav class="navbar navbar-expand-lg" id="navbar">
+            <button class="navbar-toggler" type="button" (click)="toggleMenu()" aria-controls="navbarNav"
+                [attr.aria-expanded]="menuOpen" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" [class.show]="menuOpen" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav" id="navbar-list">
                     <li class="nav-item">
-                        <a class="nav-link btn" routerLink="/">Inicio</a>
+                        <button class="nav-link btn" (click)="navigateTo('/')">Inicio</button>
                     </li>
                     <li class="nav-item" *ngIf="isAuthenticated">
-                        <a class="nav-link btn" routerLink="/coleccion">Colección</a>
+                        <button class="nav-link btn" (click)="navigateTo('/coleccion')">Colección</button>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn" routerLink="/mercado">Mercado</a>
+                        <button class="nav-link btn" (click)="navigateTo('/mercado')">Mercado</button>
                     </li>
                     <li class="nav-item" *ngIf="isAuthenticated">
-                        <a class="nav-link btn" routerLink="/seguimientos">Seguimientos</a>
+                        <button class="nav-link btn" (click)="navigateTo('/seguimientos')">Seguimientos</button>
                     </li>
                     <li class="nav-item" *ngIf="isAuthenticated">
-                        <a class="nav-link btn" routerLink="/ventas">Ventas</a>
+                        <button class="nav-link btn" (click)="navigateTo('/ventas')">Ventas</button>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn" routerLink="/contacto">Contacto</a>
+                        <button class="nav-link btn" (click)="navigateTo('/contacto')">Contacto</button>
                     </li>
+                    <li class="nav-item">
+                        <button *ngIf="isLoggedIn" id="logout-btn" class="nav-link btn" (click)="logout()">Salir</button>
+                    </li>      
                 </ul>
             </div>
         </nav>
-    </div>
-
-    <div class="user-actions">
-        <button *ngIf="isLoggedIn" id="logout-btn" class="btn" (click)="logout()">Salir</button>
     </div>
 </header>
