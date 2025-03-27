@@ -11,7 +11,22 @@
     width: 100%;
     height: 100px;
     z-index: 1000;
+    
 }
+
+.navbar-nav .nav-item .nav-link.active {
+    background: linear-gradient(to right, #8A2BE2, #DDA0DD, #4B0082);  
+    border: 1px solid #4B0082;
+}
+
+.navbar-nav .nav-item .nav-link.active:hover {
+    background: linear-gradient(to right, #8A2BE2, #DDA0DD, #4B0082);
+    border: 1px solid #4B0082;
+    transform: scale(1.1);  
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
+    transition: all 0.3s ease-in-out; 
+}
+
 
 .header-left {
     display: flex;
@@ -49,54 +64,57 @@
 .navbar-nav {
     display: flex;
     gap: 15px;
+    margin: 0;
+    padding: 0;
 }
 
-    .navbar-nav .nav-item .nav-link {
-        background: linear-gradient(to right, #50C878, #50C878, #3A9A55);
-        color: white;
-        border-radius: 8px;
-        border: 1px solid #3A9A55;
-        padding: 12px 20px;
-        font-size: 18px;
-        transition: all 0.2s ease-in-out;
-    }
+.navbar-nav .nav-item .nav-link {
+    background: linear-gradient(to right, #50C878, #50C878, #3A9A55);
+    color: white;
+    border-radius: 8px;
+    border: 1px solid #3A9A55;
+    padding: 12px 20px;
+    font-size: 18px;
+    transition: all 0.2s ease-in-out;
+}
 
-        .navbar-nav .nav-item .nav-link:hover {
-            background: linear-gradient(to right, #60D888, #50C878, #4CAF50);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-        }
+.navbar-nav .nav-item .nav-link:hover {
+    background: linear-gradient(to right, #60D888, #50C878, #4CAF50);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
 
-        .navbar-nav .nav-item .nav-link:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        }
+.navbar-nav .nav-item .nav-link:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
 
 .user-actions {
     display: flex;
     align-items: center;
 }
 
-    .user-actions .btn {
-        background: linear-gradient(to right, #50C878, #50C878, #3A9A55);
-        color: white;
-        border-radius: 8px;
-        border: 1px solid #3A9A55;
-        padding: 12px 20px;
-        font-size: 18px;
-        transition: all 0.2s ease-in-out;
-    }
+.user-actions .btn {
+    background: linear-gradient(to right, #50C878, #50C878, #3A9A55);
+    color: white;
+    border-radius: 8px;
+    border: 1px solid #3A9A55;
+    padding: 12px 20px;
+    font-size: 18px;
+    transition: all 0.2s ease-in-out;
+}
 
-        .user-actions .btn:hover {
-            background: linear-gradient(to right, #60D888, #50C878, #4CAF50);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-        }
+.user-actions .btn:hover {
+    background: linear-gradient(to right, #60D888, #50C878, #4CAF50);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
 
-        .user-actions .btn:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        }
+.user-actions .btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
 
 @media (max-width: 992px) {
     .navbar-collapse {
@@ -109,47 +127,53 @@
         z-index: 1000;
     }
 
-    .navbar-nav .nav-item .nav-link {
-        font-size: 20px; 
-        padding: 14px 24px; 
-    }
-
-    .user-actions .btn {
-        font-size: 20px;
-        padding: 14px 24px;
-    }
-
     .navbar-nav {
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         width: 100%;
     }
 
-        .navbar-nav .nav-item {
-            width: 100%;
-        }
+    .navbar-nav .nav-item {
+        width: 100%;
+    }
 
-            .navbar-nav .nav-item .nav-link {
-                width: 100%;
-                text-align: center;
-            }
+    .navbar-nav .nav-item .nav-link {
+        font-size: 14px;
+        padding: 8px 12px;
+        text-align: left;
+        width: auto;
+        box-sizing: border-box; 
+    }
 
-            li{
-                width: 100%;
-            }
+    .user-actions {
+        padding-left: 10px;
+    }
+
+    .navbar-nav .nav-item .nav-link,
+    .user-actions .btn {
+        font-size: 14px;
+        text-align: left;
+        padding: 12px 20px;
+    }
 }
+
 
 @media (max-width: 480px) {
     .header {
         flex-direction: column;
         height: auto;
-        padding: 10px;
+        padding: 5px;
+    }
+
+    .navbar-nav {
+        padding-left: 5px;
     }
 
     .navbar-nav .nav-item .nav-link,
     .user-actions .btn {
-        font-size: 10px;
-        padding: 16px 28px;
+        font-size: 12px;  
+        text-align: left;
+        padding: 10px 16px; 
     }
 
     .navbar-toggler {
