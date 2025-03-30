@@ -1,25 +1,41 @@
+<app-header></app-header>
 <div class="contacto-container">
-    <h2>Contacta con nosotros</h2>
+    <div id="form-container">
+      <form (ngSubmit)="enviarCorreo()">
+        <h3>Contacto:</h3>
+        <div>
+          <label for="subject">Asunto:</label>
+            <select id="subject" [(ngModel)]="asunto" name="subject" required>
+                <option value="" disabled selected>Selecciona un asunto</option>
+                <option value="Consulta">Consulta</option>
+                <option value="Sugerencia">Sugerencia</option>
+                <option value="Reclamo">Reclamo</option>
+                <option value="Sospecha de fraude">Fraude</option>
+                <option value="Otros">Otros</option>
+            </select>
+        </div>
+        <div>
+          <label for="message">Mensaje:</label>
+          <textarea id="message" [(ngModel)]="mensaje" name="message" required></textarea>
+        </div>
   
-    <form (ngSubmit)="enviarCorreo()">
-      <div>
-        <label for="subject">Asunto:</label>
-        <input type="text" id="subject" [(ngModel)]="asunto" name="subject" required>
+        <button type="submit">Enviar</button>
+          
+      <div *ngIf="exito" class="exito">
+        {{ exito }}
+      </div>
+      <div *ngIf="fallo" class="fallo">
+        {{ fallo }}
       </div>
   
-      <div>
-        <label for="message">Mensaje:</label>
-        <textarea id="message" [(ngModel)]="mensaje" name="message" required></textarea>
+      </form>
+
+      <div id="image-container">
+        <img src="assets/img/contacto/enano_contacto.webp" alt="Imagen de contacto">
+        <p>¡¿Problemas?! ¡No en mi forja!</p>
+        <p>¡Envíanos un correo con tus dudas y te responderemos enseguida!</p>
       </div>
-  
-      <button type="submit">Enviar</button>
-    </form>
-  
-    <div *ngIf="exito" class="exito">
-      {{ exito }}
-    </div>
-    <div *ngIf="fallo" class="fallo">
-      {{ fallo }}
     </div>
   </div>
   
+<app-footer></app-footer>
