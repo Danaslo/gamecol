@@ -1,0 +1,25 @@
+<div class="contacto-container">
+    <h2>Contacta con nosotros</h2>
+  
+    <form (ngSubmit)="enviarCorreo()">
+      <div>
+        <label for="subject">Asunto:</label>
+        <input type="text" id="subject" [(ngModel)]="asunto" name="subject" required>
+      </div>
+  
+      <div>
+        <label for="message">Mensaje:</label>
+        <textarea id="message" [(ngModel)]="mensaje" name="message" required></textarea>
+      </div>
+  
+      <button type="submit">Enviar</button>
+    </form>
+  
+    <div *ngIf="exito" class="exito">
+      {{ exito }}
+    </div>
+    <div *ngIf="fallo" class="fallo">
+      {{ fallo }}
+    </div>
+  </div>
+  

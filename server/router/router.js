@@ -3,6 +3,8 @@ const router = express.Router();
 const userController = require('../controller/UserController');
 const coleccionController = require('../controller/ColeccionController');
 const juegoController = require('../controller/JuegoController');
+const contactoController = require('../controller/ContactoController');
+
 const verificarToken = require('../controller/UserController').verificarToken;
 
 //Rutas de userController:
@@ -24,6 +26,11 @@ router.post("/borrarJuego", verificarToken, coleccionController.borrarJuego);
 router.get("/listarJuegos", verificarToken, coleccionController.listarJuegos);
 router.get("/listarVenta", verificarToken, coleccionController.listarVentas);
 router.get("/deslistarVenta", verificarToken, coleccionController.listarSinVender);
+
+
+//ENdpoints para el envío de correos:
+router.post("/contacto",contactoController.enviarCorreo); //Como un correo lo puede enviar cualquiera no se revisa el token.
+
 
 
 module.exports = router;
