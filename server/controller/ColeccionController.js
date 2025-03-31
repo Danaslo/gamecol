@@ -2,36 +2,32 @@
 - Agregar juego a la tabla con su id para meterlo como juego suyo. HECHO
 - Borrar juego de la tabla con su id para quitarlo de la colección. HECHO
 - Listar los juegos de la colección. HECHO
-
 HAY QUE TESTEARLO TODO
 */
 
 const Usuario = require('../model/Usuario');
 const Coleccion = require('../model/Coleccion');
+const Juego = require('../model/Juego');
 
 async function agregarJuego(req, res) {
     try {
-        const { idJuego } = req.body; //Sacamos la id del juego de la petición
+        const { nombre, condicion, descripcion, imagen, precio, estado } = req.body; //Sacamos la id del juego de la petición
         const idUsuario = req.userId;  //Se saca la Id del usuario qeu se guardó antes con el verifyToken de turno
-
         // Se busca la colección. No debería de dar problemas porque se genera una automáticamente al registrarse.
-        const coleccion = await Coleccion.findOne({ where: { id_usuario: idUsuario } });
-        if (!coleccion) {
-            return res.status(404).json({ message: 'Bóveda no encontrada' });
-        }
-
-        // Se mira por si acaso el juego existiera ya en la colección (no se si sirve de mucho pero por si acaso).
-        if (coleccion.juegos.includes(idJuego)) {
-            return res.status(400).json({ message: '¡El juego ya está en la colección, su alteza!' });
-        }
-
-        //Se añade el juego a la colección.
-        coleccion.juegos.push(idJuego);
-
-       
-        await coleccion.save();  //Sin esto NO se actualiza la colección en la base de datos, así que ojito.
-
-        res.json({ message: 'Su nuevo juego está listo para exhibirse' });
+            const coleccion = await Coleccion.findOne({ where: { id_usuario: idUsuario } });
+            if (!coleccion) {
+                return res.status(404).json({ message: 'Bóveda no encontrada' });
+            }
+            const juego = await Juego.create({
+                nombre,
+                condicion,
+                descripcion,
+                imagen,
+                id_coleccion: coleccion.id,
+                precio,
+                estado
+            });
+            res.json({ message: 'Su nuevo juego está listo para exhibirse' });   
     }
     catch (error) {
         console.error(error.message);
@@ -42,32 +38,21 @@ async function agregarJuego(req, res) {
 async function borrarJuego(req, res) {
     try {
         const { idJuego } = req.body;
-        const idUsuario = req.userId;  //Volvemos a coger el userId del verifyToken
+        const idUsuario = req.userId;
 
-        // Buscamos la colección de turno.
         const coleccion = await Coleccion.findOne({ where: { id_usuario: idUsuario } });
         if (!coleccion) {
             return res.status(404).json({ message: 'Bóveda no encontrada' });
         }
-
-        // Obtenemos el array de juegos
-        const juegos = coleccion.juegos;
-        const index = juegos.indexOf(idJuego);
-
-        // Si el juego existe, se elimina del array
-        if (index > -1) {
-            juegos.splice(index, 1);
-        } else {
-            return res.status(404).json({ message: '¡Lo sentimos, no hemos encontrado éste juego en la bóveda!' });
+        
+        const juego = await Juego.findOne({ where: { id: idJuego, id_coleccion: coleccion.id } });
+        if (!juego) {
+            return res.status(404).json({ message: 'Juego no encontrado en tu bóveda' });
         }
-
-       
-        coleccion.juegos = juegos; 
-        await coleccion.save();  
-
+        await juego.destroy();
         res.json({ message: '¡Juego destruido!' });
-    }
-    catch (error) {
+
+    } catch (error) {
         console.error(error.message);
         res.status(500).json({ message: 'Algo ha salido mal mientras intentábamos borrar el juego.' });
     }
@@ -81,8 +66,9 @@ async function listarJuegos(req, res) {
         if (!coleccion) {
             return res.status(404).json({ message: 'Bóveda no encontrada' });
         }
+        const juegos = await Juego.findAll({ where: { id_coleccion: coleccion.id } });
+        res.json({ juegos });
 
-        res.json(coleccion.juegos);
     } catch (error) {
         console.error(error.message);
         res.status(500).json({ message: 'Error al listar los juegos de la colección' });

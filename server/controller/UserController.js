@@ -40,20 +40,24 @@ async function registro(req, res){
     }  
 }
 
-//Verificación del token:
 const verificarToken = (req, res, next) => {
-    const token = req.headers['token'];
+    console.log('Entra');
+    const authHeader = req.headers['authorization'];
+    if (!authHeader) {
+        return res.status(403).json({ message: 'No se proporcionó un token' });
+    }
+    const token = authHeader.split(' ')[1]; 
     if (!token) {
         return res.status(403).json({ message: 'No se proporcionó un token' });
     }
-
-    jwt.verify(token, process.env.SECRET, (err, decoded) => {
+    jwt.verify(token, "Iba yo de peregrino", (err, decoded) => {
         if (err) {
             return res.status(500).json({ message: 'Fallo al autenticar el token' });
         }
+        
         req.userId = decoded.id;
         req.userRol = decoded.rol;
-        next();
+        next(); 
     });
 }
 

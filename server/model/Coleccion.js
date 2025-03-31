@@ -10,10 +10,6 @@ const Coleccion = sequelize.define('Coleccion',{
     id_usuario: {
         type: DataTypes.BIGINT,
         allowNull: false
-    },
-    juegos: {
-        type: DataTypes.JSON,
-        allowNull: false
     }
 },{
     timestamps: false,
