@@ -27,10 +27,6 @@ const Juego = sequelize.define('Juego',{
         type: DataTypes.STRING,
         allowNull: false
     },
-    precio: {
-        type: DataTypes.DECIMAL,
-        allowNull: false
-    },
     id_coleccion: {
         type: DataTypes.BIGINT,
         allowNull: false

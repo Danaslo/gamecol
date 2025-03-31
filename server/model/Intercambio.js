@@ -12,6 +12,9 @@ const Intercambio = sequelize.define('Intercambio',{
     id_juego: {
         type: DataTypes.BIGINT,
         allowNull: false
+    },precio: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     },
     id_comprador: {
         type: DataTypes.BIGINT,
@@ -20,6 +23,10 @@ const Intercambio = sequelize.define('Intercambio',{
     id_vendedor: {
         type: DataTypes.BIGINT,
         allowNull: false
+    },
+    confirmacion_vendedor: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true
     }
 },{
     timestamps: false,

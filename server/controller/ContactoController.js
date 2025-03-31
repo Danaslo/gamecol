@@ -1,12 +1,13 @@
 /* Tenemos que recordar que, como es un servicio que me manda correos a mí mismo, noi hace falta
     que se valide el correo. Porque parece ser que gmail tiene problemillas mandándolos desde otros.
+
+    Los campos subject,message,from y to tienen que estar en inglés para que lo reconozca bien la API de gmail.
 */
 const { enviarEmail } = require('../servicios/ServicioEmail');
 
 const enviarCorreo = async (req, res) => {
   const { subject, message } = req.body;
   
-  // Vemos si se ha seleccionado un asunto y un mensaje.
   if (!subject || !message) {
     return res.status(400).json({ success: false, message: 'Rellena todos los campos' });
   }
