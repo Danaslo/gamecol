@@ -3,36 +3,71 @@
         <div class="logo">
             <img src="assets/img/header/logo.png" alt="Logo" />
         </div>
-        <nav class="navbar navbar-expand-lg" id="navbar">
-            <button class="navbar-toggler" type="button" (click)="toggleMenu()" aria-controls="navbarNav"
-                [attr.aria-expanded]="menuOpen" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" [class.show]="menuOpen" id="navbarNav">
-                <ul class="navbar-nav" id="navbar-list">
-                    <li class="nav-item">
-                        <button class="nav-link btn" (click)="navigateTo('/')">Inicio</button>
-                    </li>
-                    <li class="nav-item" *ngIf="isAuthenticated">
-                        <button class="nav-link btn" (click)="navigateTo('/coleccion')">Colección</button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="nav-link btn" (click)="navigateTo('/mercado')">Mercado</button>
-                    </li>
-                    <li class="nav-item" *ngIf="isAuthenticated">
-                        <button class="nav-link btn" (click)="navigateTo('/seguimientos')">Seguimientos</button>
-                    </li>
-                    <li class="nav-item" *ngIf="isAuthenticated">
-                        <button class="nav-link btn" (click)="navigateTo('/ventas')">Ventas</button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="nav-link btn" (click)="navigateTo('/contacto')">Contacto</button>
-                    </li>
-                    <li class="nav-item">
-                        <button *ngIf="isLoggedIn" id="logout-btn" class="nav-link btn" (click)="logout()">Salir</button>
-                    </li>      
-                </ul>
-            </div>
-        </nav>
+        <div class="navbar-container">
+            <nav class="navbar navbar-expand-lg" id="navbar">
+                <button class="navbar-toggler" type="button" (click)="toggleMenu()" aria-controls="navbarNav"
+                    [attr.aria-expanded]="menuOpen" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" [class.show]="menuOpen" id="navbarNav">
+                    <ul class="navbar-nav" id="navbar-list">
+                        <li class="nav-item">
+                            <button 
+                                class="nav-link btn" 
+                                (click)="navigateTo('/')" 
+                                [ngClass]="{'active-button': rutaActual === '/'}">
+                                Inicio
+                            </button>
+                        </li>
+                        <li class="nav-item" *ngIf="isAuthenticated">
+                            <button 
+                                class="nav-link btn" 
+                                (click)="navigateTo('/coleccion')" 
+                                [ngClass]="{'active-button': rutaActual === '/coleccion'}">
+                                Colección
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button 
+                                class="nav-link btn" 
+                                (click)="navigateTo('/mercado')" 
+                                [ngClass]="{'active-button': rutaActual === '/mercado'}">
+                                Mercado
+                            </button>
+                        </li>
+                        <li class="nav-item" *ngIf="isAuthenticated">
+                            <button 
+                                class="nav-link btn" 
+                                (click)="navigateTo('/seguimientos')" 
+                                [ngClass]="{'active-button': rutaActual === '/seguimientos'}">
+                                Seguimientos
+                            </button>
+                        </li>
+                        <li class="nav-item" *ngIf="isAuthenticated">
+                            <button 
+                                class="nav-link btn" 
+                                (click)="navigateTo('/ventas')" 
+                                [ngClass]="{'active-button': rutaActual === '/ventas'}">
+                                Ventas
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button 
+                                class="nav-link btn" 
+                                (click)="navigateTo('/contacto')" 
+                                [ngClass]="{'active-button': rutaActual === '/contacto'}">
+                                Contacto
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button *ngIf="isLoggedIn" id="logout-btn" class="nav-link btn"
+                                (click)="logout()">
+                                Salir
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
     </div>
 </header>

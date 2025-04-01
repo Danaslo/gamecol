@@ -16,7 +16,12 @@ const Usuario = sequelize.define('Usuario',{
   },
   email: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      isEmail: {
+        msg: 'El email no sigue un formato válido'
+      }
+    }
   },
   password: {
     type: DataTypes.STRING,
@@ -34,5 +39,13 @@ const Usuario = sequelize.define('Usuario',{
     timestamps: false,
     tableName: 'usuarios'
 });
+
+//Validación para contraseña mayor de caracteres. Como estoy testeando prefiero no ponerlo aún.
+/* validate: {
+        len: {
+            args: [6],
+            msg: "La contraseña debe tener al menos 8 caracteres."
+        }
+    } */
 
 module.exports = Usuario;

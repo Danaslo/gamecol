@@ -15,9 +15,13 @@ export class HeaderComponent {
     isLoggedIn: boolean = false;
     isAuthenticated: boolean = false;
     menuOpen: boolean = false;
+    rutaActual: string = '';
 
     constructor(private router: Router) {
         this.checkAuthStatus();
+        this.router.events.subscribe(() => {
+            this.rutaActual = this.router.url;
+          });
     }
 
     checkAuthStatus() {
