@@ -27,7 +27,7 @@ app.set('views', './views');
 sequelize.authenticate()
     .then(() => {
         console.log(' Conexión a la base de datos exitosa.');
-        return sequelize.sync({ force: false }); 
+        return sequelize.sync({ alter: true }); 
     })
     .then(() => {
         console.log(' Tablas sincronizadas correctamente.');
