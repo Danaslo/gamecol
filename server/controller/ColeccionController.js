@@ -11,7 +11,7 @@ const Juego = require('../model/Juego');
 
 async function agregarJuego(req, res) {
     try {
-        const { nombre, condicion, descripcion, imagen, precio, estado } = req.body; //Sacamos la id del juego de la petición
+        const { nombre, condicion, descripcion, imagen, precio, estado, plataforma} = req.body; //Sacamos la id del juego de la petición
         const idUsuario = req.userId;  //Se saca la Id del usuario qeu se guardó antes con el verifyToken de turno
         // Se busca la colección. No debería de dar problemas porque se genera una automáticamente al registrarse.
             const coleccion = await Coleccion.findOne({ where: { id_usuario: idUsuario } });
@@ -21,6 +21,7 @@ async function agregarJuego(req, res) {
             const juego = await Juego.create({
                 nombre,
                 condicion,
+                plataforma,
                 descripcion,
                 imagen,
                 id_coleccion: coleccion.id,

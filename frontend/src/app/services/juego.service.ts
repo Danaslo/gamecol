@@ -19,7 +19,7 @@ export class JuegoService {
   listarJuegos(): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    console.log(headers);
+    console.log(this.http.get(`${this.apiUrl}/listarJuegos`, { headers }));
     return this.http.get(`${this.apiUrl}/listarJuegos`, { headers });
   }
 

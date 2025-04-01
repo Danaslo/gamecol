@@ -4,15 +4,13 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from '../header/header.component';
-import { FooterComponent } from '../footer/footer.component';
 import { JuegoService } from '../../services/juego.service';
 
 
 @Component({
   selector: 'app-registro-juego',
   standalone: true,
-  imports: [FormsModule,CommonModule,ReactiveFormsModule,HeaderComponent,FooterComponent],
+  imports: [FormsModule,CommonModule,ReactiveFormsModule],
   templateUrl: './registro-juego.component.html',
   styleUrls: ['./registro-juego.component.css']
 })
@@ -25,6 +23,7 @@ export class RegistroJuegoComponent implements OnInit {
     this.juegoForm = this.fb.group({
       nombre: [''],
       condicion: ['precintado'],
+      plataforma: [''],
       descripcion: [''],
       imagen: [''],
       estado: ['en venta']
@@ -32,16 +31,26 @@ export class RegistroJuegoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.listarJuegos();
+    this.juegoService.listarJuegos();
+    this.juegoService.listarJuegos().subscribe(
+      (data) => {
+        this.juegos = data.juegos;
+      },
+      (error) => {
+        console.error('Error al listar los juegos', error);
+      }
+    );
   }
 
   agregarJuego() {
+    console.log(this.juegoForm.value);
     this.juegoService.agregarJuego(this.juegoForm.value).subscribe(
       () => {
-        this.listarJuegos();
+        this.juegoService.listarJuegos();
         this.juegoForm.reset({
           nombre: '',
           condicion: 'precintado',
+          plataforma: '',
           descripcion: '',
           imagen: '',
           precio: 0,
@@ -54,25 +63,7 @@ export class RegistroJuegoComponent implements OnInit {
     );
   }
 
-  listarJuegos() {
-    this.juegoService.listarJuegos().subscribe(
-      (data) => {
-        this.juegos = data.juegos;
-      },
-      (error) => {
-        console.error('Error al listar los juegos', error);
-      }
-    );
-  }
+  
 
-  borrarJuego(idJuego: number) {
-    this.juegoService.borrarJuego(idJuego).subscribe(
-      () => {
-        this.listarJuegos();
-      },
-      (error) => {
-        console.error('Error al borrar el juego', error);
-      }
-    );
-  }
+
 }
