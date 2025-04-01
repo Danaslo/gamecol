@@ -11,6 +11,10 @@ const Juego = sequelize.define('Juego',{
         type: DataTypes.STRING,
         allowNull: false
     },
+    plataforma: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
     condicion: {
         type: DataTypes.STRING,
         allowNull: false,

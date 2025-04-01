@@ -1,28 +1,28 @@
-<app-header></app-header>
-<div class="container">
-    <h2>Agregar Juego</h2>
-    <form [formGroup]="juegoForm" (ngSubmit)="agregarJuego()">
-      <input type="text" formControlName="nombre" placeholder="Nombre del juego">
-      <select formControlName="condicion">
-        <option value="precintado">Precintado</option>
-        <option value="usado">Usado</option>
-      </select>
-      <textarea formControlName="descripcion" placeholder="Descripción"></textarea>
-      <input type="text" formControlName="imagen" placeholder="URL de imagen">
-      <select formControlName="estado">
-        <option value="en venta">En venta</option>
-        <option value="no en venta">No en venta</option>
-      </select>
-      <button type="submit">Agregar</button>
-    </form>
-  
-    <h2>Juegos en la Colección</h2>
-    <ul>
-      <li *ngFor="let juego of juegos">
-        {{ juego.nombre }} - {{ juego.condicion }} - {{ juego.estado }}
-        <button (click)="borrarJuego(juego.id)">❌</button>
-      </li>
-    </ul>
+
+<div class="modal-overlay">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="container">
+      <h2 [ngStyle]="{'color':'#DAA520'}">Agregar Juego</h2>
+      <form [formGroup]="juegoForm" (ngSubmit)="agregarJuego()">
+        <input type="text" formControlName="nombre" placeholder="Nombre del juego">  
+        <select formControlName="plataforma">
+          <option value="" disabled>Selecciona una plataforma</option>
+          <option value="Playstation">PlayStation</option>
+          <option value="Xbox">Xbox</option>
+          <option value="PC">PC</option>
+        </select>
+        <select formControlName="condicion">
+          <option value="precintado">Precintado</option>
+          <option value="usado">Usado</option>
+        </select>    
+        <textarea formControlName="descripcion" placeholder="Descripción"></textarea>        
+        <input type="text" formControlName="imagen" placeholder="URL de imagen">  
+        <select formControlName="estado">
+          <option value="en venta">En venta</option>
+          <option value="no en venta">No en venta</option>
+        </select> 
+        <button type="submit">Agregar</button>
+      </form>
+    </div>
   </div>
-  
-<app-footer></app-footer>
+</div>
