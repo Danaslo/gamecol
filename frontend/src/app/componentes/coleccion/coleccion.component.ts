@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { JuegoService } from '../../services/juego.service';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
@@ -17,17 +17,23 @@ export class ColeccionComponent implements OnInit {
 
   constructor(private juegoService: JuegoService) {}
 
+  @HostListener('document:keydown', ['$event'])
+  cerrarConEscape(event: KeyboardEvent) {
+    if (event.key === 'Escape' && this.isModalOpen) {
+      this.closeModal();
+    }
+  }
+  
   ngOnInit(): void {
     this.listarJuegos(); 
   }
 
-  openModal() {
-    this.isModalOpen = true;
-  }
-
-
   closeModal() {
     this.isModalOpen = false;
+  }
+
+  openModal() {
+    this.isModalOpen = true;
   }
 
   listarJuegos() {

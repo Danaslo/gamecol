@@ -1,41 +1,79 @@
-/*ColecciónController tiene que:
-- Agregar juego a la tabla con su id para meterlo como juego suyo. HECHO
-- Borrar juego de la tabla con su id para quitarlo de la colección. HECHO
-- Listar los juegos de la colección. HECHO
-HAY QUE TESTEARLO TODO
-*/
-
 const Usuario = require('../model/Usuario');
 const Coleccion = require('../model/Coleccion');
 const Juego = require('../model/Juego');
+const multer = require('multer');
+const fs = require('fs');
+const path = require('path');
 
+// Multer para subir imagenes
+/*const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        const uploadDir = path.join(__dirname, 'uploads');
+        if (!fs.existsSync(uploadDir)) {
+            fs.mkdirSync(uploadDir, { recursive: true });
+        }
+        cb(null, uploadDir);
+    },
+    filename: (req, file, cb) => {
+        cb(null, `${Date.now()}-${file.originalname}`);
+    }
+});
+*/
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        // Usamos la ruta de require.main?.path para obtener la ruta principal del proyecto
+        const uploadDir = path.join(require.main?.path || __dirname, 'uploads');
+console.log('Ruta en controller.js:', uploadDir);
+console.log('Ruta absoluta en controller.js:', path.resolve(uploadDir));
+        // Si no existe la carpeta, la creamos
+        if (!fs.existsSync(uploadDir)) {
+            fs.mkdirSync(uploadDir, { recursive: true });
+        }
+        
+        // Pasamos la ruta al callback para que multer guarde el archivo allí
+        cb(null, uploadDir);
+    },
+    filename: (req, file, cb) => {
+        // Asignamos un nombre único a la imagen para evitar conflictos
+        cb(null, `${Date.now()}-${file.originalname}`);
+    }
+});
+const upload = multer({ storage });
+
+// Función para agregar un juego
 async function agregarJuego(req, res) {
     try {
-        const { nombre, condicion, descripcion, imagen, precio, estado, plataforma} = req.body; //Sacamos la id del juego de la petición
-        const idUsuario = req.userId;  //Se saca la Id del usuario qeu se guardó antes con el verifyToken de turno
-        // Se busca la colección. No debería de dar problemas porque se genera una automáticamente al registrarse.
-            const coleccion = await Coleccion.findOne({ where: { id_usuario: idUsuario } });
-            if (!coleccion) {
-                return res.status(404).json({ message: 'Bóveda no encontrada' });
-            }
-            const juego = await Juego.create({
-                nombre,
-                condicion,
-                plataforma,
-                descripcion,
-                imagen,
-                id_coleccion: coleccion.id,
-                precio,
-                estado
-            });
-            res.json({ message: 'Su nuevo juego está listo para exhibirse' });   
+        const { nombre, condicion, descripcion, precio, estado, plataforma } = req.body;
+        const idUsuario = req.userId;
+        const coleccion = await Coleccion.findOne({ where: { id_usuario: idUsuario } });
+
+        if (!coleccion) {
+            return res.status(404).json({ message: 'Bóveda no encontrada' });
+        }
+        const imagen = req.file
+            ? path.join('uploads', req.file.filename) 
+            : path.join('uploads', 'default.jpg'); 
+
+        const juego = await Juego.create({
+            nombre,
+            condicion,
+            plataforma,
+            descripcion,
+            imagen, 
+            id_coleccion: coleccion.id,
+            precio,
+            estado
+        });
+
+        res.json({ message: 'Su nuevo juego está listo para exhibirse' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Ha habido un problema al intentar añadir su nuevo juego a la colección' });
     }
-    catch (error) {
-        console.error(error.message);
-        res.status(500).json({ message: 'Ha habido un problemilla al intentar añadir su nuevo juego a la colección' });
-    }  
 }
 
+// Función para borrar un juego
 async function borrarJuego(req, res) {
     try {
         const { idJuego } = req.body;
@@ -45,11 +83,12 @@ async function borrarJuego(req, res) {
         if (!coleccion) {
             return res.status(404).json({ message: 'Bóveda no encontrada' });
         }
-        
+
         const juego = await Juego.findOne({ where: { id: idJuego, id_coleccion: coleccion.id } });
         if (!juego) {
             return res.status(404).json({ message: 'Juego no encontrado en tu bóveda' });
         }
+
         await juego.destroy();
         res.json({ message: '¡Juego destruido!' });
 
@@ -59,6 +98,8 @@ async function borrarJuego(req, res) {
     }
 }
 
+// Función para listar juegos
+
 async function listarJuegos(req, res) {
     try {
         const idUsuario = req.userId;
@@ -67,6 +108,39 @@ async function listarJuegos(req, res) {
         if (!coleccion) {
             return res.status(404).json({ message: 'Bóveda no encontrada' });
         }
+
+        const juegos = await Juego.findAll({ where: { id_coleccion: coleccion.id } });
+
+
+        const baseUrl = 'http://172.18.1.3/uploads/'; 
+
+        const juegosConImagenesCompletas = juegos.map(juego => {
+            juego.imagen = baseUrl + juego.imagen.replace('uploads/', '');  // Elimina 'uploads/' para crear una URL válida
+            return juego;
+        });
+
+        res.json({ juegos: juegosConImagenesCompletas });
+
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ message: 'Error al listar los juegos de la colección' });
+    }
+}
+
+
+
+
+
+/*
+async function listarJuegos(req, res) {
+    try {
+        const idUsuario = req.userId;
+
+        const coleccion = await Coleccion.findOne({ where: { id_usuario: idUsuario } });
+        if (!coleccion) {
+            return res.status(404).json({ message: 'Bóveda no encontrada' });
+        }
+
         const juegos = await Juego.findAll({ where: { id_coleccion: coleccion.id } });
         res.json({ juegos });
 
@@ -75,20 +149,20 @@ async function listarJuegos(req, res) {
         res.status(500).json({ message: 'Error al listar los juegos de la colección' });
     }
 }
-
-//No sé si incorporaré buscador en la colección por ventas pero por si acaso lo dejo aquí.
+*/
 async function listarVentas(req, res) {
     try {
-        const coleccion = await Coleccion.findAll({ 
-            where: { 
+        const coleccion = await Coleccion.findAll({
+            where: {
                 estado: 'en venta',
-                id_usuario: req.userId            
-            } 
+                id_usuario: req.userId
+            }
         });
 
         if (coleccion.length === 0) {
             return res.status(404).json({ message: '¡No hay juegos en venta en su bóveda!' });
         }
+
         res.json(coleccion);
     } catch (error) {
         console.error(error.message);
@@ -98,11 +172,11 @@ async function listarVentas(req, res) {
 
 async function listarSinVender(req, res) {
     try {
-        const coleccion = await Coleccion.findAll({ 
-            where: { 
+        const coleccion = await Coleccion.findAll({
+            where: {
                 estado: 'no en venta',
-                id_usuario: req.userId 
-            } 
+                id_usuario: req.userId
+            }
         });
 
         if (coleccion.length === 0) {
@@ -117,9 +191,9 @@ async function listarSinVender(req, res) {
 }
 
 module.exports = {
-    agregarJuego,
+    agregarJuego: [upload.single('imagen'), agregarJuego],
     borrarJuego,
     listarJuegos,
     listarVentas,
     listarSinVender
-}
+};

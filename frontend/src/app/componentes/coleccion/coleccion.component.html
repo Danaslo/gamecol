@@ -4,14 +4,23 @@
     <h1  [ngStyle]="{'color':'#DAA520'}">Juegos en la Colección</h1>
     <button id="add-button" (click)="openModal()">Agregar juego</button>
   </div>
-  <app-registro-juego *ngIf="isModalOpen" (close)="closeModal()"></app-registro-juego>
+
+  <div *ngIf="isModalOpen" class="modal-content-container">
+    <div class="modal-content">
+      <button class="close-btn" (click)="closeModal()">X</button>
+      <app-registro-juego (close)="closeModal()"></app-registro-juego>
+    </div>
+  </div>
+
+
+
   <div class="card-container">
       <div class="card" *ngFor="let juego of juegos">
         <div class="card-header"  [ngStyle]="{'border':'none'}">
           <h3>{{ juego.nombre }}</h3>
         </div>
         <div class="card-body">
-          <img src=`${juego.imagen}` alt="Imagen juego">
+          <img [src]="juego.imagen" alt="Imagen juego" class="imagen-juego">
           <p><strong>Condición:</strong> {{ juego.condicion }}</p>
           <p><strong>Plataforma:</strong> {{ juego.plataforma }}</p>
           <p><strong>Descripción:</strong> {{ juego.descripcion }}</p>
