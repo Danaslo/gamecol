@@ -1,10 +1,7 @@
 /*Éste controller tiene que: 
-- Loguear un usuario (devuelve un token)
-- Registrar un usuario creando una colección con su ID y encriptando contraseña.
-- Verificar el token
-
-QUEDA PROBAR EL LOGIN Y VER SI DA UN TOKEN VÁLIDO.
-
+- Loguear un usuario (devuelve un token) HECHO
+- Registrar un usuario creando una colección con su ID y encriptando contraseña. HECHO
+- Verificar el token HECHO
 */
 const Usuario = require('../model/Usuario');
 const bcrypt = require('bcrypt');

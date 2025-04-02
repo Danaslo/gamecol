@@ -5,37 +5,18 @@ const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
 
-// Multer para subir imagenes
-/*const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        const uploadDir = path.join(__dirname, 'uploads');
-        if (!fs.existsSync(uploadDir)) {
-            fs.mkdirSync(uploadDir, { recursive: true });
-        }
-        cb(null, uploadDir);
-    },
-    filename: (req, file, cb) => {
-        cb(null, `${Date.now()}-${file.originalname}`);
-    }
-});
-*/
-
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        // Usamos la ruta de require.main?.path para obtener la ruta principal del proyecto
         const uploadDir = path.join(require.main?.path || __dirname, 'uploads');
 console.log('Ruta en controller.js:', uploadDir);
 console.log('Ruta absoluta en controller.js:', path.resolve(uploadDir));
-        // Si no existe la carpeta, la creamos
         if (!fs.existsSync(uploadDir)) {
             fs.mkdirSync(uploadDir, { recursive: true });
         }
         
-        // Pasamos la ruta al callback para que multer guarde el archivo allí
         cb(null, uploadDir);
     },
     filename: (req, file, cb) => {
-        // Asignamos un nombre único a la imagen para evitar conflictos
         cb(null, `${Date.now()}-${file.originalname}`);
     }
 });
@@ -99,7 +80,6 @@ async function borrarJuego(req, res) {
 }
 
 // Función para listar juegos
-
 async function listarJuegos(req, res) {
     try {
         const idUsuario = req.userId;
@@ -115,7 +95,7 @@ async function listarJuegos(req, res) {
         const baseUrl = 'http://172.18.1.3/uploads/'; 
 
         const juegosConImagenesCompletas = juegos.map(juego => {
-            juego.imagen = baseUrl + juego.imagen.replace('uploads/', '');  // Elimina 'uploads/' para crear una URL válida
+            juego.imagen = baseUrl + juego.imagen.replace('uploads/', ''); 
             return juego;
         });
 
@@ -127,29 +107,6 @@ async function listarJuegos(req, res) {
     }
 }
 
-
-
-
-
-/*
-async function listarJuegos(req, res) {
-    try {
-        const idUsuario = req.userId;
-
-        const coleccion = await Coleccion.findOne({ where: { id_usuario: idUsuario } });
-        if (!coleccion) {
-            return res.status(404).json({ message: 'Bóveda no encontrada' });
-        }
-
-        const juegos = await Juego.findAll({ where: { id_coleccion: coleccion.id } });
-        res.json({ juegos });
-
-    } catch (error) {
-        console.error(error.message);
-        res.status(500).json({ message: 'Error al listar los juegos de la colección' });
-    }
-}
-*/
 async function listarVentas(req, res) {
     try {
         const coleccion = await Coleccion.findAll({
