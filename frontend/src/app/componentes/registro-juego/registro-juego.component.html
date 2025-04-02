@@ -3,7 +3,8 @@
   <div class="modal-content" (click)="$event.stopPropagation()">
     <div class="container">
       <h2 [ngStyle]="{'color':'#DAA520'}">Agregar Juego</h2>
-      <form [formGroup]="juegoForm" (ngSubmit)="agregarJuego()">
+      <button (click)="cerrarModal()">X</button>
+      <form [formGroup]="juegoForm" (ngSubmit)="agregarJuego()" enctype="multipart/form-data">
         <input type="text" formControlName="nombre" placeholder="Nombre del juego">  
         <select formControlName="plataforma">
           <option value="" disabled>Selecciona una plataforma</option>
@@ -16,7 +17,7 @@
           <option value="usado">Usado</option>
         </select>    
         <textarea formControlName="descripcion" placeholder="Descripción"></textarea>        
-        <input type="text" formControlName="imagen" placeholder="URL de imagen">  
+        <input type="file" (change)="onFileSelected($event)" placeholder="Cargar imagen de juego">  
         <select formControlName="estado">
           <option value="en venta">En venta</option>
           <option value="no en venta">No en venta</option>

@@ -1,6 +1,6 @@
-/* Aseguramos que los contenedores estén centrados */
 .games-container {
     margin-top: 100px;
+    margin-bottom: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,8 +40,6 @@
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
 }
 
-
-
 #title-add-button-container h1 {
     font-size: 30px;
     font-weight: bold;
@@ -50,14 +48,15 @@
 
 .card-container {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: row;
     gap: 20px;
     justify-content: center;
 }
 
 .card {
-    width: 350px;
-    height: 300px;
+    width: 100%;
+    max-width: 350px;
+    height: auto;
     padding: 15px;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -72,16 +71,23 @@
     color: #DAA520;
 }
 
-.card-header{
+.card-header {
     background-color: transparent;
     background-image: none;
 }
 
-
 .card-body p {
     font-size: 14px;
     margin: 5px 0;
-    color:black;
+    color: black;
+}
+
+.card-body img {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    border-radius: 5px;
+    object-fit: cover;
 }
 
 .delete-btn {
@@ -96,4 +102,19 @@
 
 .delete-btn:hover {
     background-color: #e60000;
+}
+
+@media (max-width: 768px) {
+    #title-add-button-container {
+        width: 90%;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .card-body img {
+        max-width: 120px;
+    }
 }

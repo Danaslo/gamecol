@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,EventEmitter,Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
@@ -15,9 +15,10 @@ import { JuegoService } from '../../services/juego.service';
   styleUrls: ['./registro-juego.component.css']
 })
 export class RegistroJuegoComponent implements OnInit {
-
+  @Output() close = new EventEmitter<void>();
   juegoForm: FormGroup;
   juegos: any[] = [];
+  selectedImage: File | null = null;
 
   constructor(private fb: FormBuilder, private juegoService: JuegoService) {
     this.juegoForm = this.fb.group({
@@ -40,11 +41,42 @@ export class RegistroJuegoComponent implements OnInit {
         console.error('Error al listar los juegos', error);
       }
     );
+    window.addEventListener('keydown', this.cerrarConEscape.bind(this));
   }
 
-  agregarJuego() {
-    console.log(this.juegoForm.value);
-    this.juegoService.agregarJuego(this.juegoForm.value).subscribe(
+  ngOnDestroy(): void {
+    window.removeEventListener('keydown', this.cerrarConEscape.bind(this));
+  }
+
+  cerrarModal() {
+    this.close.emit(); 
+  }
+
+  cerrarConEscape(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      this.cerrarModal();  
+    }
+  }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input && input.files) {
+      this.selectedImage = input.files[0];
+    }
+  }
+
+  agregarJuego(): void {
+    const formData = new FormData();
+    formData.append('nombre', this.juegoForm.get('nombre')?.value);
+    formData.append('condicion', this.juegoForm.get('condicion')?.value);
+    formData.append('plataforma', this.juegoForm.get('plataforma')?.value);
+    formData.append('descripcion', this.juegoForm.get('descripcion')?.value);
+    formData.append('estado', this.juegoForm.get('estado')?.value);
+      
+    if (this.selectedImage) {
+      formData.append('imagen', this.selectedImage, this.selectedImage.name);
+    }
+    this.juegoService.agregarJuego(formData).subscribe(
       () => {
         this.juegoService.listarJuegos();
         this.juegoForm.reset({
