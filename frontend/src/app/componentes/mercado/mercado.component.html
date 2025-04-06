@@ -1,0 +1,44 @@
+<app-header></app-header>
+<div class="games-container">
+    <h1 [ngStyle]="{'color':'#DAA520'}">Mercado</h1>
+    <div id="market-searcher-container">
+        <form (ngSubmit)="buscarJuegos()">
+            <input type="text" [(ngModel)]="filtros.nombre" name="nombre" placeholder="Nombre del juego" />
+            <select [(ngModel)]="filtros.plataforma" name="plataforma" placeholder="Plataforma">
+                <option value="" disabled>Selecciona una plataforma</option>
+                <option value="Playstation">PlayStation</option>
+                <option value="Xbox">Xbox</option>
+                <option value="PC">PC</option>
+              </select>
+
+            <select [(ngModel)]="filtros.condicion" name="condicion">
+                <option value="">Todas las condiciones</option>
+                <option value="nuevo">Nuevo</option>
+                <option value="usado">Usado</option>
+            </select>
+
+            <input type="number" [(ngModel)]="filtros.precioMin" name="precioMin" placeholder="Precio mínimo" />
+            <input type="number" [(ngModel)]="filtros.precioMax" name="precioMax" placeholder="Precio máximo" />
+
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+</div>
+
+<div class="card-container">
+    <div class="card" *ngFor="let juego of juegos">
+        <div class="card-header" [ngStyle]="{'border':'none'}">
+            <h3>{{ juego.nombre }}</h3>
+        </div>
+        <div class="card-body">
+            <img [src]="juego.imagen" alt="Imagen juego" class="imagen-juego">
+            <p><strong>Condición:</strong> {{ juego.condicion }}</p>
+            <p><strong>Plataforma:</strong> {{ juego.plataforma }}</p>
+            <p><strong>Descripción:</strong> {{ juego.descripcion }}</p>
+            <p><strong>Estado:</strong> {{ juego.estado }}</p>
+            <p><strong>Precio:</strong> {{juego.precio}}</p>
+            <button class="follow-register" (click)="seguirJuego(juego.id)">Agregar a seguimientos</button>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

@@ -8,8 +8,6 @@ const path = require('path');
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         const uploadDir = path.join(require.main?.path || __dirname, 'uploads');
-console.log('Ruta en controller.js:', uploadDir);
-console.log('Ruta absoluta en controller.js:', path.resolve(uploadDir));
         if (!fs.existsSync(uploadDir)) {
             fs.mkdirSync(uploadDir, { recursive: true });
         }
@@ -22,7 +20,7 @@ console.log('Ruta absoluta en controller.js:', path.resolve(uploadDir));
 });
 const upload = multer({ storage });
 
-// Función para agregar un juego
+//Función para agregar un juego
 async function agregarJuego(req, res) {
     try {
         const { nombre, condicion, descripcion, precio, estado, plataforma } = req.body;
@@ -91,9 +89,7 @@ async function listarJuegos(req, res) {
 
         const juegos = await Juego.findAll({ where: { id_coleccion: coleccion.id } });
 
-
         const baseUrl = 'http://172.18.1.3/uploads/'; 
-
         const juegosConImagenesCompletas = juegos.map(juego => {
             juego.imagen = baseUrl + juego.imagen.replace('uploads/', ''); 
             return juego;

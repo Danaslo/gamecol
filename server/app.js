@@ -39,7 +39,6 @@ app.use('/uploads', express.static(uploadDir));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 //Inicio de la conexión
-/*
 sequelize.authenticate()
     .then(() => {
         console.log(' Conexión a la base de datos exitosa.');
@@ -51,7 +50,7 @@ sequelize.authenticate()
     .catch(err => {
         console.error(' No se pudo conectar a la base de datos o sincronizar tablas:', err);
     });
-    */
+
 app.use(userRouter);
 
 app.listen(PORT, '0.0.0.0', () => {
