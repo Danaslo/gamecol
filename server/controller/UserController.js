@@ -10,7 +10,7 @@ const Coleccion = require('../model/Coleccion');
 
 async function registro(req, res){
     try {
-        const { nombreUsuario, email, password } = req.body;
+        const { nombreUsuario, email, password, telefono } = req.body;
 
         const existe = await Usuario.findOne({ where: { nombreUsuario } });
         if (existe) {
@@ -24,7 +24,8 @@ async function registro(req, res){
             nombreUsuario: nombreUsuario,
             email: email,
             password: contraseniaHasheada,
-            rol: 'user'
+            rol: 'user',
+            telefono: telefono
         });
         //Creación de la colección:
         const idUsuario = usuario.id;

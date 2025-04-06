@@ -8,9 +8,9 @@ import { Observable } from 'rxjs';
 export class AuthService {
   private apiUrl = 'http://172.18.1.3';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  registro(user: { nombreUsuario: string; email: string; password: string }): Observable<any> {
+  registro(user: { nombreUsuario: string; email: string; password: string, telefono: string }): Observable<any> {
     return this.http.post(`${this.apiUrl}/registro`, user);
   }
 
@@ -19,14 +19,14 @@ export class AuthService {
       this.http.post(`${this.apiUrl}/login`, credentials).subscribe({
         next: (response: any) => {
           if (response.token) {
-            localStorage.setItem('token', response.token);  
-            localStorage.setItem('isLoggedIn', 'true'); 
+            localStorage.setItem('token', response.token);
+            localStorage.setItem('isLoggedIn', 'true');
           }
-          observer.next(response);  
-          observer.complete(); 
+          observer.next(response);
+          observer.complete();
         },
         error: (err) => {
-          observer.error(err);  
+          observer.error(err);
         }
       });
     });

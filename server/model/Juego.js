@@ -3,7 +3,7 @@ const sequelize = require('../config/sequelize');
 
 const Juego = sequelize.define('Juego',{
     id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         primaryKey: true,
         autoIncrement: true
     },
