@@ -18,6 +18,7 @@ export class RegistroComponent {
   nombreUsuario: string = '';
   email: string = '';
   password: string = '';
+  telefono: string = '';
 
   constructor(
     private authService: AuthService,
@@ -25,9 +26,8 @@ export class RegistroComponent {
   ) {}
 
   onSubmit() {
-    if (this.nombreUsuario && this.email && this.password) {
-      console.log(this.nombreUsuario + ' ' + this.email + ' ' + this.password);
-      this.authService.registro({ nombreUsuario: this.nombreUsuario, email: this.email, password: this.password })
+    if (this.nombreUsuario && this.email && this.password && this.telefono) {
+      this.authService.registro({ nombreUsuario: this.nombreUsuario, email: this.email, password: this.password, telefono: this.telefono })
         .subscribe(
           (response) => {
             console.log('Usuario registrado:', response);

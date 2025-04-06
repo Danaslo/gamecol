@@ -20,7 +20,7 @@
             <input type="number" [(ngModel)]="filtros.precioMin" name="precioMin" placeholder="Precio mínimo" />
             <input type="number" [(ngModel)]="filtros.precioMax" name="precioMax" placeholder="Precio máximo" />
 
-            <button type="submit">Buscar</button>
+            <button type="submit" class="search-btn">Buscar</button>
         </form>
     </div>
 </div>
@@ -36,7 +36,7 @@
             <p><strong>Plataforma:</strong> {{ juego.plataforma }}</p>
             <p><strong>Descripción:</strong> {{ juego.descripcion }}</p>
             <p><strong>Estado:</strong> {{ juego.estado }}</p>
-            <p><strong>Precio:</strong> {{juego.precio}}</p>
+            <p><strong>Precio:</strong> {{juego.precio}}€</p>
             <button class="follow-register" (click)="seguirJuego(juego.id)">Agregar a seguimientos</button>
         </div>
     </div>

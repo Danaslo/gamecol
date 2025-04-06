@@ -3,19 +3,22 @@ const Coleccion = require('./Coleccion');
 const Juego = require('./Juego');
 const Intercambio = require('./Intercambio');
 const Chat = require('./Chat');
+const Seguimiento = require('./Seguimiento');
 const { isModuleNamespaceObject } = require('util/types');
 
 Chat.belongsTo(Usuario, { as: 'Usuario1', foreignKey: 'id_usuario1' });
 Chat.belongsTo(Usuario, { as: 'Usuario2', foreignKey: 'id_usuario2' });
 
 Coleccion.belongsTo(Usuario, { foreignKey: 'id_usuario' });
-Coleccion.hasMany(Juego, { foreignKey: 'id_juego' });
+Coleccion.hasMany(Juego, { foreignKey: 'id_coleccion' });
 
-Intercambio.hasOne(Juego, { foreignKey: 'id_juego' });
+Intercambio.belongsTo(Juego, { foreignKey: 'id_juego', onDelete: 'CASCADE' });
 Intercambio.belongsTo(Usuario, { as: 'Comprador', foreignKey: 'id_comprador' });
 Intercambio.belongsTo(Usuario, { as: 'Vendedor', foreignKey: 'id_vendedor' });
 
 Juego.belongsTo(Coleccion, { foreignKey: 'id_coleccion' });
+Juego.hasMany(Intercambio, { foreignKey: 'id_juego', onDelete: 'CASCADE' });
+Juego.hasMany(Seguimiento, { foreignKey: 'id_juego' });
 
 Usuario.hasMany(Intercambio, { as: 'Compras', foreignKey: 'id_comprador' });
 Usuario.hasMany(Intercambio, { as: 'Ventas', foreignKey: 'id_vendedor' });
@@ -24,10 +27,14 @@ Usuario.hasOne(Coleccion, { foreignKey: 'id_usuario' });
 Usuario.hasMany(Chat, { as: 'Usuario1', foreignKey: 'id_usuario1' });
 Usuario.hasMany(Chat, { as: 'Usuario2', foreignKey: 'id_usuario2' });
 
+Seguimiento.belongsTo(Juego, { foreignKey: 'id_juego' });
+
+
 module.exports = {
     Usuario,
     Coleccion,
     Juego,
     Intercambio,
-    Chat
+    Chat,
+    Seguimiento
 };

@@ -40,8 +40,6 @@
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
 }
 
-
-
 .follow-register {
     background: linear-gradient(to right, #6A4C9C, #9B59B6, #8E44AD, #A569BD);
     border-radius: 3%;
@@ -120,7 +118,6 @@
     color: black;
 }
 
-
 .card-body img {
     width: 150px;
     height: 150px;
@@ -129,7 +126,7 @@
     object-position: center;
 }
 
-.delete-btn {
+.search-btn{
     background: linear-gradient(to right, #D5006D, #C2185B, #9C1C44);
     border-radius: 5%;
     color: white;
@@ -141,13 +138,13 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.delete-btn:hover {
+.search-btn:hover {
     background: linear-gradient(to right, #9C1C44, #C2185B, #D5006D);
     transform: translateY(-4px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
-.delete-btn:active {
+.search-btn:active {
     transform: scale(0.95);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -191,16 +188,6 @@ select:focus {
     box-shadow: 0 0 8px gold;
     outline: none;
 }
-
-
-
-
-
-
-
-
-
-
 
 @media (max-width: 1180px) {
     #title-add-button-container {

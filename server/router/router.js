@@ -5,6 +5,7 @@ const coleccionController = require('../controller/ColeccionController');
 const juegoController = require('../controller/JuegoController');
 const contactoController = require('../controller/ContactoController');
 const mercadoController = require('../controller/MercadoController');
+const seguimientosController = require('../controller/SeguimientoController')
 
 const verificarToken = require('../controller/UserController').verificarToken;
 
@@ -31,6 +32,10 @@ router.get("/deslistarVenta", verificarToken, coleccionController.listarSinVende
 //Rutas de mercadoController:
 router.get("/listarEnVenta", verificarToken, mercadoController.listarJuegosEnVenta);
 router.get("/listarPorParametro", verificarToken, mercadoController.listarPorParametro);
+
+//Rutas de SeguimientosController:
+router.get("/listarSeguimientos",verificarToken, seguimientosController.listarSeguimientos)
+
 
 
 //ENdpoints para el envío de correos:
