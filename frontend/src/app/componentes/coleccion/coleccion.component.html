@@ -23,7 +23,12 @@
           <p><strong>Plataforma:</strong> {{ juego.plataforma }}</p>
           <p><strong>Descripción:</strong> {{ juego.descripcion }}</p>
           <p><strong>Estado:</strong> {{ juego.estado }}</p>
-          <button class="delete-btn" (click)="borrarJuego(juego.id)">❌</button>
+          
+          <div class="card-buttons">
+            <button class="sale-register" *ngIf="juego.estado === 'en venta'" (click)="venderJuego(juego.id)" >Registrar venta</button> <!-- Hay que añadir la funcionalidad una vez la página de ventas esté terminada-->
+            <button class="delete-btn" (click)="borrarJuego(juego.id)">Borrar juego</button>
+          </div>
+
         </div>
       </div>
     </div>

@@ -106,7 +106,7 @@
 
 
 /* Así mantengo el menú a la derecha del todo y el logo a la izquierda hasta pantallas pequeñas, donde se centra */
-@media (max-width: 1000px){
+@media (max-width: 1002px){
     .header-left {
         display: flex;
         justify-content: space-between;
@@ -251,12 +251,10 @@
         align-items: center; 
     }
 
-
     .navbar-collapse.show {
         display: flex;
     }
 
-   
     .navbar-nav {
         width: 100%;
         display: flex;

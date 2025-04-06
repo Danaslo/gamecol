@@ -29,4 +29,19 @@ export class JuegoService {
 
     return this.http.post(`${this.apiUrl}/borrarJuego`, { idJuego }, { headers });
   }
+
+  /*
+  venderJuego(idJuego: BigInt): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+  }
+*/
+
+//Simplemente para probar que llegue aquí
+  venderJuego(idJuego: BigInt){
+    console.log('Patata' + idJuego);
+  }
+
+
 }

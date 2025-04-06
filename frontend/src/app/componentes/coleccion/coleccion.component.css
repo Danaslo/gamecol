@@ -40,6 +40,32 @@
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
 }
 
+
+
+.sale-register {
+    background: linear-gradient(to right, #6A4C9C, #9B59B6, #8E44AD, #A569BD);
+    border-radius: 3%;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.sale-register:hover {
+    background: linear-gradient(to right, #5E3370, #9B59B6, #7D3C98);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.sale-register:active {
+    transform: scale(0.95);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
 #title-add-button-container h1 {
     font-size: 30px;
     font-weight: bold;
@@ -101,32 +127,49 @@
 }
 
 .delete-btn {
-    margin-top: 10px;
-    padding: 5px 10px;
-    background-color: #ff4d4d;
+    background: linear-gradient(to right, #D5006D, #C2185B, #9C1C44);
+    border-radius: 5%;
     color: white;
     border: none;
-    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
     cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .delete-btn:hover {
-    background-color: #e60000;
+    background: linear-gradient(to right, #9C1C44, #C2185B, #D5006D);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
-@media (max-width: 768px) {
+.delete-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-buttons{
+    padding-top: 15px;
+    display:flex;
+    flex-direction:row;
+    gap: 30px;
+}
+
+
+@media (max-width: 1180px) {
     #title-add-button-container {
         width: 90%;
     }
 
     .card-container {
         flex-direction: column;
-        align-items: center; 
+        align-items: center;
     }
 
     .card {
         width: 90%;
-        max-width: none; 
+        max-width: none;
     }
 
     .card-body img {
