@@ -2,8 +2,10 @@
 <div class="modal-overlay">
   <div class="modal-content" (click)="$event.stopPropagation()">
     <div class="container">
-      <h2 [ngStyle]="{'color':'#DAA520'}">Agregar Juego</h2>
-      <button (click)="cerrarModal()">X</button>
+      <div class="modal-header">
+        <h2 [ngStyle]="{'color':'#DAA520'}">Agregar Juego</h2>
+        <button (click)="cerrarModal()" id="modal-closer">X</button>
+      </div>
       <form [formGroup]="juegoForm" (ngSubmit)="agregarJuego()" enctype="multipart/form-data">
         <input type="text" formControlName="nombre" placeholder="Nombre del juego">  
         <select formControlName="plataforma">
@@ -22,7 +24,10 @@
           <option value="en venta">En venta</option>
           <option value="no en venta">No en venta</option>
         </select> 
-        <button type="submit">Agregar</button>
+        <div id="submit-container">
+          <button type="submit" id="add-btn" [ngStyle]="{'border':'none'}"  >Agregar</button>
+        </div>
+        
       </form>
     </div>
   </div>
