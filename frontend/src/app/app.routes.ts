@@ -6,6 +6,7 @@ import { IndexComponent } from './componentes/index/index.component';
 import { ContactoComponent } from './componentes/contacto/contacto.component';
 import { RegistroJuegoComponent } from './componentes/registro-juego/registro-juego.component';
 import { ColeccionComponent } from './componentes/coleccion/coleccion.component';
+import { MercadoComponent } from './componentes/mercado/mercado.component';
 
 export const routes: Routes = [
     { path: 'registro', component: RegistroComponent },
@@ -13,6 +14,6 @@ export const routes: Routes = [
     { path: '', component: IndexComponent},
     { path: 'contacto', component: ContactoComponent },
     { path: 'coleccion', component: ColeccionComponent},
+    { path: 'mercado', component: MercadoComponent},
     { path: '**', redirectTo: '' },
-
 ];

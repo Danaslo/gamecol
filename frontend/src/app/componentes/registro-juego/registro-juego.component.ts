@@ -27,7 +27,8 @@ export class RegistroJuegoComponent implements OnInit {
       plataforma: [''],
       descripcion: [''],
       imagen: [''],
-      estado: ['en venta']
+      estado: ['en venta'],
+      precio: [0]
     });
   }
 
@@ -72,6 +73,7 @@ export class RegistroJuegoComponent implements OnInit {
     formData.append('plataforma', this.juegoForm.get('plataforma')?.value);
     formData.append('descripcion', this.juegoForm.get('descripcion')?.value);
     formData.append('estado', this.juegoForm.get('estado')?.value);
+    formData.append('precio', this.juegoForm.get('precio')?.value)
       
     if (this.selectedImage) {
       formData.append('imagen', this.selectedImage, this.selectedImage.name);

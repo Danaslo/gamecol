@@ -4,6 +4,7 @@ const userController = require('../controller/UserController');
 const coleccionController = require('../controller/ColeccionController');
 const juegoController = require('../controller/JuegoController');
 const contactoController = require('../controller/ContactoController');
+const mercadoController = require('../controller/MercadoController');
 
 const verificarToken = require('../controller/UserController').verificarToken;
 
@@ -26,6 +27,10 @@ router.post("/borrarJuego", verificarToken, coleccionController.borrarJuego);
 router.get("/listarJuegos", verificarToken, coleccionController.listarJuegos);
 router.get("/listarVenta", verificarToken, coleccionController.listarVentas);
 router.get("/deslistarVenta", verificarToken, coleccionController.listarSinVender);
+
+//Rutas de mercadoController:
+router.get("/listarEnVenta", verificarToken, mercadoController.listarJuegosEnVenta);
+router.get("/listarPorParametro", verificarToken, mercadoController.listarPorParametro);
 
 
 //ENdpoints para el envío de correos:

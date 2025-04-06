@@ -40,6 +40,20 @@ const Juego = sequelize.define('Juego',{
         validate: {
             isIn: [['en venta', 'no en venta']]
         }
+    },
+    precio:{
+        type: DataTypes.FLOAT,
+        allowNull: false,
+        validate: {
+            isFloat: true,
+            min: 0
+        },
+        defaultValue: 0
+    },
+    favorito: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
     }
 },{
     timestamps: false,
