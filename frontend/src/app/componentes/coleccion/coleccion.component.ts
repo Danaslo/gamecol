@@ -28,6 +28,26 @@ export class ColeccionComponent implements OnInit {
     this.listarJuegos(); 
   }
 
+  
+  /*
+  venderJuego(id: BigInt){
+    this.juegoService.venderJuego(id).subscribe(
+      (response) => {
+        console.log('Juego vendido:', response);
+        this.listarJuegos(); 
+      },
+      (error) => {
+        console.error('Error al vender el juego', error);
+      }
+    );
+  }
+*/
+
+  venderJuego(idJuego: BigInt){
+    this.juegoService.venderJuego(idJuego);
+  }
+
+
   closeModal() {
     this.isModalOpen = false;
   }
