@@ -34,11 +34,13 @@ router.get("/listarEnVenta", verificarToken, mercadoController.listarJuegosEnVen
 router.get("/listarPorParametro", verificarToken, mercadoController.listarPorParametro);
 
 //Rutas de SeguimientosController:
-router.get("/listarSeguimientos",verificarToken, seguimientosController.listarSeguimientos)
+router.get("/listarSeguimientos",verificarToken, seguimientosController.listarSeguimientos);
+router.post("/crearSeguimiento",verificarToken, seguimientosController.crearSeguimiento);
+router.post("/borrarSeguimiento",verificarToken, seguimientosController.borrarSeguimiento);
 
 
 
-//ENdpoints para el envío de correos:
+//ENdpoint para el envío de correos:
 router.post("/contacto",contactoController.enviarCorreo); //Como un correo lo puede enviar cualquiera no se revisa el token.
 
 

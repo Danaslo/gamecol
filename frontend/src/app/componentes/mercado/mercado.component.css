@@ -52,13 +52,19 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.sale-register:hover {
+.follow-register:hover {
+    background: linear-gradient(to left, #A569BD, #8E44AD, #9B59B6, #6A4C9C);
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+
+.follow-register:hover {
     background: linear-gradient(to right, #5E3370, #9B59B6, #7D3C98);
     transform: translateY(-4px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
-.sale-register:active {
+.follow-register:active {
     transform: scale(0.95);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -91,6 +97,7 @@
     background: linear-gradient(#4B4B4B, #C0C0C0, #FFFFFF);
     text-align: center;
 }
+
 
 .card-header h3 {
     font-size: 20px;
