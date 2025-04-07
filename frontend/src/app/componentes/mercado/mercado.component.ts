@@ -54,9 +54,14 @@ export class MercadoComponent {
   }
 
   seguirJuego(id: BigInt) {
-
+    this.juegoService.crearSeguimiento(id).subscribe(
+      (response) => {
+        console.log('Juego seguido: ', response);
+      },
+      (error) => {
+        console.error('Error al seguir el juego: ', error);
+      }
+    )
   }
-
-
 
 }

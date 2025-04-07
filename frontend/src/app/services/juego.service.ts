@@ -64,8 +64,23 @@ export class JuegoService {
     return this.http.get<any>(`${this.apiUrl}/listarPorParametro`, { headers, params });
   }
 
-  
+crearSeguimiento(idJuego: BigInt): Observable<any> {
+  const token = localStorage.getItem('token');
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  return this.http.post(`${this.apiUrl}/crearSeguimiento`, {idJuego}, {headers});
+}
 
+listarSeguimientos(): Observable<any> {
+  const token = localStorage.getItem('token');
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  return this.http.get(`${this.apiUrl}/listarSeguimientos`, { headers });
+}
+
+borrarSeguimiento(idJuego: BigInt): Observable<any> {
+  const token = localStorage.getItem('token');
+  const headers= new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  return this.http.post(`${this.apiUrl}/borrarSeguimiento`, {idJuego}, {headers});
+}
 
 
 
@@ -77,8 +92,6 @@ export class JuegoService {
 
   }
 */
-
-
 
   //Simplemente para probar que llegue aquí
   venderJuego(idJuego: BigInt) {
