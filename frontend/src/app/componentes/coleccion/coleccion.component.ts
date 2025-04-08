@@ -4,18 +4,23 @@ import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { RegistroJuegoComponent } from '../registro-juego/registro-juego.component';
+import { VentaService } from '../../services/venta.service';
+import { stringify } from 'querystring';
+import { VentaJuegoComponent } from '../venta-juego/venta-juego.component';
 @Component({
   selector: 'app-coleccion',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, CommonModule,RegistroJuegoComponent],
+  imports: [HeaderComponent, FooterComponent, CommonModule,RegistroJuegoComponent, VentaJuegoComponent],
   templateUrl: './coleccion.component.html',
   styleUrls: ['./coleccion.component.css']
 })
 export class ColeccionComponent implements OnInit {
   juegos: any[] = [];
   isModalOpen: boolean = false;
+  isSellingModalOpen: boolean = false;
+  juegoSeleccionadoId: number | null = null;
 
-  constructor(private juegoService: JuegoService) {}
+  constructor(private juegoService: JuegoService, private ventaService: VentaService) {}
 
   @HostListener('document:keydown', ['$event'])
   cerrarConEscape(event: KeyboardEvent) {
@@ -28,23 +33,8 @@ export class ColeccionComponent implements OnInit {
     this.listarJuegos(); 
   }
 
-  
-  /*
-  venderJuego(id: BigInt){
-    this.juegoService.venderJuego(id).subscribe(
-      (response) => {
-        console.log('Juego vendido:', response);
-        this.listarJuegos(); 
-      },
-      (error) => {
-        console.error('Error al vender el juego', error);
-      }
-    );
-  }
-*/
+  venderJuego(id:BigInt){
 
-  venderJuego(idJuego: BigInt){
-    this.juegoService.venderJuego(idJuego);
   }
 
 
@@ -54,6 +44,16 @@ export class ColeccionComponent implements OnInit {
 
   openModal() {
     this.isModalOpen = true;
+  }
+  
+  openSellingModal(juegoId: number) {
+    this.juegoSeleccionadoId = juegoId;
+    this.isSellingModalOpen = true;
+  }
+  
+  closeSellingModal() {
+    this.isSellingModalOpen = false;
+    this.juegoSeleccionadoId = null;
   }
 
   listarJuegos() {

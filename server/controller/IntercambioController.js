@@ -8,44 +8,63 @@
 const Usuario = require('../model/Usuario');
 const Coleccion = require('../model/Coleccion');
 const Juego = require('../model/Juego');
+const Intercambio = require('../model/Intercambio');
 
-async function intercambiarJuego(req, res){
+async function intercambiarJuego(req, res) {
+
     try {
-        const { idJuego, idUsuarioDestino } = req.body;
-        const idUsuarioOrigen = req.userId;
+        const { juegoId, telefono } = req.body;
+        const userId = req.userId;
 
-        const coleccionOrigen = await Coleccion.findOne({ where: { idUsuario: idUsuarioOrigen } });
-        if (!coleccionOrigen) {
+        const nuevoDuenio = await Usuario.findOne({ where: { telefono } });
+        if (!nuevoDuenio) {
             return res.status(404).json({ message: 'Colección no encontrada' });
         }
 
-        const coleccionDestino = await Coleccion.findOne({ where: { idUsuario: idUsuarioDestino } });
+        //Intercambio del juego: 
+        console.log('Usuario de la pagina: ' + userId + ' Usuario comprador: ' + nuevoDuenio.id)
+
+        const coleccionDestino = await Coleccion.findOne({ where: { id_usuario: nuevoDuenio.id } });
         if (!coleccionDestino) {
             return res.status(404).json({ message: 'Colección no encontrada' });
         }
+        await Juego.update({ id_coleccion: coleccionDestino.id }, { where: { id: juegoId } });
+        await Juego.update({ estado: 'no en venta' }, { where: { id: juegoId } });
 
-        const juegosOrigen = coleccionOrigen.juegos;
-        const juegosDestino = coleccionDestino.juegos;
+        //Registro de la venta:
+        const juego = await Juego.findOne({ where: { id: juegoId } });
 
-        const indexOrigen = juegosOrigen.indexOf(idJuego);
-        if (indexOrigen > -1) {
-            juegosOrigen.splice(indexOrigen, 1);
-        }
-
-        juegosDestino.push(idJuego);
-
-        await Coleccion.update({ juegos: juegosOrigen }, { where: { idUsuario: idUsuarioOrigen } });
-        await Coleccion.update({ juegos: juegosDestino }, { where: { idUsuario: idUsuarioDestino } });
-
-        await Juego.update({ estado: 'no en venta' }, { where: { id: idJuego } });
+        const intercambio = await Intercambio.create({
+            id_juego: juegoId,
+            id_comprador: nuevoDuenio.id,
+            precio: juego.precio,
+            id_vendedor: userId,
+        });
 
         res.json({ message: 'Juego intercambiado con éxito' });
-    }
-    catch (error){
+    } catch (error) {
         console.log(error.message);
-    }  
+    }
+}
+
+async function listarVentas(req, res) {
+    try {
+        const userId = req.userId;
+        const ventas = await Intercambio.findAll({ where: { id_vendedor: userId } });
+        res.json(ventas);
+
+    } catch (error) {
+        console.log('Error al listar ventas');
+    }
+}
+
+async function borrarVenta(req,res){
+
 }
 
 module.exports = {
-    intercambiarJuego
+    intercambiarJuego,
+    listarVentas,
+    borrarVenta
+
 };

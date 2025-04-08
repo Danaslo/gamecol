@@ -38,7 +38,7 @@ async function editarDescripcion(req, res){
     try {
         const { id, descripcion } = req.body;
         await Juego.update({ descripcion }, { where: { id } });
-        res.json({ message: 'Editado de descripcióno exitoso.' });
+        res.json({ message: 'Editado de descripción exitoso.' });
     }
     catch (error){
         console.log(error.message);
@@ -67,17 +67,6 @@ async function editarPrecio(req,res){
     }  
 }
 
-async function ponerEnVenta(req,res){
-    try {
-        const { id } = req.body;
-        await Juego.update({ estado: 'en venta' }, { where: { id } });
-        res.json({ message: 'Juego puesto en venta' });
-    }
-    catch (error){
-        console.log(error.message);
-    }  
-}
-
 async function quitarVenta(req,res){
     try {
         const { id } = req.body;
@@ -95,6 +84,5 @@ module.exports = {
     editarDescripcion,
     editarImagen,
     editarPrecio,
-    ponerEnVenta,
     quitarVenta
 }

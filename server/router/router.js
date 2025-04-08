@@ -6,6 +6,7 @@ const juegoController = require('../controller/JuegoController');
 const contactoController = require('../controller/ContactoController');
 const mercadoController = require('../controller/MercadoController');
 const seguimientosController = require('../controller/SeguimientoController')
+const intercambioController = require('../controller/IntercambioController');
 
 const verificarToken = require('../controller/UserController').verificarToken;
 
@@ -19,7 +20,6 @@ router.post("/editarCondicion", verificarToken, juegoController.editarCondicion)
 router.post("/editarDescripcion", verificarToken, juegoController.editarDescripcion);
 router.post("/editarImagen", verificarToken, juegoController.editarImagen);
 router.post("/editarPrecio", verificarToken, juegoController.editarPrecio);
-router.post("/vender", verificarToken, juegoController.ponerEnVenta);
 router.post("/quitarVenta",verificarToken,juegoController.quitarVenta);
 
 //Rutas de coleccionController:
@@ -37,6 +37,10 @@ router.get("/listarPorParametro", verificarToken, mercadoController.listarPorPar
 router.get("/listarSeguimientos",verificarToken, seguimientosController.listarSeguimientos);
 router.post("/crearSeguimiento",verificarToken, seguimientosController.crearSeguimiento);
 router.post("/borrarSeguimiento",verificarToken, seguimientosController.borrarSeguimiento);
+
+//Rutas de IntercambioController:
+router.post("/vender",verificarToken, intercambioController.intercambiarJuego)
+router.get("/ventas", verificarToken, intercambioController.listarVentas);
 
 
 

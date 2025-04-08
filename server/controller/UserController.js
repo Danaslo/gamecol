@@ -39,7 +39,6 @@ async function registro(req, res){
 }
 
 const verificarToken = (req, res, next) => {
-    console.log('Entra');
     const authHeader = req.headers['authorization'];
     if (!authHeader) {
         return res.status(403).json({ message: 'No se proporcionó un token' });
@@ -52,7 +51,6 @@ const verificarToken = (req, res, next) => {
         if (err) {
             return res.status(500).json({ message: 'Fallo al autenticar el token' });
         }
-        
         req.userId = decoded.id;
         req.userRol = decoded.rol;
         next(); 
