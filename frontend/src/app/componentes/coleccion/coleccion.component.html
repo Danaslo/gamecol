@@ -23,11 +23,20 @@
           <p><strong>Plataforma:</strong> {{ juego.plataforma }}</p>
           <p><strong>Descripción:</strong> {{ juego.descripcion }}</p>
           <p><strong>Estado:</strong> {{ juego.estado }}</p>
-          <p><strong>Precio: </strong> {{juego.precio}}€ </p>
-          
+          <p><strong>Precio: </strong> {{juego.precio}}€ </p>     
           <div class="card-buttons">
-            <button class="sale-register" *ngIf="juego.estado === 'en venta'" (click)="venderJuego(juego.id)" >Registrar venta</button> <!-- Hay que añadir la funcionalidad una vez la página de ventas esté terminada-->
+            <button class="sale-register" *ngIf="juego.estado === 'en venta'" (click)="openSellingModal(juego.id)">Registrar venta</button> <!-- Hay que añadir la funcionalidad una vez la página de ventas esté terminada-->
             <button class="delete-btn" (click)="borrarJuego(juego.id)">Borrar juego</button>
+          </div>
+
+          <div *ngIf="isSellingModalOpen" class="modal-content-container">
+            <div class="modal-content">
+              <button class="close-btn" (click)="closeSellingModal()">X</button>
+              <app-venta-juego  
+                [juegoId]="juegoSeleccionadoId"
+                (close)="closeSellingModal()">
+              </app-venta-juego>
+            </div>
           </div>
 
         </div>
