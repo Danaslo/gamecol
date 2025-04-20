@@ -1,6 +1,6 @@
 /*
     MercadoController tiene que:
-    -Listar todos los juegos en venta que no sean del propio usuario: POR AHORA TODOS
+    -Listar todos los juegos en venta que no sean del propio usuario: HECHO
     -Listar juegos según parámetros de búsqueda que vienen como parámetro. HECHO
 */
 

@@ -1,7 +1,9 @@
 <header class="header">
     <div class="header-left">
         <div class="logo">
-            <img src="assets/img/header/logo.png" alt="Logo" />
+            <button id="index-button" (click)="navigateTo('/')" [ngClass]="{'active-button': rutaActual === '/'}">
+                <img src="assets/img/header/logo.gif" alt="Logo" />
+            </button>
         </div>
         <div class="navbar-container">
             <nav class="navbar navbar-expand-lg" id="navbar">
@@ -11,57 +13,38 @@
                 </button>
                 <div class="collapse navbar-collapse" [class.show]="menuOpen" id="navbarNav">
                     <ul class="navbar-nav" id="navbar-list">
-                        <li class="nav-item">
-                            <button 
-                                class="nav-link btn" 
-                                (click)="navigateTo('/')" 
-                                [ngClass]="{'active-button': rutaActual === '/'}">
-                                Inicio
-                            </button>
-                        </li>
                         <li class="nav-item" *ngIf="isAuthenticated">
-                            <button 
-                                class="nav-link btn" 
-                                (click)="navigateTo('/coleccion')" 
+                            <button class="nav-link btn" (click)="navigateTo('/coleccion')"
                                 [ngClass]="{'active-button': rutaActual === '/coleccion'}">
                                 Colección
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button 
-                                class="nav-link btn" 
-                                (click)="navigateTo('/mercado')" 
+                            <button class="nav-link btn" (click)="navigateTo('/mercado')"
                                 [ngClass]="{'active-button': rutaActual === '/mercado'}">
                                 Mercado
                             </button>
                         </li>
                         <li class="nav-item" *ngIf="isAuthenticated">
-                            <button 
-                                class="nav-link btn" 
-                                (click)="navigateTo('/seguimientos')" 
+                            <button class="nav-link btn" (click)="navigateTo('/seguimientos')"
                                 [ngClass]="{'active-button': rutaActual === '/seguimientos'}">
                                 Seguimientos
                             </button>
                         </li>
                         <li class="nav-item" *ngIf="isAuthenticated">
-                            <button 
-                                class="nav-link btn" 
-                                (click)="navigateTo('/ventas')" 
+                            <button class="nav-link btn" (click)="navigateTo('/ventas')"
                                 [ngClass]="{'active-button': rutaActual === '/ventas'}">
                                 Ventas
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button 
-                                class="nav-link btn" 
-                                (click)="navigateTo('/contacto')" 
+                            <button class="nav-link btn" (click)="navigateTo('/contacto')"
                                 [ngClass]="{'active-button': rutaActual === '/contacto'}">
                                 Contacto
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button *ngIf="isLoggedIn" id="logout-btn" class="nav-link btn"
-                                (click)="logout()">
+                            <button *ngIf="isLoggedIn" id="logout-btn" class="nav-link btn" (click)="logout()">
                                 Salir
                             </button>
                         </li>

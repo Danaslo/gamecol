@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="games-container">
   <div id="title-add-button-container">
-    <h1  [ngStyle]="{'color':'#DAA520'}">Juegos en la Colección</h1>
+    <h1  [ngStyle]="{'color':'#DAA520'}">Colección</h1>
     <button id="add-button" (click)="openModal()">Agregar juego</button>
   </div>
 
@@ -19,14 +19,15 @@
         </div>
         <div class="card-body">
           <img [src]="juego.imagen" alt="Imagen juego" class="imagen-juego">
-          <p><strong>Condición:</strong> {{ juego.condicion }}</p>
-          <p><strong>Plataforma:</strong> {{ juego.plataforma }}</p>
-          <p><strong>Descripción:</strong> {{ juego.descripcion }}</p>
-          <p><strong>Estado:</strong> {{ juego.estado }}</p>
-          <p><strong>Precio: </strong> {{juego.precio}}€ </p>     
+          <p><strong>Condición:</strong>  {{ juego.condicion }}</p>
+          <p><strong>Plataforma:</strong>  {{ juego.plataforma }}</p>
+          <p><strong>Descripción:</strong>  {{ juego.descripcion }}</p>
+          <p><strong>Estado:</strong>  {{ juego.estado }}</p>
+          <p><strong>Precio: </strong>  {{juego.precio}}€ </p>     
           <div class="card-buttons">
-            <button class="sale-register" *ngIf="juego.estado === 'en venta'" (click)="openSellingModal(juego.id)">Registrar venta</button> <!-- Hay que añadir la funcionalidad una vez la página de ventas esté terminada-->
-            <button class="delete-btn" (click)="borrarJuego(juego.id)">Borrar juego</button>
+            <button class="sale-changer-btn" (click)="cambiarEstado(juego.id)">Cambiar estado</button>
+            <button class="sale-register" *ngIf="juego.estado === 'en venta'" (click)="openSellingModal(juego.id)">Vender</button> <!-- Hay que añadir la funcionalidad una vez la página de ventas esté terminada-->
+            <button class="delete-btn" (click)="borrarJuego(juego.id)">Borrar</button>
           </div>
 
           <div *ngIf="isSellingModalOpen" class="modal-content-container">
