@@ -54,7 +54,7 @@ async function crearSeguimiento(req, res) {
             }
         });
         if (seguimientoExiste)
-            return res.status(400).json({ message: 'El seguimiento que intenta registrar ya existe' });
+            return res.json({ message: 'El seguimiento que intenta registrar ya existe' });
 
         //Busco el juego asociado a la id pasada por parámetro.
         console.log('Id del juego: ' + idJuego);
@@ -86,9 +86,11 @@ async function crearSeguimiento(req, res) {
             id_juego: idJuego,
             telefono_duenio: telefonoDuenio
         })
+
+        res.json({ message: 'Juego añadido a seguimientos' });
     } catch (error) {
         console.log(error.message);
-        res.status(500).json({ message: 'Error al listar los juegos en venta' });
+        res.status(500).json({ message: 'Error al añadir el juego a seguimientos' });
     }
 }
 
@@ -102,6 +104,7 @@ async function borrarSeguimiento(req, res) {
                 id_juego: idJuego
             }
         })
+        res.json({ message: 'Seguimiento eliminado'})
         
     } catch (error) {
         console.log(error.message);

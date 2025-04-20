@@ -78,11 +78,31 @@ async function quitarVenta(req,res){
     }  
 }
 
+async function cambiarVenta(req,res){
+    try{
+        const {idJuego} = req.body;
+        console.log('La id es: ' + idJuego);
+        const juego = await Juego.findByPk(idJuego);
+        console.log(juego);
+        if(juego.estado === 'en venta'){
+            await Juego.update({estado: 'no en venta'}, {where: {id: idJuego}});
+            res.json({message: 'Venta quitada'});
+        }else{
+            await Juego.update({estado: 'en venta'}, {where: {id: idJuego}});
+            res.json({message: 'Puesto en venta'});
+        }
+    }catch(error){
+        console.log(error.message);
+        res.status(500).json({message: 'Error al cambiar el estado'});
+    }
+}
+
 module.exports = {
     editarNombre,
     editarCondicion,
     editarDescripcion,
     editarImagen,
     editarPrecio,
-    quitarVenta
+    quitarVenta,
+    cambiarVenta
 }

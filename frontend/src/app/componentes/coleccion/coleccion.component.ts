@@ -70,7 +70,10 @@ export class ColeccionComponent implements OnInit {
   cambiarEstado(id: BigInt){
     this.juegoService.cambiarEstado(id).subscribe(
       (data) => {
-        this.listarJuegos();
+        this.mostrarResultados(id,data);
+        setTimeout(() => {
+          this.listarJuegos();
+        },3000);
       },
       (error) => {
         console.error('No se ha podido cambiar el estado de venta del juego', error);
@@ -78,7 +81,18 @@ export class ColeccionComponent implements OnInit {
     );
   }
 
+  mostrarResultados(id: BigInt,data: any){
+    const resultado = document.getElementById(`results-${id}`);
+    if(resultado){
+      resultado.style.visibility = 'visible';
+      resultado.innerHTML = data.message;
+      setTimeout(function() {
+        resultado.style.visibility = 'hidden';
+        resultado.innerHTML = '';
+      }, 3000);
+    }
 
+  }
 
   borrarJuego(idJuego: number) {
     this.juegoService.borrarJuego(idJuego).subscribe(

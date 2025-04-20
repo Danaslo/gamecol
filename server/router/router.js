@@ -21,6 +21,7 @@ router.post("/editarDescripcion", verificarToken, juegoController.editarDescripc
 router.post("/editarImagen", verificarToken, juegoController.editarImagen);
 router.post("/editarPrecio", verificarToken, juegoController.editarPrecio);
 router.post("/quitarVenta",verificarToken,juegoController.quitarVenta);
+router.post("/cambiarVenta",verificarToken,juegoController.cambiarVenta);
 
 //Rutas de coleccionController:
 router.post("/agregarJuego", verificarToken, coleccionController.agregarJuego);

@@ -56,7 +56,7 @@
     background: linear-gradient(to left, #A569BD, #8E44AD, #9B59B6, #6A4C9C);
     transform: scale(1.05);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-  }
+}
 
 .follow-register:hover {
     background: linear-gradient(to right, #5E3370, #9B59B6, #7D3C98);
@@ -69,7 +69,6 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-
 #title-add-button-container h1 {
     font-size: 30px;
     font-weight: bold;
@@ -77,27 +76,33 @@
 }
 
 .card-container {
+    margin-top: 40px;
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
     justify-content: center;
-    padding-bottom: 150px; 
     position: relative;
-    z-index: 1;
-  }
+    gap: 20px;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+    border-radius: 20px;
+    max-width: 1200px;
+    padding-bottom: 25px;
+    background-color: rgba(0, 0, 0, 0.6);
+}
 
 .card {
-    width: 100%;
+    flex: 1 1 calc(33.33% - 40px);
     max-width: 350px;
     height: 500px;
     padding: 15px;
-    border: 1px solid #ccc;
+    border: 1px solid #DAA520;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    background: linear-gradient(#4B4B4B, #C0C0C0, #FFFFFF);
+    background-color: #222;
     text-align: center;
+    box-sizing: border-box;
 }
-
 
 .card-header h3 {
     font-size: 20px;
@@ -118,14 +123,20 @@
     height: 100%;
 }
 
+strong {
+    color: #DAA520;
+}
+
 
 .card-body p {
     font-size: 14px;
     margin: 5px 0;
-    color: black;
+    color: white;
 }
 
+
 .card-body img {
+    border: 1px solid #DAA520;
     width: 150px;
     height: 150px;
     border-radius: 5px;
@@ -133,7 +144,7 @@
     object-position: center;
 }
 
-.search-btn{
+.search-btn {
     background: linear-gradient(to right, #D5006D, #C2185B, #9C1C44);
     border-radius: 5%;
     color: white;
