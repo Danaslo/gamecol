@@ -55,13 +55,29 @@ export class MercadoComponent {
 
   seguirJuego(id: BigInt) {
     this.juegoService.crearSeguimiento(id).subscribe(
-      (response) => {
-        console.log('Juego seguido: ', response);
+      (data) => {
+        this.mostrarResultados(id,data);
+        setTimeout(() => {
+          this.listarEnVenta();
+        },3000);
       },
       (error) => {
-        console.error('Error al seguir el juego: ', error);
+        console.error('No se puede seguir el juego', error);
       }
-    )
+    );
+  }
+
+  mostrarResultados(id: BigInt,data: any){
+    const resultado = document.getElementById(`results-${id}`);
+    if(resultado){
+      resultado.style.visibility = 'visible';
+      resultado.innerHTML = data.message;
+      setTimeout(function() {
+        resultado.style.visibility = 'hidden';
+        resultado.innerHTML = '';
+      }, 3000);
+    }
+
   }
 
 }

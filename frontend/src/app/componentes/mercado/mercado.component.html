@@ -9,7 +9,7 @@
                 <option value="Playstation">PlayStation</option>
                 <option value="Xbox">Xbox</option>
                 <option value="PC">PC</option>
-              </select>
+            </select>
 
             <select [(ngModel)]="filtros.condicion" name="condicion">
                 <option value="">Todas las condiciones</option>
@@ -23,20 +23,21 @@
             <button type="submit" class="search-btn">Buscar</button>
         </form>
     </div>
-</div>
 
-<div class="card-container">
-    <div class="card" *ngFor="let juego of juegos">
-        <div class="card-header" [ngStyle]="{'border':'none'}">
-            <h3>{{ juego.nombre }}</h3>
-        </div>
-        <div class="card-body">
-            <img [src]="juego.imagen" alt="Imagen juego" class="imagen-juego">
-            <p><strong>Condición:</strong> {{ juego.condicion }}</p>
-            <p><strong>Plataforma:</strong> {{ juego.plataforma }}</p>
-            <p><strong>Descripción:</strong> {{ juego.descripcion }}</p>
-            <p><strong>Precio:</strong> {{juego.precio}}€</p>
-            <button class="follow-register" (click)="seguirJuego(juego.id)">Seguir</button>
+    <div class="card-container">
+        <div class="card" *ngFor="let juego of juegos">
+            <div class="card-header" [ngStyle]="{'border':'none'}">
+                <h3>{{ juego.nombre }}</h3>
+            </div>
+            <div class="card-body">
+                <img [src]="juego.imagen" alt="Imagen juego" class="imagen-juego">
+                <p><strong>Condición:</strong> {{ juego.condicion }}</p>
+                <p><strong>Plataforma:</strong> {{ juego.plataforma }}</p>
+                <p><strong>Descripción:</strong> {{ juego.descripcion }}</p>
+                <p><strong>Precio:</strong> {{juego.precio}}€</p>
+                <p [id]="'results-' + juego.id"></p>
+                <button class="follow-register" (click)="seguirJuego(juego.id)">Seguir</button>
+            </div>
         </div>
     </div>
 </div>

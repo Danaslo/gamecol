@@ -1,31 +1,35 @@
 <app-header></app-header>
-<div id="body-container">
+<div id="home-container">
+<div class="games-container">
     <h3> Seguimientos</h3>
-    <div class="card-container">
-        <div class="card" *ngFor="let juego of juegos"  [ngClass]="{
+    <div class="card-wrapper">
+        <div class="card-container">
+            <div class="card" *ngFor="let juego of juegos" [ngClass]="{
             'en-venta': juego.estado === 'en venta',
             'no-en-venta': juego.estado !== 'en venta'
          }">
-            <div class="card-body">
-                <div id="card-body-image-container">
-                     <img [src]="juego.imagen" alt="Imagen juego" class="imagen-juego">
-                </div>
-                <div id="card-body-information-container-1">
-                    <h3>{{ juego.nombre }}</h3>
-                    <p><strong>Precio: </strong> {{juego.precio}}€ </p>
-                    <p><strong>Telefono del dueño: </strong> {{ juego.telefono_duenio}}</p>
-                </div> 
-                <div id="card-body-information-container-2">
-                    <p><strong>Descripción: </strong> {{juego.descripcion}}</p>
-                    <p><strong>Condicion: </strong> {{juego.condicion}}</p>
-                    <p><strong>Estado: </strong> {{juego.estado}}</p>
-                </div>  
-                <div class="card-buttons">
-                    <button class="delete-btn" (click)="borrarSeguimiento(juego.id)">Eliminar</button>
+                <div class="card-body">
+                    <div id="card-body-image-container">
+                        <img [src]="juego.imagen" alt="Imagen juego" class="imagen-juego">
+                    </div>
+                    <div id="card-body-information-container-1">
+                        <h3>{{ juego.nombre }}</h3>
+                        <p><strong>Precio: </strong> {{juego.precio}}€ </p>
+                        <p><strong>Telefono del dueño: </strong> {{ juego.telefono_duenio}}</p>
+                    </div>
+                    <div id="card-body-information-container-2">
+                        <p><strong>Descripción: </strong> {{juego.descripcion}}</p>
+                        <p><strong>Condicion: </strong> {{juego.condicion}}</p>
+                        <p><strong>Estado: </strong> {{juego.estado}}</p>
+                    </div>
+                    <p [id]="'results-' + juego.id"></p>
+                    <div class="card-buttons">
+                        <button class="delete-btn" (click)="borrarSeguimiento(juego.id)">Eliminar</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-    <app-footer></app-footer>
+</div>
+</div>
+<app-footer></app-footer>

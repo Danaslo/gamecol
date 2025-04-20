@@ -32,10 +32,28 @@ export class SeguimientoComponent {
 
   borrarSeguimiento(idJuego: BigInt){
     this.juegoService.borrarSeguimiento(idJuego).subscribe(
-      (response) => {
-        console.log('Juego seguido destruído: ',response);
-        this.listarSeguimientos();
+      (data) => {
+        this.mostrarResultados(idJuego,data);
+        setTimeout(() => {
+          this.listarSeguimientos();
+        },3000);
+      },
+      (error) => {
+        console.error('No se ha podido cambiar el estado de venta del juego', error);
       }
-    )
+    );
+  }
+
+  mostrarResultados(id: BigInt,data: any){
+    const resultado = document.getElementById(`results-${id}`);
+    if(resultado){
+      resultado.style.visibility = 'visible';
+      resultado.innerHTML = data.message;
+      setTimeout(function() {
+        resultado.style.visibility = 'hidden';
+        resultado.innerHTML = '';
+      }, 3000);
+    }
+
   }
 }
