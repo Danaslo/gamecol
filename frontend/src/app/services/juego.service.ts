@@ -30,6 +30,14 @@ export class JuegoService {
     return this.http.post(`${this.apiUrl}/borrarJuego`, { idJuego }, { headers });
   }
 
+  cambiarEstado(idJuego: BigInt): Observable<any>{
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', 'Bearer $(token)');
+    return this.http.post(`${this.apiUrl}/cambiarVenta`, { idJuego }, { headers });
+  }
+
+
+
   listarEnVenta(): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);

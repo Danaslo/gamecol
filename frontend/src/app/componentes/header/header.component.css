@@ -15,7 +15,7 @@
 }
 
 .navbar-nav .nav-item .nav-link.active-button {
-    background: linear-gradient(to right, #74f44d, #43882a, #177319);  
+    background: linear-gradient(to right, #50C878, #50C878, #3A9A55);
 }
 
 .header-left {
@@ -29,6 +29,12 @@
     height: 86px;
     border-radius: 10px;
     object-fit: contain;
+    border: 1px solid #DAA520;
+    transition: all 0.3s ease-in-out;
+}
+
+.logo img:hover{
+    box-shadow: 0 0 15px 4px gold;
 }
 
 .navbar {
@@ -59,7 +65,8 @@
 }
 
 .navbar-nav .nav-item .nav-link {
-    background: linear-gradient(to right, #50C878, #50C878, #3A9A55);
+    background: linear-gradient(to right, #388f55, #26623a, #1d512b);
+    border: 1px solid #3A9A55;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     color: white;
     border-radius: 8px;
@@ -69,6 +76,7 @@
 }
 
 .navbar-nav .nav-item .nav-link:hover {
+    background: linear-gradient(to right, #4CAF50, #66BB6A, #2C6B39);
     transform: translateY(-3px);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
@@ -103,6 +111,13 @@
     transform: translateY(2px);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
+
+
+#index-button{
+    background: none;
+    border: none;
+}
+
 
 
 /* Así mantengo el menú a la derecha del todo y el logo a la izquierda hasta pantallas pequeñas, donde se centra */

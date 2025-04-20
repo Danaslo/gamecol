@@ -67,6 +67,19 @@ export class ColeccionComponent implements OnInit {
     );
   }
 
+  cambiarEstado(id: BigInt){
+    this.juegoService.cambiarEstado(id).subscribe(
+      (data) => {
+        this.listarJuegos();
+      },
+      (error) => {
+        console.error('No se ha podido cambiar el estado de venta del juego', error);
+      }
+    );
+  }
+
+
+
   borrarJuego(idJuego: number) {
     this.juegoService.borrarJuego(idJuego).subscribe(
       () => {

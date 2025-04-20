@@ -13,9 +13,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './ventas.component.css'
 })
 export class VentasComponent implements OnInit{
-  
     ventas: any[] = [];  
-  
     constructor(private ventaService: VentaService) {}
   
     ngOnInit(): void {
