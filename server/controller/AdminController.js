@@ -56,7 +56,6 @@ async function borrarUsuario(req, res) {
 
         await Seguimiento.destroy({where: {id_usuario: userId}});
 
-
         await Chat.destroy({ where: { id_usuario1: userId } });
         await Chat.destroy({ where: { id_usuario2: userId } });
 
