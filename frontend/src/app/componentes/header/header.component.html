@@ -43,6 +43,12 @@
                                 Contacto
                             </button>
                         </li>
+                        <li class="nav-item" *ngIf="isAdmin">
+                            <button class="nav-link btn" (click)="navigateTo('/admin')"
+                                [ngClass]="{'active-button': rutaActual === '/admin'}">
+                                Admin
+                            </button>
+                        </li>
                         <li class="nav-item">
                             <button *ngIf="isLoggedIn" id="logout-btn" class="nav-link btn" (click)="logout()">
                                 Salir

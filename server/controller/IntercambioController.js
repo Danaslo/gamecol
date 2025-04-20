@@ -50,9 +50,18 @@ async function intercambiarJuego(req, res) {
 async function listarVentas(req, res) {
     try {
         const userId = req.userId;
-        const ventas = await Intercambio.findAll({ where: { id_vendedor: userId } });
+        const ventas = await Intercambio.findAll({ where: { id_vendedor: userId },include: [
+            {
+              model: Juego
+            },
+            {
+              model: Usuario,
+              as: 'Comprador',
+              attributes: ['telefono']
+            }
+          ],
+          order: [['fecha_venta', 'DESC']]});
         res.json(ventas);
-
     } catch (error) {
         console.log('Error al listar ventas');
     }

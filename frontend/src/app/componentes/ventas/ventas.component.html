@@ -1,17 +1,24 @@
 <app-header></app-header>
-<div id="sells-container">
-    <div *ngIf="ventas.length > 0; else noVentas">
-      <h2>Lista de Ventas</h2>
-      <div class="cards-container">
+<div id="games-container">
+  <div class="card-wrapper">
+    <div id="card-container" *ngIf="ventas.length > 0; else noVentas">
+      <h2>Listado de Ventas</h2>
+      <div class="card-container">
         <div class="card" *ngFor="let venta of ventas">
-          <div class="card-body">
-            <p><strong>Vendedor:</strong> {{ venta.id_vendedor }}</p>
-            <p><strong>Comprador:</strong> {{ venta.id_comprador }}</p>
-            <p><strong>Precio:</strong> {{ venta.precio}}€</p>
-            <p><strong>Fecha de Venta:</strong> {{ venta.fecha_venta | date: 'dd/MM/yyyy' }}</p>
+          <div class="card-body" style="display: flex; flex-direction: row; justify-content: space-between; width: 100%;">
+            <div class="info-container" style="flex: 1;">
+              <p><strong>Título del juego:</strong> {{venta.Juego.nombre}}</p>
+              <p><strong>Plataforma: </strong>{{venta.Juego.plataforma}}</p>
+              <p><strong>Comprador:</strong> {{ venta.Comprador.telefono }}</p>
+            </div>
+            <div class="info-container" style="text-align: right;">
+              <p><strong>Precio:</strong> {{ venta.precio}}€</p>
+              <p><strong>Fecha de Venta:</strong> {{ venta.fecha_venta | date: 'dd/MM/yyyy' }}</p>
+            </div>
           </div>
         </div>
       </div>
+    </div>
     </div>
     <ng-template #noVentas>
       <p>No se han encontrado ventas.</p>

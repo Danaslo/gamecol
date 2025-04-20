@@ -20,12 +20,12 @@ Juego.belongsTo(Coleccion, { foreignKey: 'id_coleccion' });
 Juego.hasMany(Intercambio, { foreignKey: 'id_juego', onDelete: 'CASCADE' });
 Juego.hasMany(Seguimiento, { foreignKey: 'id_juego' });
 
-Usuario.hasMany(Intercambio, { as: 'Compras', foreignKey: 'id_comprador' });
-Usuario.hasMany(Intercambio, { as: 'Ventas', foreignKey: 'id_vendedor' });
-Usuario.hasOne(Coleccion, { foreignKey: 'id_usuario' });
+Usuario.hasMany(Intercambio, { as: 'Compras', foreignKey: 'id_comprador', onDelete: 'CASCADE' });
+Usuario.hasMany(Intercambio, { as: 'Ventas', foreignKey: 'id_vendedor', onDelete: 'CASCADE' });
+Usuario.hasOne(Coleccion, { foreignKey: 'id_usuario', onDelete: 'CASCADE' });
 
-Usuario.hasMany(Chat, { as: 'Usuario1', foreignKey: 'id_usuario1' });
-Usuario.hasMany(Chat, { as: 'Usuario2', foreignKey: 'id_usuario2' });
+Usuario.hasMany(Chat, { as: 'Usuario1', foreignKey: 'id_usuario1', onDelete: 'CASCADE' });
+Usuario.hasMany(Chat, { as: 'Usuario2', foreignKey: 'id_usuario2', onDelete: 'CASCADE' });
 
 Seguimiento.belongsTo(Juego, { foreignKey: 'id_juego' });
 

@@ -7,6 +7,7 @@ const contactoController = require('../controller/ContactoController');
 const mercadoController = require('../controller/MercadoController');
 const seguimientosController = require('../controller/SeguimientoController')
 const intercambioController = require('../controller/IntercambioController');
+const adminController = require('../controller/AdminController');
 
 const verificarToken = require('../controller/UserController').verificarToken;
 
@@ -45,9 +46,14 @@ router.get("/ventas", verificarToken, intercambioController.listarVentas);
 
 
 
+//Rutas de adminController:
+router.get("/isAdmin",verificarToken,adminController.isAdmin);
+router.get("/usuarios",verificarToken,adminController.getUsuarios);
+router.delete("/borrarUsuario",verificarToken,adminController.borrarUsuario);
+
+
+
 //ENdpoint para el envío de correos:
 router.post("/contacto",contactoController.enviarCorreo); //Como un correo lo puede enviar cualquiera no se revisa el token.
-
-
 
 module.exports = router;
