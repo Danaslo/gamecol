@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
     selector: 'app-header',
@@ -16,13 +17,20 @@ export class HeaderComponent {
     isAuthenticated: boolean = false;
     menuOpen: boolean = false;
     rutaActual: string = '';
+    isAdmin: boolean = false;
 
-    constructor(private router: Router) {
+    constructor(private router: Router, private authService: AuthService) {
         this.checkAuthStatus();
         this.router.events.subscribe(() => {
             this.rutaActual = this.router.url;
           });
     }
+
+    ngOnInit() {
+        this.checkIfAdmin();
+    }
+
+
 
     checkAuthStatus() {
         this.isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn') || 'false');
@@ -48,4 +56,18 @@ export class HeaderComponent {
     toggleMenu() {
         this.menuOpen = !this.menuOpen;
     }
+
+    checkIfAdmin() {
+        this.authService.isAdmin().subscribe({
+          next: (res) => {
+            this.isAdmin = res.admin;
+          },
+          error: (err) => {
+            console.error('Error al verificar rol de usuario:', err);
+          }
+        });
+      }
+
+
+
 }

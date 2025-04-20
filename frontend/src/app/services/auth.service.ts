@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
   private apiUrl = 'http://172.18.1.3';
 
@@ -39,5 +40,11 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     return localStorage.getItem('token') !== null;
+  }
+
+  isAdmin(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get(`${this.apiUrl}/isAdmin`, { headers });
   }
 }
