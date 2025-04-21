@@ -33,13 +33,9 @@ export class ColeccionComponent implements OnInit {
     this.listarJuegos(); 
   }
 
-  venderJuego(id:BigInt){
-
-  }
-
-
   closeModal() {
     this.isModalOpen = false;
+    this.listarJuegos();
   }
 
   openModal() {
@@ -54,6 +50,7 @@ export class ColeccionComponent implements OnInit {
   closeSellingModal() {
     this.isSellingModalOpen = false;
     this.juegoSeleccionadoId = null;
+    this.listarJuegos();
   }
 
   listarJuegos() {
@@ -95,9 +92,10 @@ export class ColeccionComponent implements OnInit {
   }
 
   borrarJuego(idJuego: number) {
+    console.log("Entra en borrar juego");
     this.juegoService.borrarJuego(idJuego).subscribe(
       () => {
-        this.juegoService.listarJuegos(); 
+        this.listarJuegos(); 
       },
       (error) => {
         console.error('Error al borrar el juego', error);
