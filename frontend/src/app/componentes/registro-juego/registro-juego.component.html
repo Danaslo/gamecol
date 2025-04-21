@@ -1,4 +1,3 @@
-
 <div class="modal-overlay">
   <div class="modal-content" (click)="$event.stopPropagation()">
     <div class="container">
@@ -7,29 +6,73 @@
         <button (click)="cerrarModal()" id="modal-closer">X</button>
       </div>
       <form [formGroup]="juegoForm" (ngSubmit)="agregarJuego()" enctype="multipart/form-data">
-        <input type="text" formControlName="nombre" placeholder="Nombre del juego">  
+        <input type="text" formControlName="nombre" placeholder="Nombre del juego">
         <select formControlName="plataforma">
           <option value="" disabled>Selecciona una plataforma</option>
-          <option value="Playstation">PlayStation</option>
+          <!-- Consolas de Sony-->
+          <option value="" disabled>Sony</option>
+          <option value="PSX">PlayStation 1 (PSX)</option>
+          <option value="PS2">Playstation 2</option>
+          <option value="PS3">Playstation 3</option>
+          <option value="PS4">Playstation 4</option>
+          <option value="PS5">Playstation 5</option>
+          <!-- Consolas de Microsoft-->
+          <option value="" disabled>Microsoft</option>
           <option value="Xbox">Xbox</option>
+          <option value="Xbox 360">Xbox 360</option>
+          <option value="Xbox One">Xbox One</option>
+          <option value="Xbox Series X">Xbox Series X</option>
+          <!-- Consolas de Sega-->
+          <option value="" disabled>Sega</option>
+          <option value="Mega Drive">Sega Mega Drive / Genesis</option>
+          <option value="Sega CD">Sega CD</option>
+          <option value="Sega 32X">Sega 32X </option>
+          <option value="Sega Saturn">Sega Saturn</option>
+          <option value="Master System">Sega Master System</option>
+          <option value="Dreamcast">Sega Dreamcast</option>
+          <!-- Consolas de  Nintendo-->
+          <option value="" disabled>Nintendo</option>
+          <option value="NES">Nintendo Entertainment System</option>
+          <option value="SNES">Super Nintendo</option>
+          <option value="N64">Nintendo 64</option>
+          <option value="GameCube">Nintendo Gamecube</option>
+          <option value="Wii">Nintendo Wii</option>
+          <option value="Wii-U">Nintendo Wii-U</option>
+          <option value="Switch">Nintendo Switch</option>
+          <option value="GameBoy">Nintendo Gameboy</option>
+          <option value="GBC">Nintendo Game Boy Color</option>
+          <option value="GBA">Nintendo Game Boy Advance</option>
+          <option value="NDS">Nintendo DS</option>
+          <option value="3DS">Nintendo 3DS</option>
+          <!-- Atari-->
+          <option value="" disabled>Atari</option>
+          <option value="Atari 2600">Atari 2600</option>
+          <option value="Atari 5200">Atari 5200</option>
+          <option value="Atari Jaguar">Atari Jaguar</option>
+          <option value="Atari Jaguar CD">Atari Jaguar CD</option>
+          <option value="Atari Lynx">Atari Lynx</option>
+          <!-- PC-->
+          <option value="" disabled>Otros</option>
           <option value="PC">PC</option>
+          <!-- TG/PC Engine-->
+          <option value="PCE">Turbografix16 / PC Engine</option>
         </select>
         <select formControlName="condicion">
           <option value="precintado">Precintado</option>
           <option value="usado">Usado</option>
-        </select>    
-        <textarea formControlName="descripcion" placeholder="Descripción"></textarea>        
-        <input type="file" (change)="onFileSelected($event)" placeholder="Cargar imagen de juego">  
+        </select>
+        <textarea formControlName="descripcion" placeholder="Descripción"></textarea>
+        <input type="file" (change)="onFileSelected($event)" placeholder="Cargar imagen de juego">
         <select formControlName="estado">
           <option value="en venta">En venta</option>
           <option value="no en venta">No en venta</option>
-        </select> 
+        </select>
         <label for="precio">Precio:</label>
         <input type="number" formControlName="precio" placeholder="Precio">
         <div id="submit-container">
-          <button type="submit" id="add-btn" [ngStyle]="{'border':'none'}"  >Agregar</button>
+          <button type="submit" id="add-btn" [ngStyle]="{'border':'none'}">Agregar</button>
         </div>
-        
+
       </form>
     </div>
   </div>
