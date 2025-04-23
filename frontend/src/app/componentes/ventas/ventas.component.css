@@ -85,7 +85,10 @@ strong {
 .info-container{
   display:flex;
   text-align: left;
-  gap: 15px;
+}
+
+.info-container p{
+  margin: 0 10px;
 }
 
 

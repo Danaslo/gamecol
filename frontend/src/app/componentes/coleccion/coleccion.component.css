@@ -22,6 +22,9 @@
     border: 1px solid #DAA520;
 }
 
+
+
+
 #add-button {
     padding: 12px 30px;
     background: linear-gradient(to right, #9B111E, #E0115F, #D5006D);
@@ -79,7 +82,8 @@
     padding-right: 20px;
     padding-left: 20px;
     border-radius: 20px;
-    max-width: 1200px;;
+    max-width: 1200px;
+    ;
     padding-bottom: 150px;
     background-color: rgba(0, 0, 0, 0.6);
 }
@@ -137,7 +141,7 @@ strong {
     object-position: center;
 }
 
-.sale-changer-btn{
+.sale-changer-btn {
     background: linear-gradient(to right, #D5006D, #C2185B, #9C1C44);
     border-radius: 5%;
     color: white;
@@ -149,7 +153,7 @@ strong {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.sale-changer-btn:hover{
+.sale-changer-btn:hover {
     background: linear-gradient(to right, #9C1C44, #C2185B, #D5006D);
     transform: translateY(-4px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
@@ -184,6 +188,17 @@ strong {
     display: flex;
     flex-direction: row;
     gap: 15px;
+}
+
+
+.en-venta {
+    color: green !important;
+    font-weight: bold;
+}
+
+.no-en-venta {
+    color: red !important;
+    font-weight: bold;
 }
 
 
