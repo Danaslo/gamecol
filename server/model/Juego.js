@@ -19,7 +19,7 @@ const Juego = sequelize.define('Juego',{
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-            isIn: [['precintado', 'usado']]
+            isIn: [['Precintado', 'Usado']]
         }
     },
     descripcion: {
@@ -38,7 +38,7 @@ const Juego = sequelize.define('Juego',{
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-            isIn: [['en venta', 'no en venta']]
+            isIn: [['En venta', 'No en venta']]
         }
     },
     precio:{

@@ -83,12 +83,11 @@ async function cambiarVenta(req,res){
         const {idJuego} = req.body;
         console.log('La id es: ' + idJuego);
         const juego = await Juego.findByPk(idJuego);
-        console.log(juego);
-        if(juego.estado === 'en venta'){
-            await Juego.update({estado: 'no en venta'}, {where: {id: idJuego}});
+        if(juego.estado === 'En venta'){
+            await Juego.update({estado: 'No en venta'}, {where: {id: idJuego}});
             res.json({message: 'Venta quitada'});
         }else{
-            await Juego.update({estado: 'en venta'}, {where: {id: idJuego}});
+            await Juego.update({estado: 'En venta'}, {where: {id: idJuego}});
             res.json({message: 'Puesto en venta'});
         }
     }catch(error){

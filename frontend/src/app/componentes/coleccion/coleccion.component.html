@@ -21,12 +21,14 @@
           <img [src]="juego.imagen" alt="Imagen juego" class="imagen-juego">
           <p><strong>Condición:</strong>  {{ juego.condicion }}</p>
           <p><strong>Plataforma:</strong>  {{ juego.plataforma }}</p>
-          <p><strong>Estado:</strong>  {{ juego.estado }}</p>
+          <p [ngClass]="juego.estado === 'En venta' ? 'en-venta' : 'no-en-venta'">
+            <strong>Estado:</strong> {{ juego.estado }}
+          </p>
           <p><strong>Precio: </strong>  {{juego.precio}}€ </p>    
           <p [id]="'results-' + juego.id"></p>
           <div class="card-buttons">
             <button class="sale-changer-btn" (click)="cambiarEstado(juego.id)">Cambiar estado</button>
-            <button class="sale-register" *ngIf="juego.estado === 'en venta'" (click)="openSellingModal(juego.id)">Vender</button> <!-- Hay que añadir la funcionalidad una vez la página de ventas esté terminada-->
+            <button class="sale-register" *ngIf="juego.estado === 'En venta'" (click)="openSellingModal(juego.id)">Vender</button> <!-- Hay que añadir la funcionalidad una vez la página de ventas esté terminada-->
             <button class="delete-btn" (click)="borrarJuego(juego.id)">Borrar</button>
           </div>
 

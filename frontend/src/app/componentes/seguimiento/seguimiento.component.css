@@ -63,7 +63,15 @@ strong{
     width: 100%;
 }
 
+.en-venta {
+    color: green !important;
+    font-weight: bold;
+}
 
+.no-en-venta {
+    color: red !important;
+    font-weight: bold;
+}
 
 
 .card {

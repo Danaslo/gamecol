@@ -57,6 +57,9 @@ export class ColeccionComponent implements OnInit {
     this.juegoService.listarJuegos().subscribe(
       (data) => {
         this.juegos = data.juegos;
+        this.juegos.forEach(juego => {
+          console.log(juego.estado);
+        });
       },
       (error) => {
         console.error('Error al listar los juegos', error);
