@@ -3,11 +3,12 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { NotificationService } from '../../services/notificacion.service';
 
 @Component({
     selector: 'app-header',
     standalone: true,
-    imports: [CommonModule,RouterModule],
+    imports: [CommonModule, RouterModule],
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.css']
 })
@@ -18,19 +19,22 @@ export class HeaderComponent {
     menuOpen: boolean = false;
     rutaActual: string = '';
     isAdmin: boolean = false;
+    notifications: any[] = [];
+    unreadNotificationsCount: number = 0;
+    showNotificationsList: boolean = false;
+    notificationsVisible: boolean = false;
 
-    constructor(private router: Router, private authService: AuthService) {
+    constructor(private router: Router, private authService: AuthService, private notificacionService: NotificationService) {
         this.checkAuthStatus();
         this.router.events.subscribe(() => {
             this.rutaActual = this.router.url;
-          });
+        });
     }
 
     ngOnInit() {
         this.checkIfAdmin();
+        this.loadNotifications();
     }
-
-
 
     checkAuthStatus() {
         this.isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn') || 'false');
@@ -59,15 +63,39 @@ export class HeaderComponent {
 
     checkIfAdmin() {
         this.authService.isAdmin().subscribe({
-          next: (res) => {
-            this.isAdmin = res.admin;
-          },
-          error: (err) => {
-            console.error('Error al verificar rol de usuario:', err);
-          }
+            next: (res) => {
+                this.isAdmin = res.admin;
+            },
+            error: (err) => {
+                console.error('Error al verificar rol de usuario:', err);
+            }
         });
-      }
+    }
 
+    loadNotifications() {
+        this.notificacionService.getNotifications().subscribe((notifications: any[]) => {
+            this.notifications = notifications;
+            this.unreadNotificationsCount = notifications.filter(n => !n.leido).length;
+        });
+    }
 
+    showNotifications() {
+        this.showNotificationsList = !this.showNotificationsList;
+        this.notifications.forEach(notification => {
+            console.log(notification.mensaje);
+        })
+    }
 
+    markAsRead(notificationId: number) {
+        this.notificacionService.markAsRead(notificationId).subscribe(() => {
+            this.loadNotifications();
+        });
+    }
+
+    toggleNotifications() {
+        this.notificationsVisible = !this.notificationsVisible;
+        if (this.notificationsVisible) {
+          this.loadNotifications();
+        }
+    }
 }

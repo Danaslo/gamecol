@@ -57,9 +57,6 @@ export class ColeccionComponent implements OnInit {
     this.juegoService.listarJuegos().subscribe(
       (data) => {
         this.juegos = data.juegos;
-        this.juegos.forEach(juego => {
-          console.log(juego.estado);
-        });
       },
       (error) => {
         console.error('Error al listar los juegos', error);
@@ -95,7 +92,6 @@ export class ColeccionComponent implements OnInit {
   }
 
   borrarJuego(idJuego: number) {
-    console.log("Entra en borrar juego");
     this.juegoService.borrarJuego(idJuego).subscribe(
       () => {
         this.listarJuegos(); 

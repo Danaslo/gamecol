@@ -58,14 +58,14 @@
           <option value="PCE">Turbografix16 / PC Engine</option>
         </select>
         <select formControlName="condicion">
-          <option value="precintado">Precintado</option>
-          <option value="usado">Usado</option>
+          <option selected value="Precintado">Precintado</option>
+          <option value="Usado">Usado</option>
         </select>
         <textarea formControlName="descripcion" placeholder="Descripción"></textarea>
         <input type="file" (change)="onFileSelected($event)" placeholder="Cargar imagen de juego">
         <select formControlName="estado">
-          <option value="en venta">En venta</option>
-          <option value="no en venta">No en venta</option>
+          <option selected value="En venta">En venta</option>
+          <option value="No en venta">No en venta</option>
         </select>
         <label for="precio">Precio:</label>
         <input type="number" formControlName="precio" placeholder="Precio">
