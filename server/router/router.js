@@ -8,6 +8,7 @@ const mercadoController = require('../controller/MercadoController');
 const seguimientosController = require('../controller/SeguimientoController')
 const intercambioController = require('../controller/IntercambioController');
 const adminController = require('../controller/AdminController');
+const notificacionController = require('../controller/NotificacionController');
 
 const verificarToken = require('../controller/UserController').verificarToken;
 
@@ -52,6 +53,10 @@ router.get("/usuarios",verificarToken,adminController.getUsuarios);
 router.delete("/borrarUsuario",verificarToken,adminController.borrarUsuario);
 
 
+//Rutas de notificacionController:
+router.post('/notificaciones', notificacionController.crearNotificacion);
+router.patch('/notificaciones/:id/leida', notificacionController.marcarLeida);
+router.get('/notificaciones/:usuarioId', notificacionController.listarTodasOrdenadas);
 
 //ENdpoint para el envío de correos:
 router.post("/contacto",contactoController.enviarCorreo); //Como un correo lo puede enviar cualquiera no se revisa el token.

@@ -4,7 +4,7 @@ const Juego = require('./Juego');
 const Intercambio = require('./Intercambio');
 const Chat = require('./Chat');
 const Seguimiento = require('./Seguimiento');
-const { isModuleNamespaceObject } = require('util/types');
+const Notificacion = require('./Notificacion');
 
 Chat.belongsTo(Usuario, { as: 'Usuario1', foreignKey: 'id_usuario1' });
 Chat.belongsTo(Usuario, { as: 'Usuario2', foreignKey: 'id_usuario2' });
@@ -29,6 +29,9 @@ Usuario.hasMany(Chat, { as: 'Usuario2', foreignKey: 'id_usuario2', onDelete: 'CA
 
 Seguimiento.belongsTo(Juego, { foreignKey: 'id_juego' });
 
+Usuario.hasMany(Notificacion, { foreignKey: 'id_usuario' });
+Notificacion.belongsTo(Usuario, { foreignKey: 'id_usuario' });
+
 
 module.exports = {
     Usuario,
@@ -36,5 +39,6 @@ module.exports = {
     Juego,
     Intercambio,
     Chat,
-    Seguimiento
+    Seguimiento,
+    Notificacion
 };
