@@ -24,7 +24,6 @@ const crearNotificacion = async (req, res) => {
 const marcarLeida = async (req, res) => {
     try {
         const { notificationId } = req.body;
-        console.log(' ID DE LA NOTIFICACION' + notificationId);
         const notificacion = await Notificacion.findByPk(notificationId);
         if (!notificacion) {
             return res.status(404).json({ mensaje: 'Notificación no encontrada' });
@@ -38,16 +37,29 @@ const marcarLeida = async (req, res) => {
     }
 };
 
-//Orden: Sin leer primero
+const borrarNotificacion = async (req, res) => {
+    console.log(' ENTRA A BORRAR NOTIFICACION');
+    try {
+        const { id } = req.params;
+        console.log( 'ID DE LA NOTIFICACION ES: ---------  ' + id);
+        const notificacion = await Notificacion.findByPk(id);
+        if (!notificacion) {
+            return res.status(404).json({ mensaje: 'Notificación no encontrada' });
+        }
+        
+        await notificacion.destroy();
+        res.status(200).json({ mensaje: 'Notificación eliminada', notificacion });
+    } catch (error) {
+        console.error('Error al borrar notificación', error);
+        res.status(500).json({ mensaje: 'Error al borrar notificación' });
+    }
+};
+
 const listarTodasOrdenadas = async (req, res) => {
-    console.log( 'ENTRA A LISTAR NOTIFICACIONES');
     try {
         const id_usuario = req.userId;
         const notificaciones = await Notificacion.findAll({
             where: { id_usuario },
-            order: [
-                ['leido', 'ASC']
-            ]
         });
         res.status(200).json(notificaciones);
     } catch (error) {
@@ -60,4 +72,5 @@ module.exports = {
     crearNotificacion,
     marcarLeida,
     listarTodasOrdenadas,
+    borrarNotificacion
 };

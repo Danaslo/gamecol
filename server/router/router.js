@@ -45,11 +45,11 @@ router.get("/isAdmin",verificarToken,adminController.isAdmin);
 router.get("/usuarios",verificarToken,adminController.getUsuarios);
 router.delete("/borrarUsuario",verificarToken,adminController.borrarUsuario);
 
-
 //Rutas de notificacionController:
 router.post('/notificaciones', verificarToken,notificacionController.crearNotificacion);
 router.post('/notificaciones/cambiarEstado', verificarToken, notificacionController.marcarLeida);
 router.get('/notificaciones',verificarToken, notificacionController.listarTodasOrdenadas);
+router.delete('/borrarNotificacion/:id', verificarToken, notificacionController.borrarNotificacion);
 
 //ENdpoint para el envío de correos:
 router.post("/contacto",contactoController.enviarCorreo); //Como un correo lo puede enviar cualquiera no se revisa el token.

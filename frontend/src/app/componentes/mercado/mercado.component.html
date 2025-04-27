@@ -8,7 +8,7 @@
                 <option value="" disabled>Selecciona una plataforma</option>
                 <!-- Consolas de Sony-->
                 <option value="" disabled>Sony</option>
-                <option value="" >Cualquiera</option>
+                <option value="">Cualquiera</option>
                 <option value="Playstation">PlayStation 1 (PSX)</option>
                 <option value="PS2">Playstation 2</option>
                 <option value="PS3">Playstation 3</option>
@@ -28,7 +28,7 @@
                 <option value="Sega Saturn">Sega Saturn</option>
                 <option value="Master System">Sega Master System</option>
                 <option value="Dreamcast">Sega Dreamcast</option>
-                <!-- Consolas de  Nintendo-->
+                <!-- Consolas de Nintendo-->
                 <option value="" disabled>Nintendo</option>
                 <option value="NES">Nintendo Entertainment System</option>
                 <option value="SNES">Super Nintendo</option>
@@ -75,7 +75,7 @@
                 <h3>{{ juego.nombre }}</h3>
             </div>
             <div class="card-body">
-                <img [src]="juego.imagen" alt="Imagen juego" class="imagen-juego">
+                <img [src]="juego.imagen" alt="Imagen juego" class="imagen-juego" (click)="openImageModal(juego.imagen)">
                 <p><strong>Condición:</strong> {{ juego.condicion }}</p>
                 <p><strong>Plataforma:</strong> {{ juego.plataforma }}</p>
                 <p><strong>Descripción:</strong> {{ juego.descripcion }}</p>
@@ -86,4 +86,13 @@
         </div>
     </div>
 </div>
+
+
+<div *ngIf="isImageModalOpen" class="image-modal">
+    <div class="modal-content">
+        <span class="close" (click)="closeImageModal()">×</span>
+        <img [src]="selectedImage" alt="Imagen grande" class="modal-image">
+    </div>
+</div>
+
 <app-footer></app-footer>

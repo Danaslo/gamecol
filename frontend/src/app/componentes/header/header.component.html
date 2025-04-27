@@ -63,8 +63,9 @@
                                 </button>
                                 <div *ngIf="notificationsVisible" class="notifications-dropdown">
                                     <ul>
-                                        <li *ngFor="let notification of notifications" (mouseenter)="markAsRead(notification.id)">
-                                            {{ notification.mensaje }}
+                                        <li *ngFor="let notification of notifications"  (mouseenter)="markAsRead(notification.id)"
+                                        [ngClass]="{ 'leido': notification.leido, 'no-leido': !notification.leido }">
+                                            <button  class="notificacion-button" (click)="destroyNotification(notification.id)"> {{ notification.mensaje }} </button> 
                                         </li>
                                     </ul>
                                 </div>

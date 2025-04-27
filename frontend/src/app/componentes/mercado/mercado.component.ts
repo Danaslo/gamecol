@@ -23,11 +23,25 @@ export class MercadoComponent {
     precioMin: null,
     precioMax: null
   };
+  isImageModalOpen: boolean = false;
+  selectedImage: string = '';
+
 
   constructor(private juegoService: JuegoService) { }
 
   ngOnInit(): void {
     this.listarEnVenta();
+  }
+
+  openImageModal(image: string) {
+    console.log('se abre');
+    this.selectedImage = image;
+    this.isImageModalOpen = true;
+  }
+
+  closeImageModal() {
+    this.isImageModalOpen = false;
+    this.selectedImage = '';
   }
 
   listarEnVenta() {

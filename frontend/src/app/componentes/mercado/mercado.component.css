@@ -142,6 +142,12 @@ strong {
     border-radius: 5px;
     object-fit: cover;
     object-position: center;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+}
+
+.card-body img:hover{
+    box-shadow: 0 0 15px 4px rgb(222, 188, 0);
 }
 
 .search-btn {
@@ -205,6 +211,50 @@ select:focus {
     border-color: gold;
     box-shadow: 0 0 8px gold;
     outline: none;
+}
+
+.image-modal {
+    margin-top: 100px;
+    position: fixed;
+    top: 40%;
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    width: 50%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #222;
+    border: 1px solid #DAA520;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-image {
+    width: 100vw;
+    height: auto;
+    max-width: 600px;
+    max-height: 400px;
+    object-fit: contain;
+}
+
+.close {
+    margin-bottom: 3px;
+    font-size: 30px;
+    border: none;
+    align-self: flex-start;
+    color: #DAA520;
+    cursor: pointer;
 }
 
 @media (max-width: 1180px) {

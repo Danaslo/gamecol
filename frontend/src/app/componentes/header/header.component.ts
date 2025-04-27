@@ -92,6 +92,18 @@ export class HeaderComponent {
         });
     }
 
+    destroyNotification(id: number): void {
+        this.notificacionService.destroyNotification(id).subscribe(
+          response => {
+            console.log('Notificación eliminada:', response);
+            this.notifications = this.notifications.filter(n => n.id !== id);
+          },
+          error => {
+            console.error('Error al eliminar la notificación:', error);
+          }
+        );
+      }
+
     toggleNotifications() {
         this.notificationsVisible = !this.notificationsVisible;
         if (this.notificationsVisible) {
