@@ -63,7 +63,7 @@
                                 </button>
                                 <div *ngIf="notificationsVisible" class="notifications-dropdown">
                                     <ul>
-                                        <li *ngFor="let notification of notifications" (click)="markAsRead(notification.id)">
+                                        <li *ngFor="let notification of notifications" (mouseenter)="markAsRead(notification.id)">
                                             {{ notification.mensaje }}
                                         </li>
                                     </ul>
