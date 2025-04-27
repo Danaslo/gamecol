@@ -54,6 +54,22 @@
                                 Salir
                             </button>
                         </li>
+                        <div id="notification-container">
+                            <li class="nav-item">
+                                <button class="nav-link btn" (click)="toggleNotifications()">
+                                    <i class="bi bi-bell"></i>
+                                    <span *ngIf="unreadNotificationsCount > 0" class="notification-badge">{{
+                                        unreadNotificationsCount }}</span>
+                                </button>
+                                <div *ngIf="notificationsVisible" class="notifications-dropdown">
+                                    <ul>
+                                        <li *ngFor="let notification of notifications" (click)="markAsRead(notification.id)">
+                                            {{ notification.mensaje }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </div>
                     </ul>
                 </div>
             </nav>

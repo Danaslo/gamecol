@@ -1,6 +1,7 @@
 const Usuario = require('../model/Usuario');
 const Coleccion = require('../model/Coleccion');
 const Juego = require('../model/Juego');
+const notificacionController = require('./NotificacionController');
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
@@ -26,6 +27,8 @@ async function agregarJuego(req, res) {
         const { nombre, condicion, descripcion, precio, estado, plataforma } = req.body;
         const idUsuario = req.userId;
         const coleccion = await Coleccion.findOne({ where: { id_usuario: idUsuario } });
+
+        console.log( 'ESTADO ------ ' + estado);
 
         if (!coleccion) {
             return res.status(404).json({ message: 'Bóveda no encontrada' });

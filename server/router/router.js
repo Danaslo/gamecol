@@ -17,11 +17,6 @@ router.post("/registro", userController.registro); //FUNCIONA
 router.post("/login", userController.login);
 
 //Rutas de juegoController:
-router.post("/editarNombre", verificarToken, juegoController.editarNombre);
-router.post("/editarCondicion", verificarToken, juegoController.editarCondicion);
-router.post("/editarDescripcion", verificarToken, juegoController.editarDescripcion);
-router.post("/editarImagen", verificarToken, juegoController.editarImagen);
-router.post("/editarPrecio", verificarToken, juegoController.editarPrecio);
 router.post("/quitarVenta",verificarToken,juegoController.quitarVenta);
 router.post("/cambiarVenta",verificarToken,juegoController.cambiarVenta);
 
@@ -45,8 +40,6 @@ router.post("/borrarSeguimiento",verificarToken, seguimientosController.borrarSe
 router.post("/vender",verificarToken, intercambioController.intercambiarJuego)
 router.get("/ventas", verificarToken, intercambioController.listarVentas);
 
-
-
 //Rutas de adminController:
 router.get("/isAdmin",verificarToken,adminController.isAdmin);
 router.get("/usuarios",verificarToken,adminController.getUsuarios);
@@ -54,9 +47,9 @@ router.delete("/borrarUsuario",verificarToken,adminController.borrarUsuario);
 
 
 //Rutas de notificacionController:
-router.post('/notificaciones', notificacionController.crearNotificacion);
-router.patch('/notificaciones/:id/leida', notificacionController.marcarLeida);
-router.get('/notificaciones/:usuarioId', notificacionController.listarTodasOrdenadas);
+router.post('/notificaciones', verificarToken,notificacionController.crearNotificacion);
+router.post('/notificaciones/cambiarEstado', verificarToken, notificacionController.marcarLeida);
+router.get('/notificaciones',verificarToken, notificacionController.listarTodasOrdenadas);
 
 //ENdpoint para el envío de correos:
 router.post("/contacto",contactoController.enviarCorreo); //Como un correo lo puede enviar cualquiera no se revisa el token.

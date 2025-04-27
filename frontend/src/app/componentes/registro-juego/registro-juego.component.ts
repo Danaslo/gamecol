@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { JuegoService } from '../../services/juego.service';
+import {NotificationService} from '../../services/notificacion.service';
 
 
 @Component({
@@ -20,14 +21,14 @@ export class RegistroJuegoComponent implements OnInit {
   juegos: any[] = [];
   selectedImage: File | null = null;
 
-  constructor(private fb: FormBuilder, private juegoService: JuegoService) {
+  constructor(private fb: FormBuilder, private juegoService: JuegoService, private notificationService: NotificationService) {
     this.juegoForm = this.fb.group({
       nombre: [''],
       condicion: ['precintado'],
       plataforma: [''],
       descripcion: [''],
       imagen: [''],
-      estado: ['en venta'],
+      estado: ['En venta'],
       precio: [0]
     });
   }
@@ -74,6 +75,8 @@ export class RegistroJuegoComponent implements OnInit {
     formData.append('descripcion', this.juegoForm.get('descripcion')?.value);
     formData.append('estado', this.juegoForm.get('estado')?.value);
     formData.append('precio', this.juegoForm.get('precio')?.value)
+
+    console.log( 'Estado: ' + this.juegoForm.get('estado')?.value);
       
     if (this.selectedImage) {
       formData.append('imagen', this.selectedImage, this.selectedImage.name);
@@ -83,21 +86,23 @@ export class RegistroJuegoComponent implements OnInit {
         this.juegoService.listarJuegos();
         this.juegoForm.reset({
           nombre: '',
-          condicion: 'precintado',
+          condicion: 'Precintado',
           plataforma: '',
           descripcion: '',
           imagen: '',
           precio: 0,
-          estado: 'en venta'
+          estado: 'En venta'
         });
       },
       (error) => {
         console.error('Error al agregar el juego', error);
       }
     );
+
+    this.notificationService.crearNotificacion(`Se ha registrado el juego ${this.juegoForm.get('nombre')?.value} para ${this.juegoForm.get('plataforma')?.value}`).subscribe(
+      (response) => {
+        console.log('Notificación creada:', response);
+      }
+    );
   }
-
-  
-
-
 }
