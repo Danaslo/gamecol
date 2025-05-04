@@ -98,11 +98,5 @@ export class RegistroJuegoComponent implements OnInit {
         console.error('Error al agregar el juego', error);
       }
     );
-
-    this.notificationService.crearNotificacion(`Se ha registrado el juego ${this.juegoForm.get('nombre')?.value} para ${this.juegoForm.get('plataforma')?.value}`).subscribe(
-      (response) => {
-        console.log('Notificación creada:', response);
-      }
-    );
   }
 }

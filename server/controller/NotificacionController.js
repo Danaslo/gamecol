@@ -1,9 +1,8 @@
 const Notificacion = require('../model/Notificacion');
 const Usuario = require('../model/Usuario');
 
-const crearNotificacion = async (req, res) => {
+const crearNotificacion = async (mensaje) => {
     try {
-        const { mensaje } = req.body;
         const usuarios = await Usuario.findAll();
 
         // Crear las notificaciones para cada usuario
@@ -13,11 +12,8 @@ const crearNotificacion = async (req, res) => {
                 id_usuario: usuario.id,
             });
         }));
-
-        res.status(201).json(notificaciones);
-    } catch (error) {
+    } catch (error){
         console.error('Error al crear notificación:', error);
-        res.status(500).json({ mensaje: 'Error al crear notificación' });
     }
 };
 

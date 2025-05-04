@@ -10,12 +10,6 @@ export class NotificationService {
 
   constructor(private http: HttpClient) {}
 
-  crearNotificacion(mensaje: string): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post(`${this.apiUrl}/notificaciones`, { mensaje }, { headers });
-  }
-
   getNotifications(): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
