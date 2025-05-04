@@ -36,6 +36,7 @@ router.get("/listarPorParametro", verificarToken, mercadoController.listarPorPar
 router.get("/listarSeguimientos",verificarToken, seguimientosController.listarSeguimientos);
 router.post("/crearSeguimiento",verificarToken, seguimientosController.crearSeguimiento);
 router.post("/borrarSeguimiento",verificarToken, seguimientosController.borrarSeguimiento);
+router.get("/buscarSeguimiento", verificarToken, seguimientosController.buscarSeguimiento);
 
 //Rutas de IntercambioController:
 router.post("/vender",verificarToken, intercambioController.intercambiarJuego)

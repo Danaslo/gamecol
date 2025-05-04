@@ -112,8 +112,36 @@ async function borrarSeguimiento(req, res) {
     }
 }
 
+async function buscarSeguimiento(req,res){
+    const idUsuario = req.userId; 
+    const { idJuego } = req.query;
+    console.log("Ruta alcanzada: ", req.query.idJuego);
+
+    if (!idJuego) {
+        return res.status(400).json({ message: 'Falta el id del juego' });
+    }
+
+    try {
+        const seguimiento = await Seguimiento.findOne({
+            where: {
+                id_usuario: idUsuario,
+                id_Juego: idJuego
+            }
+        });
+        if (!seguimiento) 
+            return res.json({ ok: false });
+        res.json({ ok: true });
+    } catch (error) {
+        console.error('Error al buscar el seguimiento', error);
+        return res.status(500).json({ message: 'Error en el servidor' });
+    }
+}
+
+
+
 module.exports = {
     listarSeguimientos,
     crearSeguimiento,
-    borrarSeguimiento
+    borrarSeguimiento,
+    buscarSeguimiento
 }

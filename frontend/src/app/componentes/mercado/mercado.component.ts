@@ -4,6 +4,8 @@ import { HeaderComponent } from '../header/header.component';
 import { CommonModule } from '@angular/common';
 import { JuegoService } from '../../services/juego.service';
 import { FormsModule } from '@angular/forms';
+import { Observable, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-mercado',
@@ -77,6 +79,20 @@ export class MercadoComponent {
       },
       (error) => {
         console.error('No se puede seguir el juego', error);
+      }
+    );
+  }
+
+  borrarSeguimiento(id: BigInt){
+    this.juegoService.borrarSeguimiento(id).subscribe(
+      (data) => {
+        this.mostrarResultados(id,data);
+        setTimeout(() => {
+          this.listarEnVenta();
+        },3000);
+      },
+      (error) => {
+        console.error('No se puede dejar de seguir el juego', error);
       }
     );
   }
