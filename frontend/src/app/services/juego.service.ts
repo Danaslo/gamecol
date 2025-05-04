@@ -87,4 +87,13 @@ export class JuegoService {
     return this.http.post(`${this.apiUrl}/borrarSeguimiento`, { idJuego }, { headers });
   }
 
+  buscarSeguimiento(idJuego: BigInt): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const params = new HttpParams().set('idJuego', idJuego.toString());
+    return this.http.get(`${this.apiUrl}/buscarSeguimiento`, { headers, params });
+  }
+
+
+
 }

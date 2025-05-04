@@ -34,10 +34,8 @@ const marcarLeida = async (req, res) => {
 };
 
 const borrarNotificacion = async (req, res) => {
-    console.log(' ENTRA A BORRAR NOTIFICACION');
     try {
         const { id } = req.params;
-        console.log( 'ID DE LA NOTIFICACION ES: ---------  ' + id);
         const notificacion = await Notificacion.findByPk(id);
         if (!notificacion) {
             return res.status(404).json({ mensaje: 'Notificación no encontrada' });

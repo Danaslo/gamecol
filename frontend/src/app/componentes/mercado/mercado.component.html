@@ -75,13 +75,17 @@
                 <h3>{{ juego.nombre }}</h3>
             </div>
             <div class="card-body">
-                <img [src]="juego.imagen" alt="Imagen juego" class="imagen-juego" (click)="openImageModal(juego.imagen)">
+                <img [src]="juego.imagen" alt="Imagen juego" class="imagen-juego"
+                    (click)="openImageModal(juego.imagen)">
                 <p><strong>Condición:</strong> {{ juego.condicion }}</p>
                 <p><strong>Plataforma:</strong> {{ juego.plataforma }}</p>
                 <p><strong>Descripción:</strong> {{ juego.descripcion }}</p>
                 <p><strong>Precio:</strong> {{juego.precio}}€</p>
                 <p [id]="'results-' + juego.id"></p>
-                <button class="follow-register" (click)="seguirJuego(juego.id)">Seguir</button>
+                <div class="button-container"> 
+                        <button class="follow-register" (click)="seguirJuego(juego.id)">Seguir</button>
+                        <button class="follow-deleter" (click)="borrarSeguimiento(juego.id)">Dejar de seguir</button>
+                </div>
             </div>
         </div>
     </div>
