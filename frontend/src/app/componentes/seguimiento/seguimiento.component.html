@@ -10,7 +10,7 @@
          }">
                     <div class="card-body">
                         <div id="card-body-image-container">
-                            <img [src]="juego.imagen" alt="Imagen juego" class="imagen-juego">
+                            <img [src]="juego.imagen" alt="Imagen juego" class="imagen-juego" (click)="openImageModal(juego.imagen)">
                         </div>
                         <div id="card-body-information-container-1">
                             <h3>{{ juego.nombre }}</h3>
@@ -34,4 +34,13 @@
         </div>
     </div>
 </div>
+
+<div *ngIf="isImageModalOpen" class="image-modal">
+    <div class="modal-content">
+        <span class="close" (click)="closeImageModal()">×</span>
+        <img [src]="selectedImage" alt="Imagen grande" class="modal-image">
+    </div>
+</div>
+
+
 <app-footer></app-footer>

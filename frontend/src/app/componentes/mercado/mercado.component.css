@@ -41,28 +41,27 @@
 }
 
 .follow-register {
-    background: linear-gradient(to right, #6A4C9C, #9B59B6, #8E44AD, #A569BD);
-    border-radius: 3%;
+    display:flex;
+    background: linear-gradient(to right, #388f55, #26623a, #1d512b);
+    border: 1px solid #3A9A55;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s ease-in-out, transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 14px;
+    transition: all 0.2s ease-in-out;
+    max-width: 90px;
+    max-height: 36px;
+    align-items: center;
+    text-align: center;
 }
 
 .follow-register:hover {
-    background: linear-gradient(to left, #A569BD, #8E44AD, #9B59B6, #6A4C9C);
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(to right, #4CAF50, #66BB6A, #2C6B39);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-.follow-register:hover {
-    background: linear-gradient(to right, #5E3370, #9B59B6, #7D3C98);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-}
 
 .follow-register:active {
     transform: scale(0.95);
@@ -277,4 +276,16 @@ select:focus {
         width: 120px;
         height: 120px;
     }
+
+    .image-modal {
+        width: 90%; 
+        height: auto;
+        z-index: 1001;
+    }
+
+    .modal-image {
+        max-width: 100%;
+        height: auto;
+    }
+
 }

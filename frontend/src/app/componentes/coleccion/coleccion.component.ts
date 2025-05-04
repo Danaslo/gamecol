@@ -10,7 +10,7 @@ import { VentaJuegoComponent } from '../venta-juego/venta-juego.component';
 @Component({
   selector: 'app-coleccion',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, CommonModule,RegistroJuegoComponent, VentaJuegoComponent],
+  imports: [HeaderComponent, FooterComponent, CommonModule, RegistroJuegoComponent, VentaJuegoComponent],
   templateUrl: './coleccion.component.html',
   styleUrls: ['./coleccion.component.css']
 })
@@ -19,8 +19,10 @@ export class ColeccionComponent implements OnInit {
   isModalOpen: boolean = false;
   isSellingModalOpen: boolean = false;
   juegoSeleccionadoId: number | null = null;
+  isImageModalOpen: boolean = false;
+  selectedImage: string = '';
 
-  constructor(private juegoService: JuegoService, private ventaService: VentaService) {}
+  constructor(private juegoService: JuegoService, private ventaService: VentaService) { }
 
   @HostListener('document:keydown', ['$event'])
   cerrarConEscape(event: KeyboardEvent) {
@@ -28,10 +30,22 @@ export class ColeccionComponent implements OnInit {
       this.closeModal();
     }
   }
-  
+
   ngOnInit(): void {
-    this.listarJuegos(); 
+    this.listarJuegos();
   }
+
+  openImageModal(image: string) {
+    console.log('se abre');
+    this.selectedImage = image;
+    this.isImageModalOpen = true;
+  }
+
+  closeImageModal() {
+    this.isImageModalOpen = false;
+    this.selectedImage = '';
+  }
+
 
   closeModal() {
     this.isModalOpen = false;
@@ -41,12 +55,12 @@ export class ColeccionComponent implements OnInit {
   openModal() {
     this.isModalOpen = true;
   }
-  
+
   openSellingModal(juegoId: number) {
     this.juegoSeleccionadoId = juegoId;
     this.isSellingModalOpen = true;
   }
-  
+
   closeSellingModal() {
     this.isSellingModalOpen = false;
     this.juegoSeleccionadoId = null;
@@ -64,13 +78,13 @@ export class ColeccionComponent implements OnInit {
     );
   }
 
-  cambiarEstado(id: BigInt){
+  cambiarEstado(id: BigInt) {
     this.juegoService.cambiarEstado(id).subscribe(
       (data) => {
-        this.mostrarResultados(id,data);
+        this.mostrarResultados(id, data);
         setTimeout(() => {
           this.listarJuegos();
-        },3000);
+        }, 3000);
       },
       (error) => {
         console.error('No se ha podido cambiar el estado de venta del juego', error);
@@ -78,12 +92,12 @@ export class ColeccionComponent implements OnInit {
     );
   }
 
-  mostrarResultados(id: BigInt,data: any){
+  mostrarResultados(id: BigInt, data: any) {
     const resultado = document.getElementById(`results-${id}`);
-    if(resultado){
+    if (resultado) {
       resultado.style.visibility = 'visible';
       resultado.innerHTML = data.message;
-      setTimeout(function() {
+      setTimeout(function () {
         resultado.style.visibility = 'hidden';
         resultado.innerHTML = '';
       }, 3000);
@@ -94,7 +108,7 @@ export class ColeccionComponent implements OnInit {
   borrarJuego(idJuego: number) {
     this.juegoService.borrarJuego(idJuego).subscribe(
       () => {
-        this.listarJuegos(); 
+        this.listarJuegos();
       },
       (error) => {
         console.error('Error al borrar el juego', error);

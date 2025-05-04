@@ -118,21 +118,35 @@ strong{
     border-radius: 5px;
     object-fit: cover;
     object-position: center;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
 }
 
-.delete-btn {
+.card-body img:hover{
+    box-shadow: 0 0 15px 4px rgb(222, 188, 0);
+}
+
+.delete-btn {    
+    display:flex;
     background: linear-gradient(to right, #D5006D, #C2185B, #9C1C44);
-    width: 70px;
-    height: 50px;
-    color: white;
-    border-radius: 5%;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     border: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    color: white;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 14px;
+    transition: all 0.2s ease-in-out;
+    max-width: 90px;
+    max-height: 36px;
+    align-items: center;
+    text-align: center;
+
+
+
 }
 
 .delete-btn:hover {
-    background: linear-gradient(to right, #9C1C44, #C2185B, #D5006D);
+    background: linear-gradient(to right, #f5017f, #e51d6d, #ca2559);
     transform: translateY(-4px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
@@ -157,6 +171,50 @@ strong{
     margin-left: auto;
 }
 
+.image-modal {
+    margin-top: 100px;
+    position: fixed;
+    top: 40%;
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    width: 50%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #222;
+    border: 1px solid #DAA520;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-image {
+    width: 100vw;
+    height: auto;
+    max-width: 600px;
+    max-height: 400px;
+    object-fit: contain;
+}
+
+.close {
+    margin-bottom: 3px;
+    font-size: 30px;
+    border: none;
+    align-self: flex-start;
+    color: #DAA520;
+    cursor: pointer;
+}
+
 @media (max-width: 1024px) {
     .card {
         flex-direction: column;
@@ -172,5 +230,16 @@ strong{
     .card-buttons {
         align-self: center;
         margin-left: 0;
+    }
+
+    .image-modal {
+        width: 90%; 
+        height: auto;
+        z-index: 1001;
+    }
+
+    .modal-image {
+        max-width: 100%;
+        height: auto;
     }
 }

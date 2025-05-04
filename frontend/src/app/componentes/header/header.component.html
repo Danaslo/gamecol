@@ -1,10 +1,11 @@
 <header class="header">
     <div class="header-left">
         <div class="logo">
-            <button id="index-button" (click)="navigateTo('/')" [ngClass]="{'active-button': rutaActual === '/'}">
+            <button id="index-button" (click)="navigateTo('/')" [ngClass]="{ 'active-button': rutaActual === '/' }">
                 <img src="assets/img/header/logo.gif" alt="Logo" />
             </button>
         </div>
+
         <div class="navbar-container">
             <nav class="navbar navbar-expand-lg" id="navbar">
                 <button class="navbar-toggler" type="button" (click)="toggleMenu()" aria-controls="navbarNav"
@@ -15,65 +16,70 @@
                     <ul class="navbar-nav" id="navbar-list">
                         <li class="nav-item" *ngIf="isAuthenticated">
                             <button class="nav-link btn" (click)="navigateTo('/coleccion')"
-                                [ngClass]="{'active-button': rutaActual === '/coleccion'}">
+                                [ngClass]="{ 'active-button': rutaActual === '/coleccion' }">
                                 Colección
                             </button>
                         </li>
                         <li class="nav-item">
                             <button class="nav-link btn" (click)="navigateTo('/mercado')"
-                                [ngClass]="{'active-button': rutaActual === '/mercado'}">
+                                [ngClass]="{ 'active-button': rutaActual === '/mercado' }">
                                 Mercado
                             </button>
                         </li>
                         <li class="nav-item" *ngIf="isAuthenticated">
                             <button class="nav-link btn" (click)="navigateTo('/seguimientos')"
-                                [ngClass]="{'active-button': rutaActual === '/seguimientos'}">
+                                [ngClass]="{ 'active-button': rutaActual === '/seguimientos' }">
                                 Seguimientos
                             </button>
                         </li>
                         <li class="nav-item" *ngIf="isAuthenticated">
                             <button class="nav-link btn" (click)="navigateTo('/ventas')"
-                                [ngClass]="{'active-button': rutaActual === '/ventas'}">
+                                [ngClass]="{ 'active-button': rutaActual === '/ventas' }">
                                 Ventas
                             </button>
                         </li>
                         <li class="nav-item">
                             <button class="nav-link btn" (click)="navigateTo('/contacto')"
-                                [ngClass]="{'active-button': rutaActual === '/contacto'}">
+                                [ngClass]="{ 'active-button': rutaActual === '/contacto' }">
                                 Contacto
                             </button>
                         </li>
                         <li class="nav-item" *ngIf="isAdmin">
                             <button class="nav-link btn" (click)="navigateTo('/admin')"
-                                [ngClass]="{'active-button': rutaActual === '/admin'}">
+                                [ngClass]="{ 'active-button': rutaActual === '/admin' }">
                                 Admin
                             </button>
                         </li>
-                        <li class="nav-item">
-                            <button *ngIf="isLoggedIn" id="logout-btn" class="nav-link btn" (click)="logout()">
-                                Salir
-                            </button>
-                        </li>
-                        <div id="notification-container">
-                            <li class="nav-item">
-                                <button class="nav-link btn" (click)="toggleNotifications()">
-                                    <i class="bi bi-bell"></i>
-                                    <span *ngIf="unreadNotificationsCount > 0" class="notification-badge">{{
-                                        unreadNotificationsCount }}</span>
-                                </button>
-                                <div *ngIf="notificationsVisible" class="notifications-dropdown">
-                                    <ul>
-                                        <li *ngFor="let notification of notifications"  (mouseenter)="markAsRead(notification.id)"
-                                        [ngClass]="{ 'leido': notification.leido, 'no-leido': !notification.leido }">
-                                            <button  class="notificacion-button" (click)="destroyNotification(notification.id)"> {{ notification.mensaje }} </button> 
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </div>
                     </ul>
                 </div>
             </nav>
         </div>
     </div>
+
+    <div id="notification-container">
+        <p id="userName"> {{ username }}</p>
+        <div class="nav-item">
+            <button class="nav-link btn" (click)="toggleNotifications()">
+                <i class="bi bi-bell"   id="notification-bell"></i>
+                <span *ngIf="unreadNotificationsCount > 0" class="notification-badge">{{ unreadNotificationsCount}}</span>
+            </button>
+            <div *ngIf="notificationsVisible" class="notifications-dropdown">
+                <ul>
+                    <li class="nav-item" *ngFor="let notification of notifications"
+                        (mouseenter)="markAsRead(notification.id)"
+                        [ngClass]="{ 'leido': notification.leido, 'no-leido': !notification.leido }">
+                        <button class="notificacion-button" (click)="destroyNotification(notification.id)">
+                            {{ notification.mensaje }}
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button *ngIf="isLoggedIn" id="logout-btn" class="nav-link btn" (click)="logout()">Salir</button>
+        </div>
+    </div>
+
+
+
 </header>

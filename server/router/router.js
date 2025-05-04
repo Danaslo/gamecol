@@ -15,6 +15,7 @@ const verificarToken = require('../controller/UserController').verificarToken;
 //Rutas de userController:
 router.post("/registro", userController.registro); //FUNCIONA
 router.post("/login", userController.login);
+router.get("/getUser",verificarToken, userController.getUsuario);
 
 //Rutas de juegoController:
 router.post("/quitarVenta",verificarToken,juegoController.quitarVenta);
