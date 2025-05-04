@@ -23,6 +23,7 @@ export class HeaderComponent {
     unreadNotificationsCount: number = 0;
     showNotificationsList: boolean = false;
     notificationsVisible: boolean = false;
+    username: string = "";
 
     constructor(private router: Router, private authService: AuthService, private notificacionService: NotificationService) {
         this.checkAuthStatus();
@@ -34,7 +35,17 @@ export class HeaderComponent {
     ngOnInit() {
         this.checkIfAdmin();
         this.loadNotifications();
+        this.getUserName();
     }
+
+    getUserName() {
+        this.authService.getUser().subscribe((res) => {
+            this.username = res.nombreUsuario;
+        }, (err) => {
+            console.error('Error al obtener el nombre de usuario:', err);
+        });
+    }
+
 
     checkAuthStatus() {
         this.isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn') || 'false');
@@ -74,8 +85,12 @@ export class HeaderComponent {
 
     loadNotifications() {
         this.notificacionService.getNotifications().subscribe((notifications: any[]) => {
-            this.notifications = notifications;
-            this.unreadNotificationsCount = notifications.filter(n => !n.leido).length;
+            if(notifications.length === 0)
+                this.notifications = [{mensaje: "No hay notificaciones nuevas", leido: true}]
+            else{
+                this.notifications = notifications;
+                this.unreadNotificationsCount = notifications.filter(n => !n.leido).length;
+            } 
         });
     }
 
@@ -102,7 +117,8 @@ export class HeaderComponent {
             console.error('Error al eliminar la notificación:', error);
           }
         );
-      }
+        this.loadNotifications();
+    }
 
     toggleNotifications() {
         this.notificationsVisible = !this.notificationsVisible;

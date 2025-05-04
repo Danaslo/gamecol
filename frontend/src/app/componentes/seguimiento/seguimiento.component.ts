@@ -14,9 +14,22 @@ import { JuegoService } from '../../services/juego.service';
 export class SeguimientoComponent {
   juegos: any[] = []
   constructor(private juegoService: JuegoService){}
+  isImageModalOpen: boolean = false;
+  selectedImage: string = '';
 
   ngOnInit(): void{
     this.listarSeguimientos();
+  }
+
+  openImageModal(image: string) {
+    console.log('se abre');
+    this.selectedImage = image;
+    this.isImageModalOpen = true;
+  }
+
+  closeImageModal() {
+    this.isImageModalOpen = false;
+    this.selectedImage = '';
   }
 
   listarSeguimientos() {

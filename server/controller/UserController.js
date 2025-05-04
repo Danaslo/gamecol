@@ -73,8 +73,16 @@ async function login (req,res){
     res.json({ token });
 }
 
+async function getUsuario(req,res){
+    const name = await Usuario.findOne({ where: {id: req.userId}});
+    res.json(name);
+}
+
+
+
 module.exports = {
     registro,
     login,
-    verificarToken
+    verificarToken,
+    getUsuario
 }
