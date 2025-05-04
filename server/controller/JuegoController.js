@@ -11,6 +11,7 @@ HAY QUE TESTEARLO TODO
 */
 
 const Juego = require('../model/Juego');
+const notificacionController = require('./NotificacionController');
 
 async function editarNombre(req, res){
     try {
@@ -88,6 +89,9 @@ async function cambiarVenta(req,res){
             res.json({message: 'Venta quitada'});
         }else{
             await Juego.update({estado: 'En venta'}, {where: {id: idJuego}});
+            const plataforma = juego.plataforma;
+            const mensaje = `Juego ${juego.nombre} para ${plataforma} puesto en venta`;
+            notificacionController.crearNotificacion(mensaje);
             res.json({message: 'Puesto en venta'});
         }
     }catch(error){

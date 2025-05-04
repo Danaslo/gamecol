@@ -48,6 +48,10 @@ async function agregarJuego(req, res) {
             estado
         });
 
+        if (estado === 'En venta') {
+            const mensaje = `Nuevo juego ${nombre} disponible para ${plataforma}`;
+            await notificacionController.crearNotificacion(mensaje);
+        }
         res.json({ message: 'Su nuevo juego está listo para exhibirse' });
     } catch (error) {
         console.error(error);
