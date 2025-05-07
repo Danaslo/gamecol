@@ -134,15 +134,12 @@ strong{
     color: white;
     border-radius: 8px;
     padding: 12px 20px;
-    font-size: 14px;
+    font-size: 13px;
     transition: all 0.2s ease-in-out;
     max-width: 90px;
-    max-height: 36px;
+    max-height: 40px;
     align-items: center;
     text-align: center;
-
-
-
 }
 
 .delete-btn:hover {
