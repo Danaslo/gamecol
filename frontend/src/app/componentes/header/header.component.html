@@ -8,10 +8,6 @@
 
         <div class="navbar-container">
             <nav class="navbar navbar-expand-lg" id="navbar">
-                <button class="navbar-toggler" type="button" (click)="toggleMenu()" aria-controls="navbarNav"
-                    [attr.aria-expanded]="menuOpen" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
                 <div class="collapse navbar-collapse" [class.show]="menuOpen" id="navbarNav">
                     <ul class="navbar-nav" id="navbar-list">
                         <li class="nav-item" *ngIf="isAuthenticated">
@@ -58,28 +54,32 @@
 
     <div id="notification-container">
         <p id="userName"> {{ username }}</p>
-        <div class="nav-item">
+
+        <div class="nav-item dropdown-father">
             <button class="nav-link btn" (click)="toggleNotifications()">
-                <i class="bi bi-bell"   id="notification-bell"></i>
-                <span *ngIf="unreadNotificationsCount > 0" class="notification-badge">{{ unreadNotificationsCount}}</span>
+                <i class="bi bi-bell" id="notification-bell"></i>
+                <span *ngIf="unreadNotificationsCount > 0" class="notification-badge">{{
+                    unreadNotificationsCount}}</span>
             </button>
             <div *ngIf="notificationsVisible" class="notifications-dropdown">
-                <ul>
-                    <li class="nav-item" *ngFor="let notification of notifications"
-                        (mouseenter)="markAsRead(notification.id)"
-                        [ngClass]="{ 'leido': notification.leido, 'no-leido': !notification.leido }">
-                        <button class="notificacion-button" (click)="destroyNotification(notification.id)">
-                            {{ notification.mensaje }}
+                <div class="card-body" *ngFor="let notification of notifications"
+                    (mouseenter)="markAsRead(notification.id)"
+                    [ngClass]="{ 'leido': notification.leido, 'no-leido': !notification.leido }">
+                    <div id="notification-aligner">
+                        <button class="notification-deleter" (click)="destroyNotification(notification.id)">
+                            <span class="delete-icon">X</span>
                         </button>
-                    </li>
-                </ul>
+                    </div>
+                    <p>{{ notification.mensaje }}</p>
+                </div>
             </div>
         </div>
         <div class="nav-item">
             <button *ngIf="isLoggedIn" id="logout-btn" class="nav-link btn" (click)="logout()">Salir</button>
         </div>
+        <button  [ngStyle]="{'visibility':'hidden'}"    class="navbar-toggler" type="button" (click)="toggleMenu()" aria-controls="navbarNav"
+            [attr.aria-expanded]="menuOpen" aria-label="Toggle navigation">
+            <img class="navbar-toggler-icon" src="assets/img/header/hamburguer.png">
+        </button>
     </div>
-
-
-
 </header>
