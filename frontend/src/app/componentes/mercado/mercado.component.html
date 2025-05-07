@@ -82,9 +82,8 @@
                 <p><strong>Descripción:</strong> {{ juego.descripcion }}</p>
                 <p><strong>Precio:</strong> {{juego.precio}}€</p>
                 <p [id]="'results-' + juego.id"></p>
-                <div class="button-container"> 
-                        <button class="follow-register" (click)="seguirJuego(juego.id)">Seguir</button>
-                        <button class="follow-deleter" (click)="borrarSeguimiento(juego.id)">Dejar de seguir</button>
+                <div class="button-container">
+                    <button class="follow-register" (click)="seguirJuego(juego.id)">Seguir</button>
                 </div>
             </div>
         </div>

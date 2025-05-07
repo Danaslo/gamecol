@@ -11,6 +11,7 @@ const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
 const { Op } = require('sequelize');
+const Seguimiento = require('../model/Seguimiento');
 
 async function listarPorParametro(req, res) {
     try {
@@ -73,19 +74,37 @@ async function listarPorParametro(req, res) {
 async function listarJuegosEnVenta(req, res) {
     try {
         const idUsuario = req.userId;
-        const coleccion = await Coleccion.findOne({ where: { id_usuario: idUsuario}});
+
+        const coleccion = await Coleccion.findOne({ where: { id_usuario: idUsuario } });
+
+        //He hecho un left join al usar required false para traerme todos los juegos.
         const juegos = await Juego.findAll({
             where: {
                 estado: 'en venta',
                 id_coleccion: { [Op.ne]: coleccion.id }
-            }
+            },
+            include: [{
+                model: Seguimiento,
+                as: 'seguimiento',
+                required: false,
+                where: {
+                    id_usuario: idUsuario
+                }
+            }]
         });
+
+        //Ahora se comprueba qué juegos no tienen seguimiento y se filtran.
+        const juegosSinSeguimiento = juegos.filter(j => j.seguimiento.length === 0);
+
+        //Y ahora se preparan con imágenes los juegos que no tienen seguimiento.
         const baseUrl = 'http://172.18.1.3/uploads/';
-        const juegosConImagenesCompletas = juegos.map(juego => {
+        const juegosConImagenesCompletas = juegosSinSeguimiento.map(juego => {
             juego.imagen = baseUrl + juego.imagen.replace('uploads/', '');
             return juego;
         });
+
         res.json({ juegos: juegosConImagenesCompletas });
+
     } catch (error) {
         console.error(error.message);
         res.status(500).json({ message: 'Error al listar los juegos en venta' });

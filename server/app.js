@@ -34,26 +34,26 @@ app.use(helmet());
 //Morgan para logs de peticiones HTTP:
 
 // Ruta de los logs
-//const logDir = path.join(__dirname, 'logs');
+const logDir = path.join(__dirname, 'logs');
 
 // Miramos si  el directorio logs existe, se crea si no es así.
-// if (!fs.existsSync(logDir)) {
-//   fs.mkdirSync(logDir, { recursive: true });
-// }
+if (!fs.existsSync(logDir)) {
+  fs.mkdirSync(logDir, { recursive: true });
+}
 
 // Creamos un flujo de escritura para el archivo de logs.
-// const accessLogStream = fs.createWriteStream(
-//   path.join(logDir, 'access.log'),
-//   { flags: 'a' } // a para append, añade al final sin borrar lo anterior.
-// );
+const accessLogStream = fs.createWriteStream(
+  path.join(logDir, 'access.log'),
+  { flags: 'a' } // a para append, añade al final sin borrar lo anterior.
+);
 
 // Usar morgan con el flujo configurado
-//app.use(morgan('combined', { stream: accessLogStream }));
+app.use(morgan('combined', { stream: accessLogStream }));
 
 // Limitador de peticiones para prevenir ataques DDoS
 const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // Se comprueba que no llegue a 100 peticiones cada 15 minutos.
-    max: 200, // Máximo de 100 peticiones por IP
+    windowMs: 5 * 60 * 1000, // Se comprueba que no llegue a 500 peticiones cada 5 minutos.
+    max: 500, // Máximo de 100 peticiones por IP
     standardHeaders: true,
     legacyHeaders: false,
     message: 'Demasiadas peticiones, inténtalo más tarde.'
@@ -87,11 +87,11 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 //Inicio de la conexión
 sequelize.authenticate()
     .then(() => {
-        //console.log(' Conexión a la base de datos exitosa.');
+        console.log(' Conexión a la base de datos exitosa.');
         return sequelize.sync({ alter: true });
     })
     .then(() => {
-        //console.log(' Tablas sincronizadas correctamente.');
+        console.log(' Tablas sincronizadas correctamente.');
     })
     .catch(err => {
         console.error(' No se pudo conectar a la base de datos o sincronizar tablas:', err);

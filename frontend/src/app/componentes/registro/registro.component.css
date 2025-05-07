@@ -39,8 +39,7 @@ h2 {
 }
 
 .image-container {
-  max-width: 300px;
-  flex: 1;
+  max-width: 350px;
   display: flex;
   justify-content: center;
 }
@@ -109,8 +108,8 @@ button:hover {
   }
 
   .registro-container{
-    margin-top: 100px;
-    margin-bottom: 100px
+    margin-top: 150px;
+    margin-bottom: 150px
   }
 
   .image-container {

@@ -18,7 +18,7 @@ Intercambio.belongsTo(Usuario, { as: 'Vendedor', foreignKey: 'id_vendedor' });
 
 Juego.belongsTo(Coleccion, { foreignKey: 'id_coleccion' });
 Juego.hasMany(Intercambio, { foreignKey: 'id_juego', onDelete: 'CASCADE' });
-Juego.hasMany(Seguimiento, { foreignKey: 'id_juego' });
+Juego.hasMany(Seguimiento, { foreignKey: 'id_juego', as : 'seguimiento' });
 
 Usuario.hasMany(Intercambio, { as: 'Compras', foreignKey: 'id_comprador', onDelete: 'CASCADE' });
 Usuario.hasMany(Intercambio, { as: 'Ventas', foreignKey: 'id_vendedor', onDelete: 'CASCADE' });
