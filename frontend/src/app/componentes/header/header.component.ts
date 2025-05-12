@@ -108,7 +108,6 @@ export class HeaderComponent {
     }
 
     destroyNotification(id: number): void {
-        console.log(id);
         this.notificacionService.destroyNotification(id).subscribe(
           response => {
             console.log('Notificación eliminada:', response);

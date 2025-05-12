@@ -7,7 +7,8 @@ const sequelize = new Sequelize({
   dialect: 'mysql',
   username: 'gamehoarder', 
   password: 'Wh@t@reYouSelling', 
-  database: 'gamingcollections',  
+  database: 'gamingcollections',
+  logging: false  
 });
 
 module.exports = sequelize;
