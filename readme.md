@@ -62,10 +62,10 @@ Primero, clona el repositorio en tu máquina local:
 
 ### 2. Situar la carpeta en la raíz
 
-Asegúrate de que la carpeta Proyecto2 está al nivel de la raíz. Para lograrlo puedes usar el siguiente comando (teniendo la terminal desde donde se encuentre dicha carpeta):
+Asegúrate de que la carpeta gamecol está al nivel de la raíz. Para lograrlo puedes usar el siguiente comando (teniendo la terminal desde donde se encuentre dicha carpeta):
 
-cp Proyecto2 /
-chmod -R 777 /Proyecto2
+cp gamecol /
+chmod -R 777 /gamecol
 
 ### 3. Ejecución
 
