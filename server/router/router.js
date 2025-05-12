@@ -9,6 +9,7 @@ const seguimientosController = require('../controller/SeguimientoController')
 const intercambioController = require('../controller/IntercambioController');
 const adminController = require('../controller/AdminController');
 const notificacionController = require('../controller/NotificacionController');
+const chatController = require('../controller/MensajeController');
 
 const verificarToken = require('../controller/UserController').verificarToken;
 
@@ -53,7 +54,29 @@ router.post('/notificaciones/cambiarEstado', verificarToken, notificacionControl
 router.get('/notificaciones',verificarToken, notificacionController.listarTodasOrdenadas);
 router.delete('/borrarNotificacion/:id', verificarToken, notificacionController.borrarNotificacion);
 
+//ENdpoints del chat
+router.get('/chat/mensajesGeneral', verificarToken, chatController.obtenerMensajesGenerales);
+router.post('/chat/mensaje', chatController.guardarMensaje);
+
 //ENdpoint para el envío de correos:
 router.post("/contacto",contactoController.enviarCorreo); //Como un correo lo puede enviar cualquiera no se revisa el token.
+
+//Endpoint para el socket de IO:
+router.get('/historial',verificarToken, async (req, res) => {
+    const { usuario1, usuario2 } = req.query;
+  
+    const historial = await Chat.findAll({
+      where: {
+        [Op.or]: [
+          { id_usuario1: usuario1, id_usuario2: usuario2 },
+          { id_usuario1: usuario2, id_usuario2: usuario1 }
+        ]
+      },
+      order: [['fecha_envio', 'ASC']]
+    });
+    res.json(historial);
+  });
+
+
 
 module.exports = router;

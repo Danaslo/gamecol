@@ -63,10 +63,7 @@ app.use(limiter);
 
 //Aquí se mira si la carpeta Uploads existe, si no, se crea para que no haya problemas.
 const uploadDir = path.join(__dirname, '../uploads');
-console.log('Ruta en app.js:', uploadDir);
-console.log('Ruta absoluta en app.js:', path.resolve(uploadDir));
 
-console.log('Ruta absoluta:', path.resolve(uploadDir));
 try {
     if (!fs.existsSync(uploadDir)) {
         console.log('Creando directorio:', uploadDir);

@@ -1,0 +1,14 @@
+<app-header></app-header>
+<div class="chat-container">
+  <div class="mensajes">
+    <div *ngFor="let msg of mensajes">
+      <strong>{{ msg.Usuario1.nombreUsuario }}:</strong> {{ msg.mensaje }}
+    </div>
+  </div>
+
+  <form (ngSubmit)="enviarMensaje()">
+    <input [(ngModel)]="mensajeTexto" name="mensaje" placeholder="Escribe tu mensaje..." required />
+    <button type="submit">Enviar</button>
+  </form>
+</div>
+<app-footer></app-footer>

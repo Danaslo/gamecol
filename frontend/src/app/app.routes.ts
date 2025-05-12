@@ -10,6 +10,7 @@ import { SeguimientoComponent } from './componentes/seguimiento/seguimiento.comp
 import { VentasComponent } from './componentes/ventas/ventas.component';
 import { AdminComponent } from './componentes/admin/admin.component';
 import { Error404Component } from './componentes/error-404/error-404.component';
+import { ChatComponent } from './componentes/chat/chat.component';
 
 export const routes: Routes = [
     { path: 'registro', component: RegistroComponent },
@@ -21,5 +22,6 @@ export const routes: Routes = [
     { path: 'seguimientos', component: SeguimientoComponent },
     { path: 'ventas',component: VentasComponent },
     { path: 'admin', component: AdminComponent},
+    { path: 'chat', component: ChatComponent },
     { path: '**', component: Error404Component }
 ];
