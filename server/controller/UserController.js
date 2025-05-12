@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Coleccion = require('../model/Coleccion');
 
-async function registro(req, res){
+async function registro(req, res) {
     try {
         const { nombreUsuario, email, password, telefono } = req.body;
 
@@ -18,7 +18,7 @@ async function registro(req, res){
         }
         //Encriptación de la contraseña:
         const saltosEncriptacion = bcrypt.genSaltSync(10);
-        const contraseniaHasheada = bcrypt.hashSync(password, saltosEncriptacion);     
+        const contraseniaHasheada = bcrypt.hashSync(password, saltosEncriptacion);
         //Creación del usuario:
         const usuario = await Usuario.create({
             nombreUsuario: nombreUsuario,
@@ -33,9 +33,9 @@ async function registro(req, res){
 
         res.json({ message: 'Usuario creado correctamente' });
     }
-    catch (error){
+    catch (error) {
         console.log(error.message);
-    }  
+    }
 }
 
 const verificarToken = (req, res, next) => {
@@ -43,7 +43,7 @@ const verificarToken = (req, res, next) => {
     if (!authHeader) {
         return res.status(403).json({ message: 'No se proporcionó un token' });
     }
-    const token = authHeader.split(' ')[1]; 
+    const token = authHeader.split(' ')[1];
     if (!token) {
         return res.status(403).json({ message: 'No se proporcionó un token' });
     }
@@ -53,11 +53,11 @@ const verificarToken = (req, res, next) => {
         }
         req.userId = decoded.id;
         req.userRol = decoded.rol;
-        next(); 
+        next();
     });
 }
 
-async function login (req,res){
+async function login(req, res) {
     const { nombreUsuario, password } = req.body;
     const usuario = await Usuario.findOne({ where: { nombreUsuario } });
     if (!usuario) {
@@ -73,16 +73,31 @@ async function login (req,res){
     res.json({ token });
 }
 
-async function getUsuario(req,res){
-    const name = await Usuario.findOne({ where: {id: req.userId}});
+async function getUsuario(req, res) {
+    const name = await Usuario.findOne({ where: { id: req.userId } });
     res.json(name);
 }
 
-
+async function createChatUser(req,res) {
+    const userList = await Usuario.findAll();
+    if (!userList.some(u => u.id === 9999)) {
+        const password = 'g4m3rl0v3sp0t4t03s'
+        const saltosEncriptacion = bcrypt.genSaltSync(10);
+        const contraseniaHasheada = bcrypt.hashSync(password, saltosEncriptacion);
+        await Usuario.create({
+            id: 9999,
+            nombreUsuario: 'GamerChatterCaver',
+            email: "chatercaver@gamercave.com",
+            password: contraseniaHasheada,
+            telefono: '000000000'
+        });
+    }
+}
 
 module.exports = {
     registro,
     login,
     verificarToken,
-    getUsuario
+    getUsuario,
+    createChatUser
 }
