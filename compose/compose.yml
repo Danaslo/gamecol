@@ -9,7 +9,7 @@ services:
       MYSQL_PASSWORD: Wh@t@reYouSelling
       MYSQL_ROOT_PASSWORD: r@@terb@@ter
     volumes:
-      - /Proyecto2/db:/var/lib/mysql
+      - /gamecol/db:/var/lib/mysql
     networks:
       backend:
         ipv4_address: 172.18.0.2
@@ -20,7 +20,7 @@ services:
     depends_on:
       - db
     volumes:
-      - /Proyecto2/server:/app
+      - /gamecol/server:/app
     networks:
       backend:
         ipv4_address: 172.18.0.3
@@ -33,7 +33,7 @@ services:
     container_name: frontend
     hostname: gamercave
     volumes:
-      - /Proyecto2/frontend:/app
+      - /gamecol/frontend:/app
     networks:
       frontend:
         ipv4_address: 172.18.1.2

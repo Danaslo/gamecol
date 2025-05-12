@@ -63,7 +63,6 @@
             </button>
             <div *ngIf="notificationsVisible" class="notifications-dropdown">
                 <div class="card-body" *ngFor="let notification of notifications"
-                    (mouseenter)="markAsRead(notification.id)"
                     [ngClass]="{ 'leido': notification.leido, 'no-leido': !notification.leido }">
                     <div id="notification-aligner">
                         <button class="notification-deleter" (click)="destroyNotification(notification.id)">
