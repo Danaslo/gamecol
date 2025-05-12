@@ -65,7 +65,7 @@
                 <div class="card-body" *ngFor="let notification of notifications"
                     [ngClass]="{ 'leido': notification.leido, 'no-leido': !notification.leido }">
                     <div id="notification-aligner">
-                        <button class="notification-deleter" (click)="destroyNotification(notification.id)">
+                        <button *ngIf="unreadNotificationsCount > 0" class="notification-deleter" (click)="destroyNotification(notification.id)">
                             <span class="delete-icon">X</span>
                         </button>
                     </div>
