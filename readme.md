@@ -69,9 +69,26 @@ chmod -R 777 /Proyecto2
 
 ### 3. Ejecución
 
+**Si es nuestra primera ejecución:**
+
+Necesitarás arrancar el installer que hay contenido en la carpeta raíz con el siguiente comando:
+
+```bash
+./install.sh
+```
+
 Para arrancar el programa bastará con ejecutar el script **GamerCave.sh** contenido en la carpeta raíz. Para ello debemos introducir:
 
-./GamerCave.sh.
+```bash
+./GamerCave.sh
+```
+
+Si por un casual te denegara el arranque diciendo que no tienes permisos suficientes, por favor introduce el siguiente comando e inténtalo de nuevo:
+
+```bash
+chmod -R 777 ./gamecol
+```
+
 
 ### 4. Detener la aplicación
 
