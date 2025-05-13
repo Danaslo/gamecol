@@ -1,8 +1,10 @@
 <app-header></app-header>
+
 <div class="chat-container">
-  <div class="mensajes">
+  <h3 class="chat-h3">Chat general</h3>
+  <div class="mensajes" #mensajesContainer>
     <div *ngFor="let msg of mensajes">
-      <strong>{{ msg.Usuario1.nombreUsuario }}:</strong> {{ msg.mensaje }}
+      <strong class="user-name">{{ msg.Usuario1.nombreUsuario }}:</strong> {{ msg.mensaje }}
     </div>
   </div>
 
@@ -11,4 +13,5 @@
     <button type="submit">Enviar</button>
   </form>
 </div>
+
 <app-footer></app-footer>
