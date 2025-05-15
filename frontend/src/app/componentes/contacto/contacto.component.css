@@ -121,6 +121,7 @@ textarea:focus {
     #form-container {
         max-width: 100%;
         flex-direction: column;
+        margin-bottom: 90px;
         /* Lo cambio a columna en pantallas pequeñas para que no desborde */
     }
 

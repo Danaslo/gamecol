@@ -239,4 +239,8 @@ strong{
         max-width: 100%;
         height: auto;
     }
+
+    .games-container{
+        margin-bottom: 180px;
+    }
 }

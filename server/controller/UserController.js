@@ -78,7 +78,24 @@ async function getUsuario(req, res) {
     res.json(name);
 }
 
-async function createChatUser(req,res) {
+
+
+async function getUserName(req, res) {
+    try {
+        const name = await Usuario.findOne({
+            where: { id: req.userId },
+            attributes: ['nombreUsuario']
+        });
+        res.json(name?.nombreUsuario);
+    } catch (error) {
+        console.error('Error al obtener el nombre de usuario:', error);
+        res.status(500).json({ error: 'Error al obtener el nombre de usuario' });
+    }
+}
+
+
+
+async function createChatUser(req, res) {
     const userList = await Usuario.findAll();
     if (!userList.some(u => u.id === 9999)) {
         const password = 'g4m3rl0v3sp0t4t03s'
@@ -99,5 +116,6 @@ module.exports = {
     login,
     verificarToken,
     getUsuario,
-    createChatUser
+    createChatUser,
+    getUserName
 }

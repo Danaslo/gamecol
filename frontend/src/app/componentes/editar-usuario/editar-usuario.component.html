@@ -1,0 +1,73 @@
+<app-header></app-header>
+
+<div id="forms-container" class="card-body">
+    <h3 id="main-h3">Bienvenido a tu perfil, {{userName}}</h3>
+    <form [formGroup]="formulario" (ngSubmit)="cambiarContrasenia()">
+        <h3>Cambiar contraseña</h3>
+        <div class="card-body" id="password-container">
+            <label for="password">Introduce tu contraseña:</label>
+            <input type="password" formControlName="password" id="password" placeholder="Contraseña" />
+            <label for="password-confirmation">Repite tu contraseña:</label>
+            <input type="password" formControlName="confirmPassword" placeholder="Repetir contraseña" />
+            <div *ngIf="formulario.hasError('passwordsNoCoinciden') && formulario.get('confirmPassword')?.touched">
+                <p style="color: red;"> X Las contraseñas no coinciden.</p>
+            </div>
+            <div *ngIf="!formulario.hasError('passwordsNoCoinciden') && formulario.get('confirmPassword')?.touched">
+                <p style="color: green;">✔ Las contraseñas coinciden.</p>
+            </div>
+            <button type="submit" [disabled]="formulario.invalid || formulario.hasError('passwordsNoCoinciden')"
+                [ngClass]="{
+                'btn-activo': !(formulario.invalid || formulario.hasError('passwordsNoCoinciden')),
+                'btn-deshabilitado': formulario.invalid || formulario.hasError('passwordsNoCoinciden')
+              }">Enviar</button>
+            <p id="passwordResult"></p>
+
+        </div>
+    </form>
+
+    <div class="card-body">
+        <form (ngSubmit)="editarEmail()" [formGroup]="emailForm">
+            <h3>Cambiar correo</h3>
+            <label for="email">Introduce tu correo</label>
+            <input type="email" formControlName="email" [ngClass]="{
+    'input-error': emailForm.get('email')?.invalid && emailForm.get('email')?.touched
+  }" />
+            <div *ngIf="emailForm.get('email')?.errors?.['pattern'] && emailForm.get('email')?.touched">
+                <p style="color: red;">Correo no válido.</p>
+            </div>
+            <p id="emailResult"></p>
+            <button type="submit" [disabled]="emailForm.invalid" [ngClass]="{
+    'btn-activo': !emailForm.invalid,
+    'btn-deshabilitado': emailForm.invalid
+  }">
+                Enviar
+            </button>
+        </form>
+    </div>
+
+    <div class="card-body">
+        <form (ngSubmit)="editarTelefono()" [formGroup]="phoneForm">
+            <h3>Teléfono</h3>
+            <label for="telefono">Introduce el teléfono a cambiar</label>
+
+            <input type="phone" formControlName="phone" [ngClass]="{
+                'input-error': phoneForm.get('phone')?.invalid && phoneForm.get('phone')?.touched
+              }" />
+            <div *ngIf="phoneForm.get('phone')?.errors?.['pattern'] && phoneForm.get('phone')?.touched">
+                <p style="color: red;">Teléfono no válido.</p>
+            </div>
+
+            <button type="submit" [disabled]="phoneForm.invalid" [ngClass]="{
+                'btn-activo': !phoneForm.invalid,
+                'btn-deshabilitado': phoneForm.invalid
+              }">
+                Enviar
+            </button>
+
+            <p id="phoneResult"></p>
+        </form>
+    </div>
+</div>
+
+
+<app-footer></app-footer>
