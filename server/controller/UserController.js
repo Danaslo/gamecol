@@ -7,6 +7,7 @@ const Usuario = require('../model/Usuario');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Coleccion = require('../model/Coleccion');
+const { Console } = require('console');
 
 async function registro(req, res) {
     try {
@@ -109,18 +110,54 @@ async function createChatUser(req, res) {
     }
 }
 
-async function editarContrasenia(req,res){
-    const {nuevaContrasenia} = req.body
-    
-
-
-
+async function editarContrasenia(req, res) {
+    try {
+        const { nuevaContrasenia } = req.body;
+        console.log(nuevaContrasenia);
+        const contraseniaHasheada = passHash(nuevaContrasenia);
+        const usuario = await Usuario.findOne({ where: { id: req.userId } });
+        if (!usuario)
+            return res.status(404).json({ message: 'No se ha encontrado el usuario' }); 
+        await Usuario.update({password: contraseniaHasheada}, {where: {id: req.userId}});
+        return res.status(200).json({message: 'Contraseña cambiada con éxito'});
+    } catch (error) {
+        return res.status(500).json({ message: 'Error al editar contraseña' });
+    }
 }
 
 function passHash(password) {
     const saltosEncriptacion = bcrypt.genSaltSync(10);
     return bcrypt.hashSync(password, saltosEncriptacion);
 }
+
+async function editarCorreo(req,res){  
+    console.log('ENTRA A EDITAR CORREO');
+    try {
+        const {newEmail} = req.body;
+        console.log('EL CORREO ES: ' + newEmail);
+        const email = await Usuario.findOne({where: {email: newEmail}})
+        if(email)
+            return res.status(409).json({message: "El correo ya está en uso"});
+        await Usuario.update({email: newEmail}, {where: {id: req.userId}});
+        res.status(200).json({message: 'Correo cambiado con éxito'});
+    } catch (error) {
+        res.status(500).json({message: 'Error al editar correo'});
+    }
+}
+
+async function editarTelefono(req,res){
+    try {
+        const {newPhone} = req.body;
+        const phone = await Usuario.findOne({where: {telefono: newPhone}});
+        if(phone)
+            return res.status(409).json({message: 'El teléfono ya está en uso'});
+        Usuario.update({telefono: newPhone},{where: {id: req.userId}});
+        res.status(200).json({message: 'Teléfono editado con éxito'});
+    } catch (error) {
+        
+    }
+}
+
 
 
 module.exports = {
@@ -130,5 +167,7 @@ module.exports = {
     getUsuario,
     createChatUser,
     getUserName,
-    editarContrasenia
+    editarContrasenia,
+    editarCorreo,
+    editarTelefono
 }
