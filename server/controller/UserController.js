@@ -17,8 +17,7 @@ async function registro(req, res) {
             return res.status(400).json({ message: 'El usuario ya existe' });
         }
         //Encriptación de la contraseña:
-        const saltosEncriptacion = bcrypt.genSaltSync(10);
-        const contraseniaHasheada = bcrypt.hashSync(password, saltosEncriptacion);
+        const contraseniaHasheada = passHash(password)
         //Creación del usuario:
         const usuario = await Usuario.create({
             nombreUsuario: nombreUsuario,
@@ -99,8 +98,7 @@ async function createChatUser(req, res) {
     const userList = await Usuario.findAll();
     if (!userList.some(u => u.id === 9999)) {
         const password = 'g4m3rl0v3sp0t4t03s'
-        const saltosEncriptacion = bcrypt.genSaltSync(10);
-        const contraseniaHasheada = bcrypt.hashSync(password, saltosEncriptacion);
+        const contraseniaHasheada = passHash(password);
         await Usuario.create({
             id: 9999,
             nombreUsuario: 'GamerChatterCaver',
@@ -111,11 +109,26 @@ async function createChatUser(req, res) {
     }
 }
 
+async function editarContrasenia(req,res){
+    const {nuevaContrasenia} = req.body
+    
+
+
+
+}
+
+function passHash(password) {
+    const saltosEncriptacion = bcrypt.genSaltSync(10);
+    return bcrypt.hashSync(password, saltosEncriptacion);
+}
+
+
 module.exports = {
     registro,
     login,
     verificarToken,
     getUsuario,
     createChatUser,
-    getUserName
+    getUserName,
+    editarContrasenia
 }
