@@ -20,8 +20,6 @@ export class HeaderComponent {
     rutaActual: string = '';
     isAdmin: boolean = false;
     notifications: any[] = [];
-    unreadNotificationsCount: number = 0;
-    showNotificationsList: boolean = false;
     notificationsVisible: boolean = false;
     username: string = "";
 
@@ -45,7 +43,6 @@ export class HeaderComponent {
             console.error('Error al obtener el nombre de usuario:', err);
         });
     }
-
 
     checkAuthStatus() {
         this.isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn') || 'false');
@@ -85,45 +82,39 @@ export class HeaderComponent {
 
     loadNotifications() {
         this.notificacionService.getNotifications().subscribe((notifications: any[]) => {
-            if(notifications.length === 0)
-                this.notifications = [{mensaje: "No hay notificaciones nuevas", leido: true}]
-            else{
-                this.notifications = notifications;
-                this.unreadNotificationsCount = notifications.filter(n => !n.leido).length;
-            } 
-        });
-    }
-
-    showNotifications() {
-        this.showNotificationsList = !this.showNotificationsList;
-        this.notifications.forEach(notification => {
-            console.log(notification.mensaje);
-        })
-    }
-
-    markAsRead(notificationId: number) {
-        this.notificacionService.markAsRead(notificationId).subscribe(() => {
-            this.loadNotifications();
+            this.notifications = notifications;
         });
     }
 
     destroyNotification(id: number): void {
         this.notificacionService.destroyNotification(id).subscribe(
-          response => {
-            console.log('Notificación eliminada:', response);
-            this.notifications = this.notifications.filter(n => n.id !== id);
-          },
-          error => {
-            console.error('Error al eliminar la notificación:', error);
-          }
+            response => {
+                console.log('Notificación eliminada:', response);
+    
+                this.loadNotificationsSilently();
+    
+            },
+            error => {
+                console.error('Error al eliminar la notificación:', error);
+            }
         );
-        this.loadNotifications();
     }
 
+    loadNotificationsSilently() {
+        this.notificacionService.getNotifications().subscribe((notifications: any[]) => {
+            this.notifications = notifications;
+    
+            if (this.notifications.length === 0) {
+                this.notificationsVisible = false;
+            }
+        });
+    }
+
+
     toggleNotifications() {
-        this.notificationsVisible = !this.notificationsVisible;
-        if (this.notificationsVisible) {
-          this.loadNotifications();
-        }
+        if(this.notifications.length > 0)
+            this.notificationsVisible = !this.notificationsVisible;
+        else
+            this.notificationsVisible = false;
     }
 }

@@ -10,13 +10,13 @@ const intercambioController = require('../controller/IntercambioController');
 const adminController = require('../controller/AdminController');
 const notificacionController = require('../controller/NotificacionController');
 const chatController = require('../controller/MensajeController');
-
 const verificarToken = require('../controller/UserController').verificarToken;
 
 //Rutas de userController:
 router.post("/registro", userController.registro); //FUNCIONA
 router.post("/login", userController.login);
 router.get("/getUser",verificarToken, userController.getUsuario);
+router.get("/userName",verificarToken,userController.getUserName);
 
 //Rutas de juegoController:
 router.post("/quitarVenta",verificarToken,juegoController.quitarVenta);

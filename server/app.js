@@ -52,8 +52,8 @@ app.use(morgan('combined', { stream: accessLogStream }));
 
 // Limitador de peticiones para prevenir ataques DDoS
 const limiter = rateLimit({
-    windowMs: 5 * 60 * 1000, // Se comprueba que no llegue a 500 peticiones cada 5 minutos.
-    max: 1000, // Máximo de 100 peticiones por IP
+    windowMs: 5 * 60 * 1000, // Se comprueba que no llegue a 200 peticiones cada 5 minutos.
+    max: 200, // Máximo de 200 peticiones por IP
     standardHeaders: true,
     legacyHeaders: false,
     message: 'Demasiadas peticiones, inténtalo más tarde.'

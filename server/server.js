@@ -5,7 +5,6 @@ const handleChatSocket = require('./sockets/socketIOController');
 const { createChatUser } = require('./controller/UserController');
 const jwt = require('jsonwebtoken');
 const PORT = 80;
-
 const server = http.createServer(app);
 
 const io = new Server(server, {
@@ -25,8 +24,6 @@ io.use((socket, next) => {
   try {
     const decoded = jwt.verify(token, "Iba yo de peregrino");
     socket.userId = decoded.id;
-    console.log('ID EN DECODIFICAR TOKEN: ' + socket.userId);
-   
     next();
   } catch (err) {
     console.error('Error al verificar token en socket:', err);

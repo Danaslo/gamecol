@@ -38,7 +38,6 @@ async function guardarMensaje(io, socket) {
           if (!data.mensaje) {
             return socket.emit('error', { message: 'Falta el mensaje' });
           }
-          console.log('ID EN AÑADIR MENSAJE: ' + socket.userID);
           const nuevoMensaje = await Chat.create({
             id_usuario1: socket.userId,
             id_usuario2: data.id_usuario2 || 9999,

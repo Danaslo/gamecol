@@ -46,7 +46,6 @@ export class ColeccionComponent implements OnInit {
     this.selectedImage = '';
   }
 
-
   closeModal() {
     this.isModalOpen = false;
     this.listarJuegos();

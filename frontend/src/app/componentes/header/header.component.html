@@ -46,9 +46,6 @@
                                 Chat
                             </button>
                         </li>
-
-
-
                         <li class="nav-item" *ngIf="isAdmin">
                             <button class="nav-link btn" (click)="navigateTo('/admin')"
                                 [ngClass]="{ 'active-button': rutaActual === '/admin' }">
@@ -63,18 +60,18 @@
 
     <div id="notification-container">
         <p id="userName"> {{ username }}</p>
-
+        <i class="bi bi-gear-fill" (click)="navigateTo('/user-config')"></i>
         <div class="nav-item dropdown-father">
-            <button class="nav-link btn" (click)="toggleNotifications()">
-                <i class="bi bi-bell" id="notification-bell"></i>
-                <span *ngIf="unreadNotificationsCount > 0" class="notification-badge">{{
-                    unreadNotificationsCount}}</span>
+            <button class="nav-link btn" id="notificaciones" (click)="toggleNotifications()">
+                <i class="bi bi-bell" id="notification-bell"  [ngClass]="{ 'not-new': notifications.length == 0, 'new': notifications.length > 0 }"></i>
+                <span *ngIf="notifications.length > 0" class="notification-badge">{{
+                    notifications.length}}</span>
             </button>
             <div *ngIf="notificationsVisible" class="notifications-dropdown">
                 <div class="card-body" *ngFor="let notification of notifications"
                     [ngClass]="{ 'leido': notification.leido, 'no-leido': !notification.leido }">
                     <div id="notification-aligner">
-                        <button *ngIf="unreadNotificationsCount > 0" class="notification-deleter" (click)="destroyNotification(notification.id)">
+                        <button *ngIf="notifications.length > 0" class="notification-deleter" (click)="destroyNotification(notification.id)">
                             <span class="delete-icon">X</span>
                         </button>
                     </div>
