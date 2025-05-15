@@ -17,6 +17,9 @@ router.post("/registro", userController.registro); //FUNCIONA
 router.post("/login", userController.login);
 router.get("/getUser",verificarToken, userController.getUsuario);
 router.get("/userName",verificarToken,userController.getUserName);
+router.post('/editPhone',verificarToken,userController.editarTelefono);
+router.post('/editEmail',verificarToken,userController.editarCorreo);
+router.post('/editPassword', verificarToken,userController.editarContrasenia);
 
 //Rutas de juegoController:
 router.post("/quitarVenta",verificarToken,juegoController.quitarVenta);

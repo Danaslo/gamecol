@@ -56,15 +56,13 @@
             <div *ngIf="phoneForm.get('phone')?.errors?.['pattern'] && phoneForm.get('phone')?.touched">
                 <p style="color: red;">Teléfono no válido.</p>
             </div>
-
+            <p id="phoneResult"></p>
             <button type="submit" [disabled]="phoneForm.invalid" [ngClass]="{
                 'btn-activo': !phoneForm.invalid,
                 'btn-deshabilitado': phoneForm.invalid
               }">
                 Enviar
-            </button>
-
-            <p id="phoneResult"></p>
+            </button>      
         </form>
     </div>
 </div>

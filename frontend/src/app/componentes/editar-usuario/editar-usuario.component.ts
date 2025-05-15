@@ -61,14 +61,53 @@ export class EditarUsuarioComponent {
   }
 
   cambiarContrasenia(){
-
+    const newPass = this.formulario.value.password;
+    this.userService.editPassword(newPass).subscribe(
+      (data) => {
+        this.mostrarResultados('passwordResult', data);   
+      },
+      (error) => {
+        console.error('No se ha podido cambiar la contraseña', error);
+      }
+    );
   }
 
-  editarEmail(){
 
+  editarEmail(){
+    const newEmail = this.emailForm.value.email;
+    this.userService.editEmail(newEmail).subscribe(
+      (data) => {
+        this.mostrarResultados('emailResult', data);     
+      },
+      (error) => {
+        console.error('No se ha podido cambiar el email', error);
+      }
+    );
   }
 
   editarTelefono(){
+    const newPhone = this.phoneForm.value.phone;
+    this.userService.editPhone(newPhone).subscribe(
+      (data) => {
+        this.mostrarResultados('phoneResult', data);      
+      },
+      (error) => {
+        console.error('No se ha podido cambiar el telefono', error);
+      }
+    );
+  }
+
+
+  mostrarResultados(element: string, data: any) {
+    const resultado = document.getElementById(`${element}`);
+    if (resultado) {
+      resultado.style.visibility = 'visible';
+      resultado.innerHTML = data.message;
+      setTimeout(function () {
+        resultado.style.visibility = 'hidden';
+        resultado.innerHTML = '';
+      }, 2500);
+    }
 
   }
 

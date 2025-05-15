@@ -28,6 +28,7 @@ La plataforma busca ofrecer una experiencia sencilla y segura para comprar y ven
 - **Express-rate-limit**: Middleware que limita la cantidad de peticiones por IP, protegiendo la aplicación de **ataques DDoS** y **fuerza bruta**.
 - **CORS**: Middleware para habilitar el **Cross-Origin Resource Sharing**, permitiendo que el backend acepte solicitudes desde dominios diferentes al propio.
 - **JWT**: Tecnología para la **autenticación y autorización** de usuarios. Utiliza tokens firmados para permitir la validación de la identidad del usuario en futuras solicitudes sin necesidad de mantener sesiones.
+- **Socket-IO**: Librería de comunicación de JavaScript utilizada para la creación del chat general.
 
 ## Estructura del Proyecto
 

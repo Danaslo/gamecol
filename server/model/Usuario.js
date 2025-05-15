@@ -38,12 +38,6 @@ const Usuario = sequelize.define('Usuario',{
   telefono: {
     type: DataTypes.STRING,
     allowNull: false,
-    validate: {
-      is: {
-        args: /^\d{9}$/,
-        msg: 'El teléfono debe tener un mínimo de 9 dígitos'
-      }
-    }
   }
 },{
     timestamps: false,
