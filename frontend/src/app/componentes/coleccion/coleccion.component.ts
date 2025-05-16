@@ -7,6 +7,7 @@ import { RegistroJuegoComponent } from '../registro-juego/registro-juego.compone
 import { VentaService } from '../../services/venta.service';
 import { stringify } from 'querystring';
 import { VentaJuegoComponent } from '../venta-juego/venta-juego.component';
+import { ColeccionService } from '../../services/coleccion.service';
 @Component({
   selector: 'app-coleccion',
   standalone: true,
@@ -26,7 +27,7 @@ export class ColeccionComponent implements OnInit {
   totalValor: number = 0;
   totalPlataforma: string = 'N/A';
 
-  constructor(private juegoService: JuegoService, private ventaService: VentaService) { }
+  constructor(private juegoService: JuegoService, private ventaService: VentaService, private coleccionService: ColeccionService) { }
 
   @HostListener('document:keydown', ['$event'])
   cerrarConEscape(event: KeyboardEvent) {
@@ -37,6 +38,9 @@ export class ColeccionComponent implements OnInit {
 
   ngOnInit(): void {
     this.listarJuegos();
+    this.getTotalJuegos();
+    this.getPlataformaConMasJuegos();
+    this.getValorJuegos();
   }
 
   openImageModal(image: string) {
@@ -118,4 +122,40 @@ export class ColeccionComponent implements OnInit {
       }
     );
   }
+
+  getTotalJuegos() {
+    this.coleccionService.totalJuegos().subscribe(
+      (data) => {
+        this.totalJuegos = data.totalJuegos;
+      },
+      (error) => {
+        console.error('Error al borrar el juego', error);
+      }
+    );
+  }
+
+  getValorJuegos() {
+    this.coleccionService.valorJuegos().subscribe(
+      (data) => {
+        this.totalValor = data.totalValor;
+      },
+      (error) => {
+        console.error('Error al borrar el juego', error);
+      }
+    );
+  }
+
+  getPlataformaConMasJuegos() {
+    this.coleccionService.plataformaConMasJuegos().subscribe(
+      (data) => {
+        this.totalPlataforma = data.resultado.plataforma;
+        console.log(this.totalPlataforma);
+      },
+      (error) => {
+        console.error('Error al borrar el juego', error);
+      }
+    );
+  }
+
+
 }

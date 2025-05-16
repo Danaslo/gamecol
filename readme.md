@@ -9,6 +9,7 @@ Con **GamerCave**, los usuarios tienen la posibilidad de:
 - **Seguir** los juegos que les interesen para estar al tanto de cualquier cambio.
 - **Contactar con los vendedores** para realizar compras.
 - **Chatear** con la comunidad mediante el uso de un chat general. 
+- **Consultar las estadísticas** de su colección, como el número de juegos que la conforman, el dinero total o la plataforma con mayor número de juegos registrados.
 
 La plataforma busca ofrecer una experiencia sencilla y segura para comprar y vender videojuegos entre usuarios.
 

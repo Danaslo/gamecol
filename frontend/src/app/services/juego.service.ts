@@ -93,7 +93,4 @@ export class JuegoService {
     const params = new HttpParams().set('idJuego', idJuego.toString());
     return this.http.get(`${this.apiUrl}/buscarSeguimiento`, { headers, params });
   }
-
-
-
 }
