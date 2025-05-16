@@ -1,6 +1,7 @@
 const Usuario = require('../model/Usuario');
 const Coleccion = require('../model/Coleccion');
 const Juego = require('../model/Juego');
+const Sequelize = require('../config/sequelize');
 const notificacionController = require('./NotificacionController');
 const multer = require('multer');
 const fs = require('fs');
@@ -12,7 +13,7 @@ const storage = multer.diskStorage({
         if (!fs.existsSync(uploadDir)) {
             fs.mkdirSync(uploadDir, { recursive: true });
         }
-        
+
         cb(null, uploadDir);
     },
     filename: (req, file, cb) => {
@@ -27,22 +28,19 @@ async function agregarJuego(req, res) {
         const { nombre, condicion, descripcion, precio, estado, plataforma } = req.body;
         const idUsuario = req.userId;
         const coleccion = await Coleccion.findOne({ where: { id_usuario: idUsuario } });
-
-        console.log( 'ESTADO ------ ' + estado);
-
         if (!coleccion) {
             return res.status(404).json({ message: 'Bóveda no encontrada' });
         }
         const imagen = req.file
-            ? path.join('uploads', req.file.filename) 
-            : path.join('uploads', 'default.jpg'); 
+            ? path.join('uploads', req.file.filename)
+            : path.join('uploads', 'default.jpg');
 
         const juego = await Juego.create({
             nombre,
             condicion,
             plataforma,
             descripcion,
-            imagen, 
+            imagen,
             id_coleccion: coleccion.id,
             precio,
             estado
@@ -89,16 +87,16 @@ async function listarJuegos(req, res) {
     try {
         const idUsuario = req.userId;
 
-        const coleccion = await Coleccion.findOne({ where: { id_usuario: idUsuario }});
+        const coleccion = await Coleccion.findOne({ where: { id_usuario: idUsuario } });
         if (!coleccion) {
             return res.status(404).json({ message: 'Bóveda no encontrada' });
         }
 
-        const juegos = await Juego.findAll({ where: { id_coleccion: coleccion.id }, order: [['nombre', 'ASC']]  });
+        const juegos = await Juego.findAll({ where: { id_coleccion: coleccion.id }, order: [['nombre', 'ASC']] });
 
-        const baseUrl = 'http://172.18.1.3/uploads/'; 
+        const baseUrl = 'http://172.18.1.3/uploads/';
         const juegosConImagenesCompletas = juegos.map(juego => {
-            juego.imagen = baseUrl + juego.imagen.replace('uploads/', ''); 
+            juego.imagen = baseUrl + juego.imagen.replace('uploads/', '');
             return juego;
         });
 
@@ -150,10 +148,73 @@ async function listarSinVender(req, res) {
     }
 }
 
+async function obtenerTotalJuegos(req, res) {
+    const idUsuario = req.userId;
+    try {
+        const coleccion = await Coleccion.findOne({ where: { id_usuario: idUsuario } });
+        if (!coleccion) {
+            return res.status(404).json({ message: 'Bóveda no encontrada' });
+        }
+
+        const totalJuegos = await Juego.count({ where: { id_coleccion: coleccion.id } });
+
+        res.json({ totalJuegos });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ message: 'Error al obtener el total de juegos' });
+    }
+}
+
+async function obtenerValorJuegos(req, res) {
+    const idUsuario = req.userId;
+    try {
+        const coleccion = await Coleccion.findOne({ where: { id_usuario: idUsuario } });
+        if (!coleccion) {
+            return res.status(404).json({ message: 'Bóveda no encontrada' });
+        }
+
+        const totalValor = await Juego.sum('precio', { where: { id_coleccion: coleccion.id } });
+
+        res.json({ totalValor });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ message: 'Error al obtener el valor de los juegos' });
+    }
+}
+
+async function plataformaConMasJuegos(req, res) {
+    const idUsuario = req.userId;
+    try {
+        const coleccion = await Coleccion.findOne({ where: { id_usuario: idUsuario } });
+        if (!coleccion) {
+            return res.status(404).json({ message: 'Bóveda no encontrada' });
+        }
+
+        const resultado = await Juego.findAll({
+            attributes: [
+                'plataforma',
+                [Sequelize.fn('COUNT', Sequelize.col('plataforma')), 'cantidadJuegos']
+            ],
+            group: ['plataforma'],
+            where: { id_coleccion: coleccion.id },
+            order: [[Sequelize.fn('COUNT', Sequelize.col('plataforma')), 'DESC']],
+            limit: 1
+        });
+
+        res.status(200).json({resultado: resultado[0]});
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ message: 'Error al obtener la plataforma con más juegos' });
+    }
+}
+
 module.exports = {
     agregarJuego: [upload.single('imagen'), agregarJuego],
     borrarJuego,
     listarJuegos,
     listarVentas,
-    listarSinVender
+    listarSinVender,
+    obtenerTotalJuegos,
+    obtenerValorJuegos,
+    plataformaConMasJuegos
 };

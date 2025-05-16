@@ -31,6 +31,9 @@ router.post("/borrarJuego", verificarToken, coleccionController.borrarJuego);
 router.get("/listarJuegos", verificarToken, coleccionController.listarJuegos);
 router.get("/listarVenta", verificarToken, coleccionController.listarVentas);
 router.get("/deslistarVenta", verificarToken, coleccionController.listarSinVender);
+router.get("/totalJuegos", verificarToken, coleccionController.obtenerTotalJuegos);
+router.get("/valorJuegos", verificarToken, coleccionController.obtenerValorJuegos);
+router.get("/plataformaConMasJuegos", verificarToken, coleccionController.plataformaConMasJuegos);
 
 //Rutas de mercadoController:
 router.get("/listarEnVenta", verificarToken, mercadoController.listarJuegosEnVenta);
