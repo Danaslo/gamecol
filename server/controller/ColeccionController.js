@@ -89,12 +89,12 @@ async function listarJuegos(req, res) {
     try {
         const idUsuario = req.userId;
 
-        const coleccion = await Coleccion.findOne({ where: { id_usuario: idUsuario } });
+        const coleccion = await Coleccion.findOne({ where: { id_usuario: idUsuario }});
         if (!coleccion) {
             return res.status(404).json({ message: 'Bóveda no encontrada' });
         }
 
-        const juegos = await Juego.findAll({ where: { id_coleccion: coleccion.id } });
+        const juegos = await Juego.findAll({ where: { id_coleccion: coleccion.id }, order: [['nombre', 'ASC']]  });
 
         const baseUrl = 'http://172.18.1.3/uploads/'; 
         const juegosConImagenesCompletas = juegos.map(juego => {

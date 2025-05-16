@@ -1,7 +1,33 @@
 <app-header></app-header>
+
 <div class="games-container">
+  <div class="statistics-big-container">
+    <div class="statistics-container">
+      <div class="statistics card-body">
+        <div class="statistics-content">
+          <h2 class="title">Estadísticas</h2>
+          <div class="statistics-item">
+            <h2> <img class="topacio joya" src="assets/img/coleccion/topacio.gif"> Total de juegos: <img
+                class="topacio joya" src="assets/img/coleccion/topacio.gif"></h2>
+            <p>{{ totalJuegos }}€</p>
+          </div>
+
+          <div class="statistics-item">
+            <h2> <img class="rubi joya" src="assets/img/coleccion/amatista.gif"> Valor de la colección: <img
+                class="rubi joya" src="assets/img/coleccion/amatista.gif"></h2>
+            <p>{{ totalValor }}€</p>
+          </div>
+          <div class="statistics-item">
+            <h2> <img class="rubi joya" src="assets/img/coleccion/diamante.gif"> Plataforma con más juegos: <img
+                class="rubi joya" src="assets/img/coleccion/diamante.gif"> </h2>
+            <p>{{ totalPlataforma }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="title-add-button-container">
-    <h1  [ngStyle]="{'color':'#DAA520'}">Colección</h1>
     <button id="add-button" (click)="openModal()">Agregar juego</button>
   </div>
 
@@ -13,44 +39,44 @@
   </div>
 
   <div class="card-container">
-      <div class="card" *ngFor="let juego of juegos">
-        <div class="card-header"  [ngStyle]="{'border':'none'}">
-          <h3>{{ juego.nombre }}</h3>
+    <div class="card" *ngFor="let juego of juegos">
+      <div class="card-header" [ngStyle]="{'border':'none'}">
+        <h3>{{ juego.nombre }}</h3>
+      </div>
+      <div class="card-body">
+        <img (click)="openImageModal(juego.imagen)" [src]="juego.imagen" alt="Imagen juego" class="imagen-juego">
+        <p><strong>Condición:</strong> {{ juego.condicion }}</p>
+        <p><strong>Plataforma:</strong> {{ juego.plataforma }}</p>
+        <p [ngClass]="juego.estado === 'En venta' ? 'en-venta' : 'no-en-venta'">
+          <strong>Estado:</strong> {{ juego.estado }}
+        </p>
+        <p><strong>Precio: </strong> {{juego.precio}}€ </p>
+        <p [id]="'results-' + juego.id"></p>
+        <div class="card-buttons">
+          <button class="sale-changer-btn" (click)="cambiarEstado(juego.id)">Estado</button>
+          <button class="sale-register" *ngIf="juego.estado === 'En venta'"
+            (click)="openSellingModal(juego.id)">Vender</button>
+          <!-- Hay que añadir la funcionalidad una vez la página de ventas esté terminada-->
+          <button class="delete-btn" (click)="borrarJuego(juego.id)">Borrar</button>
         </div>
-        <div class="card-body">
-          <img (click)="openImageModal(juego.imagen)" [src]="juego.imagen" alt="Imagen juego" class="imagen-juego" >
-          <p><strong>Condición:</strong>  {{ juego.condicion }}</p>
-          <p><strong>Plataforma:</strong>  {{ juego.plataforma }}</p>
-          <p [ngClass]="juego.estado === 'En venta' ? 'en-venta' : 'no-en-venta'">
-            <strong>Estado:</strong> {{ juego.estado }}
-          </p>
-          <p><strong>Precio: </strong>  {{juego.precio}}€ </p>    
-          <p [id]="'results-' + juego.id"></p>
-          <div class="card-buttons">
-            <button class="sale-changer-btn" (click)="cambiarEstado(juego.id)">Estado</button>
-            <button class="sale-register" *ngIf="juego.estado === 'En venta'" (click)="openSellingModal(juego.id)">Vender</button> <!-- Hay que añadir la funcionalidad una vez la página de ventas esté terminada-->
-            <button class="delete-btn" (click)="borrarJuego(juego.id)">Borrar</button>
-          </div>
 
-          <div *ngIf="isSellingModalOpen" class="modal-content-container">
-            <div class="modal-content">
-              <button class="close-btn" (click)="closeSellingModal()">X</button>
-              <app-venta-juego  
-                [juegoId]="juegoSeleccionadoId"
-                (close)="closeSellingModal()">
-              </app-venta-juego>
-            </div>
+        <div *ngIf="isSellingModalOpen" class="modal-content-container">
+          <div class="modal-content">
+            <button class="close-btn" (click)="closeSellingModal()">X</button>
+            <app-venta-juego [juegoId]="juegoSeleccionadoId" (close)="closeSellingModal()">
+            </app-venta-juego>
           </div>
-
         </div>
+
       </div>
     </div>
+  </div>
 </div>
 
 <div *ngIf="isImageModalOpen" class="image-modal">
   <div class="modal-content">
-      <span class="close" (click)="closeImageModal()">×</span>
-      <img [src]="selectedImage" alt="Imagen grande" class="modal-image">
+    <span class="close" (click)="closeImageModal()">×</span>
+    <img [src]="selectedImage" alt="Imagen grande" class="modal-image">
   </div>
 </div>
 
