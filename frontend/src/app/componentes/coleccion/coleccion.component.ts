@@ -22,6 +22,10 @@ export class ColeccionComponent implements OnInit {
   isImageModalOpen: boolean = false;
   selectedImage: string = '';
 
+  totalJuegos: number = 0;
+  totalValor: number = 0;
+  totalPlataforma: string = 'N/A';
+
   constructor(private juegoService: JuegoService, private ventaService: VentaService) { }
 
   @HostListener('document:keydown', ['$event'])

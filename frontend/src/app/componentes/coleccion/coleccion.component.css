@@ -1,5 +1,4 @@
 .games-container {
-    margin-top: 100px;
     margin-bottom: 100px;
     display: flex;
     flex-direction: column;
@@ -10,7 +9,7 @@
 #title-add-button-container {
     background-color: #222;
     height: 30%;
-    width: 400px;
+    width: 220px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -21,9 +20,6 @@
     border-radius: 10px;
     border: 1px solid #DAA520;
 }
-
-
-
 
 #add-button {
     padding: 12px 30px;
@@ -44,7 +40,7 @@
 }
 
 .sale-register {
-    display:flex;
+    display: flex;
     background: linear-gradient(to right, #388f55, #26623a, #1d512b);
     border: 1px solid #3A9A55;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
@@ -64,7 +60,7 @@
     transform: translateY(-3px);
     border-color: gold;
     box-shadow: 0 0 8px gold;
-;
+    ;
 }
 
 .sale-register:active {
@@ -149,13 +145,13 @@ strong {
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
 }
 
-.card-body img:hover{
+.card-body img:hover {
     box-shadow: 0 0 15px 4px rgb(222, 188, 0);
 }
 
 
 .sale-changer-btn {
-    display:flex;
+    display: flex;
     background: linear-gradient(to right, #388f55, #26623a, #1d512b);
     border: 1px solid #3A9A55;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
@@ -178,7 +174,7 @@ strong {
 
 
 .delete-btn {
-    display:flex;
+    display: flex;
     background: linear-gradient(to right, #D5006D, #C2185B, #9C1C44);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     border: 1px solid #9C1C44;
@@ -226,8 +222,8 @@ strong {
     margin-top: 100px;
     position: fixed;
     top: 40%;
-    left: 50%; 
-    transform: translate(-50%, -50%); 
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 50%;
     height: 90%;
     display: flex;
@@ -266,6 +262,79 @@ strong {
     cursor: pointer;
 }
 
+.statistics-big-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.statistics-container {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.statistics-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #222;
+    border: 1px solid #DAA520;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.statistics-content p {
+    font-size: 30px;
+    margin-top: -10px;
+}
+
+.statistics-content h2 {
+    color: #DAA520;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    line-height: 1.2;
+    font-size: 2.0rem;
+}
+
+.statistics-content img.joya {
+    border: none;
+    width: 30px;
+    height: auto;
+    vertical-align: middle;
+    margin: 0 4px;
+}
+
+.title {
+    border-bottom: 2px solid grey;
+    padding-bottom: 8px;
+}
+
+.statistics-item {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.statistics-title {
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    height: 100%;
+    width: 100%;
+}
+
 @media (max-width: 1180px) {
     #title-add-button-container {
         width: 90%;
@@ -287,7 +356,7 @@ strong {
     }
 
     .image-modal {
-        width: 90%; 
+        width: 90%;
         height: auto;
         z-index: 1001;
     }
@@ -295,6 +364,67 @@ strong {
     .modal-image {
         max-width: 100%;
         height: auto;
+    }
+
+
+    .statistics-container {
+        margin-top: 80px;
+        padding: 15px;
+    }
+
+    .statistics-content {
+        padding: 15px;
+    }
+
+    .statistics-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .statistics-content p {
+        font-size: 24px;
+    }
+
+    .statistics-content img.joya {
+        width: 24px;
+        margin: 0 3px;
+    }
+}
+
+@media (max-width: 480px) {
+    .statistics-container {
+        margin-top: 120px;
+        padding: 10px;
+    }
+
+    .statistics-content {
+        padding: 10px;
+    }
+
+    .statistics-content h2 {
+        font-size: 1.3rem;
+        flex-wrap: wrap;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .statistics-content p {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .statistics-content img.joya {
+        width: 20px;
+        margin: 0 2px;
+    }
+
+    .statistics-item {
+        margin-bottom: 20px;
+    }
+
+    .title {
+        font-size: 1.5rem;
+        text-align: center;
+        margin-bottom: 10px;
     }
 
 
