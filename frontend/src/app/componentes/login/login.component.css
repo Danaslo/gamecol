@@ -103,6 +103,11 @@ button:hover {
 }
 
 @media (max-width: 768px) {
+    #login-card{
+        margin-bottom: 100px;
+    }
+
+
     .w-96 {
         width: 90%;
     }
