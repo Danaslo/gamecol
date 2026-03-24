@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
   providedIn: 'root',
 })
 export class NotificationService {
-  private apiUrl = 'http://172.18.1.3';
+  private apiUrl = import.meta.env.VITE_API_URL;
 
   constructor(private http: HttpClient) {}
 

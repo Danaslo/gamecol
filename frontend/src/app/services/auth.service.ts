@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 
 export class AuthService {
-  private apiUrl = 'http://172.18.1.3';
+ private apiUrl = import.meta.env.VITE_API_URL;
 
   constructor(private http: HttpClient) { }
 

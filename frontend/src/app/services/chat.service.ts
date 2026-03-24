@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class ChatService {
   private socket: Socket;
-  private readonly API_URL = 'http://172.18.1.3';
+  private readonly API_URL = import.meta.env.VITE_API_URL;
   private readonly SOCKET_URL = 'http://172.18.1.3';
 
   constructor(private http: HttpClient) {
