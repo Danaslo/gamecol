@@ -78,8 +78,6 @@ async function getUsuario(req, res) {
     res.json(name);
 }
 
-
-
 async function getUserName(req, res) {
     try {
         const name = await Usuario.findOne({
@@ -92,8 +90,6 @@ async function getUserName(req, res) {
         res.status(500).json({ error: 'Error al obtener el nombre de usuario' });
     }
 }
-
-
 
 async function createChatUser(req, res) {
     const userList = await Usuario.findAll();
@@ -157,8 +153,6 @@ async function editarTelefono(req,res){
         
     }
 }
-
-
 
 module.exports = {
     registro,

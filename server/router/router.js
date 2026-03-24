@@ -1,5 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
+const cloudinary = require('../config/cloudinary');
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
+
 const userController = require('../controller/UserController');
 const coleccionController = require('../controller/ColeccionController');
 const juegoController = require('../controller/JuegoController');
@@ -82,6 +87,25 @@ router.get('/historial',verificarToken, async (req, res) => {
     });
     res.json(historial);
   });
+
+  router.post('/upload', upload.single('image'), async (req, res) => {
+  try {
+    if (!req.file) return res.status(400).json({ message: 'No file uploaded' });
+
+    const result = cloudinary.uploader.upload_stream(
+      { folder: 'gamecol' },
+      (error, result) => {
+        if (error) return res.status(500).json({ error });
+        res.json({ url: result.secure_url });
+      }
+    );
+
+    result.end(req.file.buffer);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 
 
 

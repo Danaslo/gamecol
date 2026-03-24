@@ -7,8 +7,8 @@
                 <div class="card-body">
                   <div class="info-container">
                     <p><strong>Nombre de usuario: </strong>{{user.nombreUsuario}}</p>
-                    <p><strong>Nombre de usuario: </strong>{{user.email}}</p>
-                    <p><strong>Nombre de usuario: </strong>{{user.telefono}}</p>
+                    <p><strong>Email: </strong>{{user.email}}</p>
+                    <p><strong>Teléfono: </strong>{{user.telefono}}</p>
                     <p [id]="'results-' + user.id"></p>
                   </div>
                   <button class="delete-btn" (click)="borrarUsuario(user.id)">Eliminar</button>
