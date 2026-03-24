@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-
+import { environment } from '../../environments/environment.prod';
 @Injectable({
   providedIn: 'root',
 })
 export class NotificationService {
-  private apiUrl = import.meta.env.VITE_API_URL;
+  private apiUrl = environment.API_URL;
 
   constructor(private http: HttpClient) {}
 

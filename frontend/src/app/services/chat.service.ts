@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
   private socket: Socket;
-  private readonly API_URL = import.meta.env.VITE_API_URL;
+  private readonly API_URL = environment.API_URL;
   private readonly SOCKET_URL = 'http://172.18.1.3';
 
   constructor(private http: HttpClient) {
