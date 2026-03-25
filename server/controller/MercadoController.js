@@ -56,13 +56,7 @@ async function listarPorParametro(req, res) {
         if (!juegos || juegos.length === 0) {
             return res.status(404).json({ message: 'No se encontraron juegos.' });
         }
-
-        const baseUrl = 'http://172.18.1.3/uploads/';
-        const juegosConImagenesCompletas = juegos.map(juego => {
-            juego.imagen = baseUrl + juego.imagen.replace('uploads/', '');
-            return juego;
-        });
-        res.json({ juegos: juegosConImagenesCompletas });
+        res.json({ juegos: juegos});
 
     } catch (error) {
         console.error(error.message);
@@ -95,15 +89,7 @@ async function listarJuegosEnVenta(req, res) {
 
         //Ahora se comprueba qué juegos no tienen seguimiento y se filtran.
         const juegosSinSeguimiento = juegos.filter(j => j.seguimiento.length === 0);
-
-        //Y ahora se preparan con imágenes los juegos que no tienen seguimiento.
-        const baseUrl = 'http://172.18.1.3/uploads/';
-        const juegosConImagenesCompletas = juegosSinSeguimiento.map(juego => {
-            juego.imagen = baseUrl + juego.imagen.replace('uploads/', '');
-            return juego;
-        });
-
-        res.json({ juegos: juegosConImagenesCompletas });
+        res.json({ juegos: juegosSinSeguimiento });
 
     } catch (error) {
         console.error(error.message);
