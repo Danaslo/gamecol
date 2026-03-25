@@ -4,22 +4,15 @@ const Juego = require('../model/Juego');
 const Sequelize = require('../config/sequelize');
 const notificacionController = require('./NotificacionController');
 const multer = require('multer');
-const fs = require('fs');
-const path = require('path');
+const cloudinary = require('cloudinary').v2;
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        const uploadDir = path.join(require.main?.path || __dirname, 'uploads');
-        if (!fs.existsSync(uploadDir)) {
-            fs.mkdirSync(uploadDir, { recursive: true });
-        }
-
-        cb(null, uploadDir);
-    },
-    filename: (req, file, cb) => {
-        cb(null, `${Date.now()}-${file.originalname}`);
-    }
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
 });
+
+const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 //Función para agregar un juego
@@ -31,16 +24,27 @@ async function agregarJuego(req, res) {
         if (!coleccion) {
             return res.status(404).json({ message: 'Bóveda no encontrada' });
         }
-        const imagen = req.file
-            ? path.join('uploads', req.file.filename)
-            : path.join('uploads', 'default.jpg');
+
+        let imagenUrl = null;
+        if (req.file) {
+            const result = await cloudinary.uploader.upload_stream(
+                { folder: 'gamecol' },
+                (error, result) => {
+                    if (error) throw error;
+                    imagenUrl = result.secure_url;
+                }
+            );
+            result.end(req.file.buffer);
+        } else {
+            imagenUrl = 'https://res.cloudinary.com/tu_cloud_name/image/upload/vdefault/default.jpg';
+        }
 
         const juego = await Juego.create({
             nombre,
             condicion,
             plataforma,
             descripcion,
-            imagen,
+            imagen: imagenUrl,
             id_coleccion: coleccion.id,
             precio,
             estado
@@ -86,22 +90,13 @@ async function borrarJuego(req, res) {
 async function listarJuegos(req, res) {
     try {
         const idUsuario = req.userId;
-
         const coleccion = await Coleccion.findOne({ where: { id_usuario: idUsuario } });
         if (!coleccion) {
             return res.status(404).json({ message: 'Bóveda no encontrada' });
         }
 
         const juegos = await Juego.findAll({ where: { id_coleccion: coleccion.id }, order: [['nombre', 'ASC']] });
-
-        const baseUrl = 'http://172.18.1.3/uploads/';
-        const juegosConImagenesCompletas = juegos.map(juego => {
-            juego.imagen = baseUrl + juego.imagen.replace('uploads/', '');
-            return juego;
-        });
-
-        res.json({ juegos: juegosConImagenesCompletas });
-
+        res.json({ juegos });
     } catch (error) {
         console.error(error.message);
         res.status(500).json({ message: 'Error al listar los juegos de la colección' });
@@ -111,16 +106,11 @@ async function listarJuegos(req, res) {
 async function listarVentas(req, res) {
     try {
         const coleccion = await Coleccion.findAll({
-            where: {
-                estado: 'en venta',
-                id_usuario: req.userId
-            }
+            where: { estado: 'en venta', id_usuario: req.userId }
         });
-
         if (coleccion.length === 0) {
             return res.status(404).json({ message: '¡No hay juegos en venta en su bóveda!' });
         }
-
         res.json(coleccion);
     } catch (error) {
         console.error(error.message);
@@ -131,16 +121,11 @@ async function listarVentas(req, res) {
 async function listarSinVender(req, res) {
     try {
         const coleccion = await Coleccion.findAll({
-            where: {
-                estado: 'no en venta',
-                id_usuario: req.userId
-            }
+            where: { estado: 'no en venta', id_usuario: req.userId }
         });
-
         if (coleccion.length === 0) {
             return res.status(404).json({ message: 'No hay juegos que no estén en venta' });
         }
-
         res.json(coleccion);
     } catch (error) {
         console.error(error.message);
@@ -152,12 +137,9 @@ async function obtenerTotalJuegos(req, res) {
     const idUsuario = req.userId;
     try {
         const coleccion = await Coleccion.findOne({ where: { id_usuario: idUsuario } });
-        if (!coleccion) {
-            return res.status(404).json({ message: 'Bóveda no encontrada' });
-        }
+        if (!coleccion) return res.status(404).json({ message: 'Bóveda no encontrada' });
 
         const totalJuegos = await Juego.count({ where: { id_coleccion: coleccion.id } });
-
         res.json({ totalJuegos });
     } catch (error) {
         console.error(error.message);
@@ -169,12 +151,9 @@ async function obtenerValorJuegos(req, res) {
     const idUsuario = req.userId;
     try {
         const coleccion = await Coleccion.findOne({ where: { id_usuario: idUsuario } });
-        if (!coleccion) {
-            return res.status(404).json({ message: 'Bóveda no encontrada' });
-        }
+        if (!coleccion) return res.status(404).json({ message: 'Bóveda no encontrada' });
 
         const totalValor = await Juego.sum('precio', { where: { id_coleccion: coleccion.id } });
-
         res.json({ totalValor });
     } catch (error) {
         console.error(error.message);
@@ -186,9 +165,7 @@ async function plataformaConMasJuegos(req, res) {
     const idUsuario = req.userId;
     try {
         const coleccion = await Coleccion.findOne({ where: { id_usuario: idUsuario } });
-        if (!coleccion) {
-            return res.status(404).json({ message: 'Bóveda no encontrada' });
-        }
+        if (!coleccion) return res.status(404).json({ message: 'Bóveda no encontrada' });
 
         const resultado = await Juego.findAll({
             attributes: [
@@ -201,7 +178,7 @@ async function plataformaConMasJuegos(req, res) {
             limit: 1
         });
 
-        res.status(200).json({resultado: resultado[0]});
+        res.status(200).json({ resultado: resultado[0] });
     } catch (error) {
         console.error(error.message);
         res.status(500).json({ message: 'Error al obtener la plataforma con más juegos' });
