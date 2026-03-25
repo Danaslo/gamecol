@@ -25,16 +25,18 @@ async function agregarJuego(req, res) {
             return res.status(404).json({ message: 'Bóveda no encontrada' });
         }
 
-        let imagenUrl = null;
+        let imagenUrl;
         if (req.file) {
-            const result = await cloudinary.uploader.upload_stream(
-                { folder: 'gamecol' },
-                (error, result) => {
-                    if (error) throw error;
-                    imagenUrl = result.secure_url;
-                }
-            );
-            result.end(req.file.buffer);
+            imagenUrl = await new Promise((resolve, reject) => {
+                const stream = cloudinary.uploader.upload_stream(
+                    { folder: 'gamecol' },
+                    (error, result) => {
+                        if (error) return reject(error);
+                        resolve(result.secure_url);
+                    }
+                );
+                stream.end(req.file.buffer);
+            });
         } else {
             imagenUrl = 'https://res.cloudinary.com/tu_cloud_name/image/upload/vdefault/default.jpg';
         }
