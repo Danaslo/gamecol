@@ -10,12 +10,11 @@ import { environment } from '../../environments/environment';
 export class ChatService {
   private socket: Socket;
   private readonly API_URL = environment.API_URL;
-  private readonly SOCKET_URL = 'http://172.18.1.3';
 
   constructor(private http: HttpClient) {
     const token = localStorage.getItem('token');
 
-    this.socket = io(this.SOCKET_URL, {
+    this.socket = io(this.API_URL, {
       auth: {
         token: token
       },
