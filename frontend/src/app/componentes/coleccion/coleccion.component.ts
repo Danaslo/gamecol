@@ -147,7 +147,7 @@ export class ColeccionComponent implements OnInit {
   getPlataformaConMasJuegos() {
     this.coleccionService.plataformaConMasJuegos().subscribe(
       (data) => {
-        this.totalPlataforma = data.resultado.plataforma || "N/A";
+        this.totalPlataforma = data?.resultado?.plataforma || "N/A";
       },
       (error) => {
         console.error('Error al obtener la plataforma con más juegos');
