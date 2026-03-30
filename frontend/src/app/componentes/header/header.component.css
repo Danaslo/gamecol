@@ -291,6 +291,7 @@
         position: absolute;
         top: 35px;
         right: -200px;
+        margin-right: 30px;
         border: 1px solid #DAA520;
         border-radius: 6px;
         background: #222;
