@@ -30,15 +30,14 @@ export class RegistroComponent {
       this.authService.registro({ nombreUsuario: this.nombreUsuario, email: this.email, password: this.password, telefono: this.telefono })
         .subscribe(
           (response) => {
-            console.log('Usuario registrado:', response);
             this.router.navigate(['/']); 
           },
           (error) => {
-            console.error('Error al registrar usuario', error);
+            console.error('Error al registrar usuario');
           }
         );
     } else {
-      console.log('Formulario inválido');
+      console.error("Ha ocurrido un error");
     }
   }
 }

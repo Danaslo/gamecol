@@ -40,7 +40,6 @@ export class EditarUsuarioComponent {
 
   ngOnInit(): void {
     this.getUserName();
-    console.log(this.userName);
   }
 
   getUserName(){
@@ -49,7 +48,7 @@ export class EditarUsuarioComponent {
       this.userName = data;
     },
     (error) => {
-      console.error('Error al obtener el nombre de usuario', error);
+      console.error('No podemos encontrar tu nombre de usuario');
     })
   }
 
@@ -67,7 +66,7 @@ export class EditarUsuarioComponent {
         this.mostrarResultados('passwordResult', data);   
       },
       (error) => {
-        console.error('No se ha podido cambiar la contraseña', error);
+        console.error('No se ha podido cambiar la contraseña');
       }
     );
   }
@@ -80,7 +79,7 @@ export class EditarUsuarioComponent {
         this.mostrarResultados('emailResult', data);     
       },
       (error) => {
-        console.error('No se ha podido cambiar el email', error);
+        console.error('No se ha podido cambiar el email');
       }
     );
   }
@@ -92,7 +91,7 @@ export class EditarUsuarioComponent {
         this.mostrarResultados('phoneResult', data);      
       },
       (error) => {
-        console.error('No se ha podido cambiar el telefono', error);
+        console.error('No se ha podido cambiar el telefono');
       }
     );
   }

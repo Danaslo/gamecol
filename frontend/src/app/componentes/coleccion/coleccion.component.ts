@@ -44,7 +44,6 @@ export class ColeccionComponent implements OnInit {
   }
 
   openImageModal(image: string) {
-    console.log('se abre');
     this.selectedImage = image;
     this.isImageModalOpen = true;
   }
@@ -129,7 +128,7 @@ export class ColeccionComponent implements OnInit {
         this.totalJuegos = data.totalJuegos;
       },
       (error) => {
-        console.error('Error al borrar el juego', error);
+        console.error('Error al obtener el total de juegos', error);
       }
     );
   }
@@ -140,7 +139,7 @@ export class ColeccionComponent implements OnInit {
         this.totalValor = data.totalValor;
       },
       (error) => {
-        console.error('Error al borrar el juego', error);
+        console.error('Error al obtener el valor de juegos', error);
       }
     );
   }
@@ -149,10 +148,9 @@ export class ColeccionComponent implements OnInit {
     this.coleccionService.plataformaConMasJuegos().subscribe(
       (data) => {
         this.totalPlataforma = data.resultado.plataforma;
-        console.log(this.totalPlataforma);
       },
       (error) => {
-        console.error('Error al borrar el juego', error);
+        console.error('Error al obtener la plataforma con más juegos');
       }
     );
   }

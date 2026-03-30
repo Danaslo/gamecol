@@ -40,7 +40,7 @@ export class HeaderComponent {
         this.authService.getUser().subscribe((res) => {
             this.username = res.nombreUsuario;
         }, (err) => {
-            console.error('Error al obtener el nombre de usuario:', err);
+            console.error('Error al obtener el nombre de usuario:');
         });
     }
 
@@ -75,7 +75,7 @@ export class HeaderComponent {
                 this.isAdmin = res.admin;
             },
             error: (err) => {
-                console.error('Error al verificar rol de usuario:', err);
+                console.error('Error al verificar rol de usuario:');
             }
         });
     }
@@ -89,13 +89,10 @@ export class HeaderComponent {
     destroyNotification(id: number): void {
         this.notificacionService.destroyNotification(id).subscribe(
             response => {
-                console.log('Notificación eliminada:', response);
-    
-                this.loadNotificationsSilently();
-    
+                this.loadNotificationsSilently(); 
             },
             error => {
-                console.error('Error al eliminar la notificación:', error);
+                console.error('Error al eliminar la notificación:');
             }
         );
     }

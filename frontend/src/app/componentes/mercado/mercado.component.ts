@@ -36,7 +36,6 @@ export class MercadoComponent {
   }
 
   openImageModal(image: string) {
-    console.log('se abre');
     this.selectedImage = image;
     this.isImageModalOpen = true;
   }
@@ -52,7 +51,7 @@ export class MercadoComponent {
         this.juegos = data.juegos;
       },
       (error) => {
-        console.error('Error al listar los juegos', error);
+        console.error('Error al listar los juegos');
       }
     );
   }
@@ -61,10 +60,9 @@ export class MercadoComponent {
     this.juegoService.buscarPorFiltro(this.filtros).subscribe(
       (response) => {
         this.juegos = response.juegos;
-        console.log(this.juegos);
       },
       (error) => {
-        console.error('Error al buscar juegos:', error);
+        console.error('Error al buscar juegos:');
       }
     );
   }
@@ -78,7 +76,7 @@ export class MercadoComponent {
         },3000);
       },
       (error) => {
-        console.error('No se puede seguir el juego', error);
+        console.error('No se puede seguir el juego');
       }
     );
   }
@@ -92,7 +90,7 @@ export class MercadoComponent {
         },3000);
       },
       (error) => {
-        console.error('No se puede dejar de seguir el juego', error);
+        console.error('No se puede dejar de seguir el juego');
       }
     );
   }

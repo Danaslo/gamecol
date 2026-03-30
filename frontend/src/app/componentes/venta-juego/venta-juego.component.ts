@@ -32,7 +32,6 @@ export class VentaJuegoComponent implements OnInit, OnDestroy {
   registrarVenta() {
     const telefono = this.ventaForm.get('telefono')?.value;
     if (this.juegoId != null) {
-      console.log('Enviando al backend:', this.juegoId, telefono);
       this.ventaService.agregarVenta(this.juegoId, telefono).subscribe({
         next: () => {
           alert('Venta registrada correctamente');
@@ -40,12 +39,11 @@ export class VentaJuegoComponent implements OnInit, OnDestroy {
           window.location.reload()
         },
         error: (err) => {
-          console.error(err);
           alert('Error al registrar la venta');
         }
       });
     } else {
-      console.log('Error: juegoId es null');
+      console.log('Hemos tenido un problema al registrar la venta');
     }
   }
 

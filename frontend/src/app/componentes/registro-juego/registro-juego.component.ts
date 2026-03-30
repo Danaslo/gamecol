@@ -40,7 +40,7 @@ export class RegistroJuegoComponent implements OnInit {
         this.juegos = data.juegos;
       },
       (error) => {
-        console.error('Error al listar los juegos', error);
+        console.error('Ha ocurrido un error');
       }
     );
     window.addEventListener('keydown', this.cerrarConEscape.bind(this));
@@ -75,8 +75,6 @@ export class RegistroJuegoComponent implements OnInit {
     formData.append('descripcion', this.juegoForm.get('descripcion')?.value);
     formData.append('estado', this.juegoForm.get('estado')?.value);
     formData.append('precio', this.juegoForm.get('precio')?.value)
-
-    console.log( 'Estado: ' + this.juegoForm.get('estado')?.value);
       
     if (this.selectedImage) {
       formData.append('imagen', this.selectedImage, this.selectedImage.name);
@@ -95,7 +93,7 @@ export class RegistroJuegoComponent implements OnInit {
         });
       },
       (error) => {
-        console.error('Error al agregar el juego', error);
+        console.error('Ha ocurrido un error');
       }
     );
   }

@@ -37,7 +37,7 @@ export class ContactoComponent {
         error: (err) => {
           this.fallo = 'Hemos tenido un problema al enviar el correo.';
           this.exito = '';
-          console.error(err);
+          console.error("Hemos tenido un problema al enviar el correo");
         }
       });
   }

@@ -29,9 +29,6 @@ export class AdminComponent {
     this.authService.isAdmin().subscribe({
       next: (res) => {
         this.isAdmin = res.admin;
-      },
-      error: (err) => {
-        console.error('Error al verificar rol de usuario:', err);
       }
     });
   }
@@ -40,11 +37,9 @@ export class AdminComponent {
     this.adminService.getUsuarios().subscribe({
       next: (res) => {
         this.userList = res.usuarios;
-        console.log(res.usuarios);
-        console.log(this.userList);
       },
       error: (err) => {
-        console.error('Error al listar usuarios:', err);
+        console.error('Error al listar usuarios:');
       }
     });
   }
@@ -52,11 +47,10 @@ export class AdminComponent {
   borrarUsuario(userId: BigInt){
     this.adminService.borrarUsuario(userId).subscribe({
       next: (res) => {
-        console.log(res);
         this.listarUsusarios();
       },
       error: (err) => {
-        console.error('Error al borrar usuario:', err);
+        console.error('Error al borrar usuario:');
       }
     });
   }

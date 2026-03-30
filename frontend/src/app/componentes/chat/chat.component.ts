@@ -61,7 +61,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     try {
       this.mensajesContainer.nativeElement.scrollTop = this.mensajesContainer.nativeElement.scrollHeight;
     } catch (err) {
-      console.warn('No se pudo hacer scroll automáticamente:', err);
+      console.warn('No se pudo hacer scroll automáticamente:');
     }
   }
 

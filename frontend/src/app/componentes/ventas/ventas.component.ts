@@ -23,11 +23,10 @@ export class VentasComponent implements OnInit{
     obtenerVentas(): void {
       this.ventaService.obtenerVentas().subscribe(
         (data) => {
-          console.log(data);
           this.ventas = data;
         },
         (error) => {
-          console.error('Error al obtener las ventas', error);
+          console.error('Error al obtener las ventas');
         }
       );
     }

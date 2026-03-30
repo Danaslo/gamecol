@@ -22,7 +22,6 @@ export class SeguimientoComponent {
   }
 
   openImageModal(image: string) {
-    console.log('se abre');
     this.selectedImage = image;
     this.isImageModalOpen = true;
   }
@@ -38,7 +37,7 @@ export class SeguimientoComponent {
         this.juegos = data.juegos;
       },
       (error) => {
-        console.error('Error al listar los juegos', error);
+        console.error('Error al listar los juegos');
       }
     );
   }
@@ -52,7 +51,7 @@ export class SeguimientoComponent {
         },3000);
       },
       (error) => {
-        console.error('No se ha podido cambiar el estado de venta del juego', error);
+        console.error('No se ha podido cambiar el estado de venta del juego');
       }
     );
   }

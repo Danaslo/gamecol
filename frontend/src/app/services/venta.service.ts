@@ -14,7 +14,6 @@ export class VentaService {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     const body = { juegoId, telefono };
-    console.log('Enviando al backend: ' + typeof(juegoId) + ' ' + telefono);
     return this.http.post(`${this.apiUrl}/vender`, body , { headers });
   }
 
