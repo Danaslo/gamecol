@@ -31,9 +31,11 @@ export class HeaderComponent {
     }
 
     ngOnInit() {
-        this.checkIfAdmin();
-        this.loadNotifications();
-        this.getUserName();
+        if (this.isAuthenticated) {
+            this.checkIfAdmin();
+            this.loadNotifications();
+            this.getUserName();
+        }
     }
 
     getUserName() {
@@ -81,15 +83,21 @@ export class HeaderComponent {
     }
 
     loadNotifications() {
-        this.notificacionService.getNotifications().subscribe((notifications: any[]) => {
-            this.notifications = notifications;
+        this.notificacionService.getNotifications().subscribe({
+            next: (notifications: any[]) => {
+                this.notifications = notifications;
+            },
+            error: (err) => {
+                console.error("¡No puedo cargar tus notificaciones si no se quién eres!");
+                this.notifications = [];
+            }
         });
     }
 
     destroyNotification(id: number): void {
         this.notificacionService.destroyNotification(id).subscribe(
             response => {
-                this.loadNotificationsSilently(); 
+                this.loadNotificationsSilently();
             },
             error => {
                 console.error('Error al eliminar la notificación:');
@@ -100,7 +108,7 @@ export class HeaderComponent {
     loadNotificationsSilently() {
         this.notificacionService.getNotifications().subscribe((notifications: any[]) => {
             this.notifications = notifications;
-    
+
             if (this.notifications.length === 0) {
                 this.notificationsVisible = false;
             }
@@ -109,7 +117,7 @@ export class HeaderComponent {
 
 
     toggleNotifications() {
-        if(this.notifications.length > 0)
+        if (this.notifications.length > 0)
             this.notificationsVisible = !this.notificationsVisible;
         else
             this.notificationsVisible = false;
