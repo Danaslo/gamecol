@@ -58,7 +58,7 @@
         </div>
     </div>
 
-    <div id="notification-container">
+    <div id="notification-container" *ngIf="isAuthenticated">
         <p id="userName"> {{ username }}</p>
         <i class="bi bi-gear-fill" (click)="navigateTo('/user-config')"></i>
         <div class="nav-item dropdown-father">
