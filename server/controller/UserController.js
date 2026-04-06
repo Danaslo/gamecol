@@ -1,13 +1,10 @@
-/*Éste controller tiene que: 
-- Loguear un usuario (devuelve un token) HECHO
-- Registrar un usuario creando una colección con su ID y encriptando contraseña. HECHO
-- Verificar el token HECHO
-*/
 const Usuario = require('../model/Usuario');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Coleccion = require('../model/Coleccion');
 const { Console } = require('console');
+const dotenv = require("dotenv");
+dotenv.config();
 
 async function registro(req, res) {
     try {
@@ -47,7 +44,7 @@ const verificarToken = (req, res, next) => {
     if (!token) {
         return res.status(403).json({ message: 'No se proporcionó un token' });
     }
-    jwt.verify(token, "Iba yo de peregrino", (err, decoded) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
             return res.status(500).json({ message: 'Fallo al autenticar el token' });
         }
@@ -67,7 +64,7 @@ async function login(req, res) {
     if (!passwordValida) {
         return res.status(401).json({ message: 'Contraseña incorrecta' });
     }
-    const token = jwt.sign({ id: usuario.id, rol: usuario.rol }, "Iba yo de peregrino", {
+    const token = jwt.sign({ id: usuario.id, rol: usuario.rol }, process.env.JWT_SECRET, {
         expiresIn: 864000
     });
     res.json({ token });

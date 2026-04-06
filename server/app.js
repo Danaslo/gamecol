@@ -15,14 +15,14 @@ const rateLimit = require('express-rate-limit');
 require('./model/Asociaciones');
 
 dotenv.config();
-
+const FRONTEND_URL = process.env.FRONTEND_URL;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //Configuraciones de seguridad:
 //CORS:
 app.use(cors({
-    origin: '*',
+    origin: FRONTEND_URL || "*",
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
