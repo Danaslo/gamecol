@@ -2,6 +2,13 @@ const Usuario = require('../model/Usuario');
 const Coleccion = require('../model/Coleccion');
 const Juego = require('../model/Juego');
 const Seguimiento = require('../model/Seguimiento');
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 async function listarSeguimientos(req, res) {
     try {
@@ -16,16 +23,13 @@ async function listarSeguimientos(req, res) {
             ],
             attributes: ['telefono_duenio']
         });
-        const baseUrl = 'http://172.18.1.3/uploads/';
 
         const juegosConImagenesCompletas = juegos.map(seguimiento => {
             const juego = seguimiento.Juego;
-
-            const imagenCompleta = juego && juego.imagen? baseUrl + juego.imagen.replace('uploads/', ''): null;
             return {
                 id: juego?.id || null,
                 nombre: juego?.nombre || '',
-                imagen: imagenCompleta,
+                imagen: juego?.imagen || null,
                 telefono_duenio: seguimiento.telefono_duenio,
                 precio: juego?.precio || '',
                 condicion: juego?.condicion || '',
@@ -33,8 +37,8 @@ async function listarSeguimientos(req, res) {
                 estado: juego?.estado || ''
             };
         });
-
         res.json({ juegos: juegosConImagenesCompletas });
+        
     } catch (error) {
         console.error(error.message);
         res.status(500).json({ message: 'Error al listar los juegos en seguimiento' });
